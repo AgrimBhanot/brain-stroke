@@ -1,0 +1,27 @@
+# Python environments and caches
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Raw and intermediate EEG data
+data/raw/
+data/processed/
+*.edf
+*.fif
+*.part*
+
+# Locally generated model and plot outputs
+results/
+
+# Notebook checkpoints
+.ipynb_checkpoints/

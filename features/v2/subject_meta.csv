@@ -1,0 +1,51 @@
+subject_id,nihss_raw,severity_class,lesion_side,lesion_side_source,paralysis_side,stroke_location,sex,age,duration,handedness,n_epochs_all,n_epochs_g8f,n_epochs_g24f
+sub-01,11,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,45,1,right,39,39,39
+sub-02,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right pons,male,60,2,right,37,37,35
+sub-03,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Left cerebellum, bilateral paraventricular, Right corona radiata",male,60,2,right,37,37,36
+sub-04,6,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,"Left frontal parietal cortex, Left centrum semiovale",male,56,14,right,40,40,40
+sub-05,4,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Left pons,female,44,4,right,40,40,40
+sub-06,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right pons,male,66,6,left,15,15,10
+sub-07,2,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,62,5,right,40,40,27
+sub-08,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right basal ganglia,male,64,5,right,23,23,14
+sub-09,6,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left paraventricular,male,57,3,right,40,40,40
+sub-10,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right pons,male,55,2,right,40,40,36
+sub-11,5,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right paraventricular,male,31,7,right,39,39,34
+sub-12,1,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left medulla oblongata,male,58,1,right,39,39,35
+sub-13,9,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left paraventricular,male,46,3,right,4,4,0
+sub-14,2,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,female,67,2,right,40,40,40
+sub-15,7,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right fronto-parietal temporo-occipital lobe, Right inner watershed",male,63,1,left,39,39,34
+sub-16,4,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left basal ganglia,male,57,1,right,26,26,24
+sub-17,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right paraventricular, Right basal ganglia",male,60,3,right,39,39,39
+sub-18,10,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right basal ganglia,female,60,1,right,36,36,33
+sub-19,8,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right paraventricular, Right basal ganglia",female,62,1,right,36,36,22
+sub-20,2,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,"Left paraventricular, Right temporal lobe",male,34,24,right,29,29,19
+sub-21,2,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Pons,male,41,5,right,38,38,23
+sub-22,11,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right temporo-parietal occipital lobe and insula, Right basal ganglia, Right paraventricular",male,52,6,right,40,40,13
+sub-23,4,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right paraventricular, Right basal ganglia",male,57,2,right,40,40,40
+sub-24,1,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left paraventricular,female,55,3,right,34,34,15
+sub-25,5,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right paraventricular,male,47,10,right,30,30,17
+sub-26,4,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right thalamus,male,61,1,right,40,40,34
+sub-27,3,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,"Left basal ganglia, Left paraventricular",female,52,5,right,28,28,6
+sub-28,1,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left thalamus,female,42,2,right,40,40,40
+sub-29,1,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left thalamus,male,53,16,right,38,38,35
+sub-30,4,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right paraventricular,male,68,4,right,39,39,29
+sub-31,3,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,"Left corona radiata, Left centrum semiovale",female,59,5,right,39,39,36
+sub-32,3,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,74,2,right,40,40,39
+sub-33,3,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Pons,male,63,7,right,21,21,21
+sub-34,1,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right frontal lobe,female,69,1,right,36,36,32
+sub-35,1,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right cerebellum,bilateral occipital lobes",male,69,11,right,18,18,8
+sub-36,6,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right paraventricular,right basal ganglia",male,69,30,right,40,40,37
+sub-37,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right internal capsule,male,49,7,right,26,26,22
+sub-38,3,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Right pons,male,53,2,right,39,39,38
+sub-39,11,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,"Left cerebellar hemisphere, Left medulla oblongata",male,56,2,right,33,33,12
+sub-40,6,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right pons,female,56,6,right,9,9,4
+sub-41,7,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,77,2,right,39,39,39
+sub-42,7,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,54,2,right,39,39,38
+sub-43,2,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right frontal lobe,male,32,3,right,34,34,26
+sub-44,1,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right subfrontal cortex, Right basal ganglia, Right lateral ventricle, Right corona radiata",male,59,1,right,40,40,39
+sub-45,6,moderate,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left pons,male,64,30,right,40,40,36
+sub-46,1,mild,left,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,right,Left parietal lobe,male,66,10,right,38,38,36
+sub-47,7,moderate,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right medulla oblongata,male,40,4,right,40,40,38
+sub-48,2,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,"Right subcortical cerebral hemisphere, Right basal ganglia, Left subparietal cortex",male,75,18,right,40,40,33
+sub-49,1,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right basal ganglia,male,52,3,right,40,40,38
+sub-50,3,mild,right,participants.json defines ParalysisSide as limb paralysis side; lesion side mapped contralaterally under the v2 rule,left,Right pons,female,64,1,right,35,35,24

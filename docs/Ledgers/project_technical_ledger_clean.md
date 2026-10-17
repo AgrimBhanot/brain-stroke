@@ -38,7 +38,7 @@ The project is a Python scientific/ML repository. The important current files/co
 - `src/labels.py`: defines the NIHSS-to-severity mapping.
 - `src/build_feature_table.py`: creates the final labeled Figshare feature table.
 - `src/train_models.py`: Phase 5 model training and evaluation.
-- `src/graph_features.py`: Phase 3b graph feature extractor (wPLI/multitaper, 16 network-level features). Implemented; not yet executed.
+- `src/graph_features.py`: Phase 3b graph feature extractor (wPLI/multitaper, 16 network-level features). Implemented; legacy graph CSV outputs exist and have been audited.
 - `features/figshare_features.csv`: current 50-subject, labeled spectral modeling table.
 - `features/figshare_patient_features.csv`: patient-level feature table without the final merged labels.
 - `features/figshare_graph_features.csv`: graph-only subject-level table (written at runtime by graph_features.py).
@@ -115,7 +115,7 @@ The canonical run establishes the following current benchmark:
 
 The current interpretation is that spectral asymmetry alone has weak and unstable predictive value for this 50-subject mild-vs-moderate classification problem.
 
-### Graph/connectivity branch — `src/graph_features.py` (implemented; not yet run)
+### Graph/connectivity branch — `src/graph_features.py` (legacy v1 implemented and audited)
 
 The second feature family uses the stored time-domain epochs rather than PSD tables.
 
@@ -167,9 +167,9 @@ The comparisons should use the same CV philosophy and leakage safeguards as the 
 
 # II. Notes on Future Implementations and Things to Keep in Mind
 
-The immediate execution task is running `src/graph_features.py` on the existing `*-epo.fif` files and verifying the 50×17 graph CSV output. The script does not require re-epoching.
+The legacy graph CSV output exists and has been audited. Its epoch-count dependence means it is a baseline, not the corrected v2 graph solution. The active execution task is now the label-blind v2 audit and fixed-epoch design described in `EXECUTION_GUIDE_CURRENT.md`.
 
-After verification, the ablation study requires extending `src/train_models.py` (or a new script) to evaluate three fixed feature families under the same CV protocol:
+After the v2 feature tables are built, the registry study will evaluate fixed feature families under the documented CV protocol:
 1. Spectral only (19 features from `figshare_features.csv`).
 2. Graph only (16 features from `figshare_graph_features.csv`).
 3. Combined (35 features from `figshare_combined_features.csv`).

@@ -1,0 +1,139 @@
+{
+  "bands": {
+    "delta": [
+      1.0,
+      4.0
+    ],
+    "theta": [
+      4.0,
+      8.0
+    ],
+    "alpha": [
+      8.0,
+      13.0
+    ],
+    "beta": [
+      13.0,
+      30.0
+    ]
+  },
+  "artifact_threshold_uv": 150.0,
+  "n_fixed": 6,
+  "subsamples": 100,
+  "seed_rule": "42 + zero-based subject index",
+  "sampling_without_replacement": true,
+  "sfreq_hz": [
+    500.0
+  ],
+  "name": "g24f",
+  "left_nodes": [
+    "F3",
+    "F7",
+    "FC3",
+    "FT7",
+    "C3",
+    "T3",
+    "CP3",
+    "TP7",
+    "P3",
+    "T5",
+    "O1"
+  ],
+  "right_nodes": [
+    "F4",
+    "F8",
+    "FC4",
+    "FT8",
+    "C4",
+    "T4",
+    "CP4",
+    "TP8",
+    "P4",
+    "T6",
+    "O2"
+  ],
+  "channels": [
+    "F3",
+    "F7",
+    "FC3",
+    "FT7",
+    "C3",
+    "T3",
+    "CP3",
+    "TP7",
+    "P3",
+    "T5",
+    "O1",
+    "F4",
+    "F8",
+    "FC4",
+    "FT8",
+    "C4",
+    "T4",
+    "CP4",
+    "TP8",
+    "P4",
+    "T6",
+    "O2"
+  ],
+  "pairs": [
+    [
+      "F3",
+      "F4"
+    ],
+    [
+      "F7",
+      "F8"
+    ],
+    [
+      "FC3",
+      "FC4"
+    ],
+    [
+      "FT7",
+      "FT8"
+    ],
+    [
+      "C3",
+      "C4"
+    ],
+    [
+      "T3",
+      "T4"
+    ],
+    [
+      "CP3",
+      "CP4"
+    ],
+    [
+      "TP7",
+      "TP8"
+    ],
+    [
+      "P3",
+      "P4"
+    ],
+    [
+      "T5",
+      "T6"
+    ],
+    [
+      "O1",
+      "O2"
+    ]
+  ],
+  "pair_map": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "n_fixed_basis": "largest value with at most two subjects below it"
+}

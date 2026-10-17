@@ -45,11 +45,13 @@ matplotlib==3.11.2
 mdurl==0.1.2
 memory-profiler==0.61.0
 mne==1.13.2
+mne-connectivity==0.9.0
 mne-bids==0.19.0
 moabb==1.7.2
 narwhals==2.26.0
 nemar-py==0.3.0
 numpy==2.5.3
+networkx==3.7
 packaging==26.3
 pandas==3.0.6
 pillow==12.3.0

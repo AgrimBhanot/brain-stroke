@@ -1,0 +1,75 @@
+{
+  "bands": {
+    "delta": [
+      1.0,
+      4.0
+    ],
+    "theta": [
+      4.0,
+      8.0
+    ],
+    "alpha": [
+      8.0,
+      13.0
+    ],
+    "beta": [
+      13.0,
+      30.0
+    ]
+  },
+  "artifact_threshold_uv": 150.0,
+  "n_fixed": 15,
+  "subsamples": 100,
+  "seed_rule": "42 + zero-based subject index",
+  "sampling_without_replacement": true,
+  "sfreq_hz": [
+    500.0
+  ],
+  "name": "g8f",
+  "left_nodes": [
+    "F3",
+    "C3",
+    "P3",
+    "O1"
+  ],
+  "right_nodes": [
+    "F4",
+    "C4",
+    "P4",
+    "O2"
+  ],
+  "channels": [
+    "F3",
+    "C3",
+    "P3",
+    "O1",
+    "F4",
+    "C4",
+    "P4",
+    "O2"
+  ],
+  "pairs": [
+    [
+      "F3",
+      "F4"
+    ],
+    [
+      "C3",
+      "C4"
+    ],
+    [
+      "P3",
+      "P4"
+    ],
+    [
+      "O1",
+      "O2"
+    ]
+  ],
+  "pair_map": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

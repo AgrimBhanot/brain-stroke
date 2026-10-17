@@ -1,0 +1,36 @@
+{
+  "table": "features\\v2\\spectral_lesion.csv",
+  "created": "2026-10-17",
+  "source_features": "features\\figshare_features.csv",
+  "source_metadata": "features\\v2\\subject_meta.csv",
+  "rows": 50,
+  "columns": [
+    "subject_id",
+    "les_AI_delta_F3F4",
+    "les_AI_delta_C3C4",
+    "les_AI_delta_P3P4",
+    "les_AI_delta_O1O2",
+    "les_AI_theta_F3F4",
+    "les_AI_theta_C3C4",
+    "les_AI_theta_P3P4",
+    "les_AI_theta_O1O2",
+    "les_AI_alpha_F3F4",
+    "les_AI_alpha_C3C4",
+    "les_AI_alpha_P3P4",
+    "les_AI_alpha_O1O2",
+    "les_AI_beta_F3F4",
+    "les_AI_beta_C3C4",
+    "les_AI_beta_P3P4",
+    "les_AI_beta_O1O2",
+    "all_pdBSI",
+    "all_DAR",
+    "all_DTABR"
+  ],
+  "feature_definition": "Lesion-aligned AI = +AI for left lesion and -AI for right lesion; global features copied unchanged.",
+  "alignment_provenance": "ParalysisSide from participants.json mapped to contralateral lesion side under the v2 rule.",
+  "excluded_subjects": [],
+  "label_free": true,
+  "clinical_columns_used": [
+    "lesion_side"
+  ]
+}

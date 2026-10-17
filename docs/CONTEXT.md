@@ -1,3 +1,28 @@
+# Immediate Operational Context
+
+The authoritative execution plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md). Read it before acting.
+
+## Current state
+
+- Legacy Figshare spectral and v1 graph feature extraction exists and is frozen.
+- Legacy modeling found weak, unstable performance near the dummy baseline.
+- Legacy graph features have a known epoch-count bias, especially in `MeanHomotopic`.
+- The v2 design is specified but not implemented.
+- `features/v2/`, `configs/`, and `tests/` do not yet exist.
+- `participants.tsv` and verified lesion-side semantics are not currently available in the repository.
+- `docs/PHASE5_CONTEXT.md` is missing and is superseded by the current guide.
+
+## Active subphase
+
+**Phase 6 / freeze and registry handoff.** A0-A2 are complete, A3 locked G8f at N_fixed=15 and secondary G24f at N_fixed=6, A4 tests pass, and A5-A6 produced both 48-subject label-free graph tables. QC flags residual epoch bias and seed instability; these are documented and must not be tuned against labels. Freeze/registry work is now blocked on the Group B registry and required reviews.
+
+## Required operating behavior
+
+- Do not overwrite v1 files.
+- Do not read labels during v2 feature construction.
+- Keep v2 feature CSVs label-free.
+- Record every completed or blocked subphase in `docs/PROGRESS.md`.
+- Stop and document blockers instead of guessing.
 # Immediate Operational Context & Handoff Guide
 
 ## Role & Purpose of This File

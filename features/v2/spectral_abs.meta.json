@@ -1,0 +1,40 @@
+{
+  "table": "features\\v2\\spectral_abs.csv",
+  "created": "2026-10-17",
+  "source": "features\\figshare_features.csv",
+  "rows": 50,
+  "columns": [
+    "subject_id",
+    "abs_AI_delta_F3F4",
+    "abs_AI_delta_C3C4",
+    "abs_AI_delta_P3P4",
+    "abs_AI_delta_O1O2",
+    "abs_AI_theta_F3F4",
+    "abs_AI_theta_C3C4",
+    "abs_AI_theta_P3P4",
+    "abs_AI_theta_O1O2",
+    "abs_AI_alpha_F3F4",
+    "abs_AI_alpha_C3C4",
+    "abs_AI_alpha_P3P4",
+    "abs_AI_alpha_O1O2",
+    "abs_AI_beta_F3F4",
+    "abs_AI_beta_C3C4",
+    "abs_AI_beta_P3P4",
+    "abs_AI_beta_O1O2",
+    "all_pdBSI",
+    "all_DAR",
+    "all_DTABR"
+  ],
+  "feature_definition": "Absolute value of the 16 existing all_AI subject-level features; global features copied unchanged.",
+  "label_free": true,
+  "label_columns_excluded": [
+    "nihss_raw",
+    "severity_class"
+  ],
+  "epoch_count_columns_excluded": [
+    "n_epochs_all",
+    "n_epochs_left_hand",
+    "n_epochs_right_hand"
+  ],
+  "max_abs_mean_ai_minus_pdBSI": 0.11239281315902591
+}

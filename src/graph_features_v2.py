@@ -63,6 +63,18 @@ def _epoch_fingerprint(epoch: np.ndarray) -> bytes:
     return hashlib.blake2b(contiguous.tobytes(), digest_size=16).digest()
 
 
+def screen_epochs(epochs: Any, channels: list[str], threshold_uv: float) -> Any:
+    """Return only epochs passing the configured peak-to-peak screen."""
+    missing = [channel for channel in channels if channel not in epochs.ch_names]
+    if missing:
+        raise ValueError(f"Missing screening channels: {missing}")
+    indices = [epochs.ch_names.index(channel) for channel in channels]
+    threshold_v = float(threshold_uv) * 1e-6
+    peak_to_peak = np.ptp(epochs.get_data()[:, indices, :], axis=2)
+    keep = ~(peak_to_peak > threshold_v).any(axis=1)
+    return epochs[keep]
+
+
 def _cross_spectra(data: np.ndarray, sfreq: float) -> tuple[np.ndarray, np.ndarray]:
     """Compute windowed FFT coefficients after canonicalizing epoch order."""
     if data.ndim != 3:
@@ -138,17 +150,19 @@ def compute_graph_features(epochs: Any, config: dict[str, Any]) -> dict[str, flo
     if abs(sfreq - 500.0) > 1.0:
         raise ValueError(f"Expected approximately 500 Hz, got {sfreq}")
     channels = list(config["channels"])
-    missing = [channel for channel in channels if channel not in epochs.ch_names]
-    if missing:
-        raise ValueError(f"Missing configured channels: {missing}")
+    screened_epochs = screen_epochs(
+        epochs,
+        channels,
+        float(config.get("artifact_threshold_uv", 150.0)),
+    )
     n_fixed = int(config["n_fixed"])
     subsamples = int(config["subsamples"])
-    if n_fixed < 1 or len(epochs) < n_fixed:
-        raise ValueError(f"Need {n_fixed} epochs, got {len(epochs)}")
+    if n_fixed < 1 or len(screened_epochs) < n_fixed:
+        raise ValueError(f"Need {n_fixed} screened epochs, got {len(screened_epochs)}")
     if subsamples < 1:
         raise ValueError("subsamples must be positive")
 
-    ordered_epochs = epochs.copy().pick(channels).reorder_channels(channels)
+    ordered_epochs = screened_epochs.copy().pick(channels).reorder_channels(channels)
     data = ordered_epochs.get_data()
     spectra, frequencies = _cross_spectra(data, sfreq)
     rng = np.random.default_rng(

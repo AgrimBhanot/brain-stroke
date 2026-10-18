@@ -16,7 +16,7 @@ The active plan and phase definitions are in [EXECUTION_GUIDE_CURRENT.md](../EXE
 | V2 | Phase 2 / A2: lesion-aligned spectral table | DONE | `features/v2/spectral_lesion.csv` and `.meta.json`; 50×20; 3 acceptance tests pass | Preserve output; lesion mapping is provenance-bound |
 | V2 | Phase 3 / A3: channel and epoch design lock | DONE | `docs/GRAPH_DESIGN_LOCK.md`, audit JSON, and both configs; G8f N=15, G24f N=6 | Implement v2 graph library |
 | V2 | Phase 4 / A4: graph v2 library and tests | DONE | `src/graph_features_v2.py`; 5 synthetic tests pass | Preserve implementation; no v1 edits |
-| V2 | Phase 5 / A5-A6: generation and QC | DONE WITH FLAGS | `graph_g8f.csv`, `graph_g24f.csv`, sidecars, and `docs/FEATURE_QC_V2.md`; both tables 48×17 and label-free | Report residual bias/instability; do not tune against labels |
+| V2 | Phase 5 / A5-A6: generation and QC | DONE WITH FLAGS | Screen mismatch corrected; both graph tables regenerated 48×17 with screen applied to sampling pool; 9 tests pass | Report residual bias/instability; do not tune against labels |
 | V2 | Phase 6 / A7: freeze and registry handoff | BLOCKED | Depends on v2 outputs, reviews, and Group B registry | Freeze only after prerequisites |
 | V2 | Phase 7: UCLH transfer and reporting | NOT STARTED | UCLH validation not complete | Defer until Figshare v2 is frozen |
 

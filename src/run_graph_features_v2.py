@@ -9,9 +9,7 @@ from datetime import date
 from pathlib import Path
 
 import mne
-import numpy as np
-
-from graph_features_v2 import compute_graph_features
+from graph_features_v2 import compute_graph_features, screen_epochs
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -26,10 +24,12 @@ def subject_id(path: Path) -> str:
     return path.name.replace("-clean-epo.fif", "")
 
 
-def passing_count(epochs: mne.Epochs, channels: list[str]) -> int:
-    indices = [epochs.ch_names.index(channel) for channel in channels]
-    peak_to_peak = np.ptp(epochs.get_data()[:, indices, :], axis=2)
-    return int((~(peak_to_peak > THRESHOLD_V).any(axis=1)).sum())
+def passing_epochs(epochs: mne.Epochs, config: dict) -> mne.Epochs:
+    return screen_epochs(
+        epochs,
+        list(config["channels"]),
+        float(config.get("artifact_threshold_uv", THRESHOLD_V * 1e6)),
+    )
 
 
 def run(config_name: str) -> None:
@@ -45,13 +45,14 @@ def run(config_name: str) -> None:
     for index, path in enumerate(paths):
         subject = subject_id(path)
         epochs = mne.read_epochs(path, preload=True, verbose=False)
-        count = passing_count(epochs, list(config["channels"]))
+        screened_epochs = passing_epochs(epochs, config)
+        count = len(screened_epochs)
         counts[subject] = count
         if count < int(config["n_fixed"]):
             excluded[subject] = f"{count} usable epochs below N_fixed={config['n_fixed']}"
             continue
         subject_config = {**config, "subject_index": index}
-        features = compute_graph_features(epochs, subject_config)
+        features = compute_graph_features(screened_epochs, subject_config)
         records.append({"subject_id": subject, **features})
 
     if not records:
@@ -70,6 +71,9 @@ def run(config_name: str) -> None:
         "columns": columns,
         "label_free": True,
         "epoch_threshold_uv": 150.0,
+        "screen_applied_to_sampling_pool": True,
+        "screen_channels": config["channels"],
+        "screen_implementation": "src/graph_features_v2.py:screen_epochs",
         "usable_epoch_counts": counts,
         "excluded_subjects": excluded,
         "feature_definition": "Median adjacency over fixed-size, without-replacement epoch subsamples; four graph metrics per band.",

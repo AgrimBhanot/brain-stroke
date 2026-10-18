@@ -193,6 +193,7 @@ def main() -> None:
                 f"- Epoch window: {sorted(epoch_windows)} (time start, time end, samples).",
                 f"- Clean epoch counts: min={min(epoch_counts.values())}, median={np.median(list(epoch_counts.values()))}, max={max(epoch_counts.values())}.",
                 f"- Artifact screen: peak-to-peak threshold {THRESHOLD_UV} uV.",
+                "- The same artifact screen is applied to the graph sampling pool by `screen_epochs` before feature computation.",
                 "- Design decisions used only channel quality and epoch counts; no clinical labels were read.",
                 "",
                 "## Channel sets",

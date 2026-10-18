@@ -14,6 +14,7 @@ from src.graph_features_v2 import (
     _weighted_global_efficiency,
     _wpli_adjacency,
     compute_graph_features,
+    screen_epochs,
 )
 
 
@@ -86,6 +87,19 @@ class GraphFeaturesV2Tests(unittest.TestCase):
         too_large["n_fixed"] = 9
         with self.assertRaises(ValueError):
             compute_graph_features(epochs, too_large)
+
+    def test_artifact_screen_is_applied_to_sampling_pool(self) -> None:
+        rng = np.random.default_rng(21)
+        data = rng.normal(scale=1e-6, size=(7, 8, 2000))
+        data[0, 0, 0] = 200e-6
+        data[0, 0, 1] = -200e-6
+        info = mne.create_info(CONFIG["channels"], sfreq=500.0, ch_types="eeg")
+        epochs = mne.EpochsArray(data, info, verbose=False)
+        screened = screen_epochs(epochs, CONFIG["channels"], 150.0)
+        self.assertEqual(len(screened), 6)
+        from_full = compute_graph_features(epochs, CONFIG)
+        from_screened = compute_graph_features(screened, CONFIG)
+        self.assertEqual(from_full, from_screened)
 
 
 if __name__ == "__main__":

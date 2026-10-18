@@ -80,41 +80,41 @@ All checks below are label-free.
 
 ### Feature ranges
 
-- `g24f_alpha_ClustCoeff_absAI`: min=0.000107173, max=0.0764353
-- `g24f_alpha_FrobeniusDist`: min=0.018048, max=0.0669434
-- `g24f_alpha_GlobalEff_absAI`: min=4.82045e-05, max=0.0603336
-- `g24f_alpha_MeanHomotopic`: min=0.454903, max=0.54895
-- `g24f_beta_ClustCoeff_absAI`: min=0.000349047, max=0.06518
-- `g24f_beta_FrobeniusDist`: min=0.0100485, max=0.0421252
-- `g24f_beta_GlobalEff_absAI`: min=8.13198e-05, max=0.0354054
-- `g24f_beta_MeanHomotopic`: min=0.452749, max=0.49209
-- `g24f_delta_ClustCoeff_absAI`: min=0.00276983, max=0.135403
-- `g24f_delta_FrobeniusDist`: min=0.0205191, max=0.106713
-- `g24f_delta_GlobalEff_absAI`: min=0.000313787, max=0.0522364
-- `g24f_delta_MeanHomotopic`: min=0.453795, max=0.545288
-- `g24f_theta_ClustCoeff_absAI`: min=0.000880918, max=0.163183
-- `g24f_theta_FrobeniusDist`: min=0.0187242, max=0.0733456
-- `g24f_theta_GlobalEff_absAI`: min=0.000753174, max=0.0325522
-- `g24f_theta_MeanHomotopic`: min=0.444204, max=0.539777
+- `g24f_alpha_ClustCoeff_absAI`: min=9.87105e-05, max=0.0740839
+- `g24f_alpha_FrobeniusDist`: min=0.0189278, max=0.103511
+- `g24f_alpha_GlobalEff_absAI`: min=4.82045e-05, max=0.0603396
+- `g24f_alpha_MeanHomotopic`: min=0.449983, max=0.579152
+- `g24f_beta_ClustCoeff_absAI`: min=0.000519227, max=0.0616236
+- `g24f_beta_FrobeniusDist`: min=0.011285, max=0.0605011
+- `g24f_beta_GlobalEff_absAI`: min=0.000134343, max=0.0420273
+- `g24f_beta_MeanHomotopic`: min=0.449195, max=0.491318
+- `g24f_delta_ClustCoeff_absAI`: min=0.000867025, max=0.146527
+- `g24f_delta_FrobeniusDist`: min=0.0220369, max=0.126716
+- `g24f_delta_GlobalEff_absAI`: min=0.000463055, max=0.0598563
+- `g24f_delta_MeanHomotopic`: min=0.453304, max=0.574011
+- `g24f_theta_ClustCoeff_absAI`: min=0.00201358, max=0.15284
+- `g24f_theta_FrobeniusDist`: min=0.0181396, max=0.147763
+- `g24f_theta_GlobalEff_absAI`: min=0.000762302, max=0.081495
+- `g24f_theta_MeanHomotopic`: min=0.444204, max=0.539137
 
 ### Epoch-count bias
 
-- `g24f_alpha_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=-0.209697
-- `g24f_alpha_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.438365
-- `g24f_alpha_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.0603756
-- `g24f_alpha_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.402765
-- `g24f_beta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.0880524
-- `g24f_beta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.120249
-- `g24f_beta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.0075888
-- `g24f_beta_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.0400644
-- `g24f_delta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.0177444
-- `g24f_delta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.156575
-- `g24f_delta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=0.183973
-- `g24f_delta_MeanHomotopic` vs `n_epochs_all`: Spearman r=0.0249426
-- `g24f_theta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.163271
-- `g24f_theta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.409237
-- `g24f_theta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.173092
-- `g24f_theta_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.32325
+- `g24f_alpha_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=-0.450529
+- `g24f_alpha_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.530881
+- `g24f_alpha_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.169744
+- `g24f_alpha_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.416715
+- `g24f_beta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.178727
+- `g24f_beta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.412027
+- `g24f_beta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.226883
+- `g24f_beta_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.17644
+- `g24f_delta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.277605
+- `g24f_delta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.347578
+- `g24f_delta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=0.00976501
+- `g24f_delta_MeanHomotopic` vs `n_epochs_all`: Spearman r=0.0774504
+- `g24f_theta_ClustCoeff_absAI` vs `n_epochs_all`: Spearman r=0.223535
+- `g24f_theta_FrobeniusDist` vs `n_epochs_all`: Spearman r=-0.389707
+- `g24f_theta_GlobalEff_absAI` vs `n_epochs_all`: Spearman r=-0.070866
+- `g24f_theta_MeanHomotopic` vs `n_epochs_all`: Spearman r=-0.179732
 
 ### Collinearity
 
@@ -123,21 +123,20 @@ All checks below are label-free.
 ### Second-seed stability
 
 - Alternate seed base: 1042.
-- `g24f_alpha_ClustCoeff_absAI` between seed runs: Spearman r=0.693552
-- `g24f_alpha_FrobeniusDist` between seed runs: Spearman r=0.827073
-- `g24f_alpha_GlobalEff_absAI` between seed runs: Spearman r=0.646548
-- `g24f_alpha_MeanHomotopic` between seed runs: Spearman r=0.889275
-- `g24f_beta_ClustCoeff_absAI` between seed runs: Spearman r=0.752388
-- `g24f_beta_FrobeniusDist` between seed runs: Spearman r=0.899262
-- `g24f_beta_GlobalEff_absAI` between seed runs: Spearman r=0.655124
-- `g24f_beta_MeanHomotopic` between seed runs: Spearman r=0.895462
-- `g24f_delta_ClustCoeff_absAI` between seed runs: Spearman r=0.648285
-- `g24f_delta_FrobeniusDist` between seed runs: Spearman r=0.850304
-- `g24f_delta_GlobalEff_absAI` between seed runs: Spearman r=0.754451
-- `g24f_delta_MeanHomotopic` between seed runs: Spearman r=0.924446
-- `g24f_theta_ClustCoeff_absAI` between seed runs: Spearman r=0.563938
-- `g24f_theta_FrobeniusDist` between seed runs: Spearman r=0.835215
-- `g24f_theta_GlobalEff_absAI` between seed runs: Spearman r=0.715154
-- `g24f_theta_MeanHomotopic` between seed runs: Spearman r=0.820343
-<!-- End of label-free QC report. -->
+- `g24f_alpha_ClustCoeff_absAI` between seed runs: Spearman r=0.567846
+- `g24f_alpha_FrobeniusDist` between seed runs: Spearman r=0.854863
+- `g24f_alpha_GlobalEff_absAI` between seed runs: Spearman r=0.76954
+- `g24f_alpha_MeanHomotopic` between seed runs: Spearman r=0.919887
+- `g24f_beta_ClustCoeff_absAI` between seed runs: Spearman r=0.723947
+- `g24f_beta_FrobeniusDist` between seed runs: Spearman r=0.937473
+- `g24f_beta_GlobalEff_absAI` between seed runs: Spearman r=0.797547
+- `g24f_beta_MeanHomotopic` between seed runs: Spearman r=0.92271
+- `g24f_delta_ClustCoeff_absAI` between seed runs: Spearman r=0.711572
+- `g24f_delta_FrobeniusDist` between seed runs: Spearman r=0.90762
+- `g24f_delta_GlobalEff_absAI` between seed runs: Spearman r=0.840643
+- `g24f_delta_MeanHomotopic` between seed runs: Spearman r=0.92944
+- `g24f_theta_ClustCoeff_absAI` between seed runs: Spearman r=0.531915
+- `g24f_theta_FrobeniusDist` between seed runs: Spearman r=0.865176
+- `g24f_theta_GlobalEff_absAI` between seed runs: Spearman r=0.749132
+- `g24f_theta_MeanHomotopic` between seed runs: Spearman r=0.924446
 

@@ -9,6 +9,7 @@
 - Epoch window: [(0.0, 3.998, 2000)] (time start, time end, samples).
 - Clean epoch counts: min=4, median=39.0, max=40.
 - Artifact screen: peak-to-peak threshold 150.0 uV.
+- The same 150 uV screen is applied to the graph sampling pool by `screen_epochs` before feature computation.
 - Design decisions used only channel quality and epoch counts; no clinical labels were read.
 
 ## Channel sets

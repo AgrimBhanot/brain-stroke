@@ -1,7 +1,7 @@
 {
   "table": "features\\v2\\graph_g24f.csv",
   "created": "2026-10-18",
-  "config": "configs\\graph_g24f.json",
+  "config": "configs/graph_g24f.json",
   "rows": 48,
   "columns": [
     "subject_id",
@@ -106,5 +106,16 @@
     "sub-13": "0 usable epochs below N_fixed=6",
     "sub-40": "4 usable epochs below N_fixed=6"
   },
-  "feature_definition": "Median adjacency over fixed-size, without-replacement epoch subsamples; four graph metrics per band."
+  "feature_definition": "Median adjacency over fixed-size, without-replacement epoch subsamples; four graph metrics per band.",
+  "provenance_version": 1,
+  "generated_at_utc": "2026-10-18T16:41:48.928830+00:00",
+  "source_commit": "d6779653939f53f496f7f2b0b6f0b1655eb56b1a",
+  "config_sha256": "e4bb4bf6e578cc075a1f4348ff822a902de6c1dd09b918b5bdbc92015d651023",
+  "source_inputs": [
+    {
+      "path": "data/processed/figshare/clean",
+      "file_count": 50,
+      "manifest_sha256": "58ee11ecdfe5a93ee1a3350e2293f7ed470279fda2bed8aade7f41aee79005c4"
+    }
+  ]
 }

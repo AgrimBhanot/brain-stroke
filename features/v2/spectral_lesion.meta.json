@@ -32,5 +32,28 @@
   "label_free": true,
   "clinical_columns_used": [
     "lesion_side"
+  ],
+  "provenance_version": 1,
+  "generated_at_utc": "2026-10-18T16:41:48.928830+00:00",
+  "source_commit": "d6779653939f53f496f7f2b0b6f0b1655eb56b1a",
+  "config": null,
+  "config_sha256": null,
+  "source_inputs": [
+    {
+      "path": "features/figshare_features.csv",
+      "sha256": "f5a646c7e12e8b7aec25d3f034aef1e2d425cd40cc1d13e162c8588565a78ac0"
+    },
+    {
+      "path": "features/v2/subject_meta.csv",
+      "sha256": "951ee16bb07095bfdcb448952a02731bbc8f0015fe02c937ec8c6e1f6eed7f68"
+    },
+    {
+      "path": "data/raw/figshare/participants.tsv",
+      "sha256": "0367302fd7448173ebc110d21051b4a27e253e32e725cd64b5460ac32a6566f6"
+    },
+    {
+      "path": "data/raw/figshare/participants.json",
+      "sha256": "d8df0c6ec1a8786835e727d70c4431ab225a3e56d59378131dc868d45941b99b"
+    }
   ]
 }

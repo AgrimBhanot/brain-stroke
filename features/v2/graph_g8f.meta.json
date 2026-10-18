@@ -1,7 +1,7 @@
 {
   "table": "features\\v2\\graph_g8f.csv",
   "created": "2026-10-18",
-  "config": "configs\\graph_g8f.json",
+  "config": "configs/graph_g8f.json",
   "rows": 48,
   "columns": [
     "subject_id",
@@ -92,5 +92,16 @@
     "sub-13": "4 usable epochs below N_fixed=15",
     "sub-40": "9 usable epochs below N_fixed=15"
   },
-  "feature_definition": "Median adjacency over fixed-size, without-replacement epoch subsamples; four graph metrics per band."
+  "feature_definition": "Median adjacency over fixed-size, without-replacement epoch subsamples; four graph metrics per band.",
+  "provenance_version": 1,
+  "generated_at_utc": "2026-10-18T16:41:48.928830+00:00",
+  "source_commit": "d6779653939f53f496f7f2b0b6f0b1655eb56b1a",
+  "config_sha256": "0777f1fd3e56f2a9627cd02abc86754e3e8e40db713ab387438dae1b1d1cf6a1",
+  "source_inputs": [
+    {
+      "path": "data/processed/figshare/clean",
+      "file_count": 50,
+      "manifest_sha256": "58ee11ecdfe5a93ee1a3350e2293f7ed470279fda2bed8aade7f41aee79005c4"
+    }
+  ]
 }

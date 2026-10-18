@@ -36,5 +36,16 @@
     "n_epochs_left_hand",
     "n_epochs_right_hand"
   ],
-  "max_abs_mean_ai_minus_pdBSI": 0.11239281315902591
+  "max_abs_mean_ai_minus_pdBSI": 0.11239281315902591,
+  "provenance_version": 1,
+  "generated_at_utc": "2026-10-18T16:41:48.928830+00:00",
+  "source_commit": "d6779653939f53f496f7f2b0b6f0b1655eb56b1a",
+  "config": null,
+  "config_sha256": null,
+  "source_inputs": [
+    {
+      "path": "features/figshare_features.csv",
+      "sha256": "f5a646c7e12e8b7aec25d3f034aef1e2d425cd40cc1d13e162c8588565a78ac0"
+    }
+  ]
 }

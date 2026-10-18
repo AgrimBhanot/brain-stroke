@@ -1,0 +1,90 @@
+{
+  "manifest_version": 1,
+  "created_at_utc": "2026-10-18T16:42:53.724180+00:00",
+  "source_commit": "d6779653939f53f496f7f2b0b6f0b1655eb56b1a",
+  "label_free_feature_tables": [
+    {
+      "path": "features/v2/spectral_abs.csv",
+      "sha256": "76bfc7c8117426f1b645a6aba7ba0c36f80e00a390f298962038d2083e2d1bd3",
+      "sidecar": {
+        "path": "features/v2/spectral_abs.meta.json",
+        "sha256": "d340e31a50a710553f73f0769e29b24293d605c2c250fe5c8e38af4b7a2f4a81"
+      }
+    },
+    {
+      "path": "features/v2/spectral_lesion.csv",
+      "sha256": "0f7a9006febbfa46f2c19a67d1e2f8d7a4236c8bcea4af2d70548071e398eacb",
+      "sidecar": {
+        "path": "features/v2/spectral_lesion.meta.json",
+        "sha256": "6112efd09394e1f642e142a08a4b3d4d623e014118807144927001663602f7ba"
+      }
+    },
+    {
+      "path": "features/v2/graph_g8f.csv",
+      "sha256": "14d1cdc74a001d8d7cda1cb78ce37b284a189b5da58890809fc093d8ef565130",
+      "sidecar": {
+        "path": "features/v2/graph_g8f.meta.json",
+        "sha256": "fefab50d6ed00313676e67a017936e71c71b3085f407c191741a2bd3298c6d7d"
+      }
+    },
+    {
+      "path": "features/v2/graph_g24f.csv",
+      "sha256": "1d181103e5ba6b317b3f607c2a270d0cea62074e940e6890c826ae72d0667e41",
+      "sidecar": {
+        "path": "features/v2/graph_g24f.meta.json",
+        "sha256": "4425bf37a58003bf60e6bec95d4465aa388d60c1a71b4cff588176b94f7b01a4"
+      }
+    },
+    {
+      "path": "features/v2/subject_meta.csv",
+      "sha256": "951ee16bb07095bfdcb448952a02731bbc8f0015fe02c937ec8c6e1f6eed7f68",
+      "sidecar": "not applicable; metadata schema is documented in the guide"
+    }
+  ],
+  "configs": [
+    {
+      "path": "configs/graph_g24f.json",
+      "sha256": "e4bb4bf6e578cc075a1f4348ff822a902de6c1dd09b918b5bdbc92015d651023"
+    },
+    {
+      "path": "configs/graph_g8f.json",
+      "sha256": "0777f1fd3e56f2a9627cd02abc86754e3e8e40db713ab387438dae1b1d1cf6a1"
+    }
+  ],
+  "implementation_sources": [
+    {
+      "path": "src/graph_features_v2.py",
+      "sha256": "1428eb48778d4afa9b518d1d2d65115e9ef00b2ab31a55dd682b5489c6f766b4"
+    },
+    {
+      "path": "src/run_graph_features_v2.py",
+      "sha256": "9bba5d2d04650966adf4b6c5b83fb30d77f68ccfa4a5864e6b99a567d4e62db0"
+    },
+    {
+      "path": "src/audit_graph_design_v2.py",
+      "sha256": "0788fdb8e9c14d472251d4de3401bcf506274980746f30594f6aebc460ae2b1b"
+    },
+    {
+      "path": "src/qc_graph_features_v2.py",
+      "sha256": "99ef8c5e017bfced543b0df646a6cc791f9601b1ad87db0921b402c70974aaac"
+    },
+    {
+      "path": "src/build_spectral_abs_v2.py",
+      "sha256": "56e3457dd7064cfb445202e9534605ff24705d9043b596cb509ae97b2358e4ed"
+    },
+    {
+      "path": "src/build_spectral_lesion_v2.py",
+      "sha256": "171b2818ba94278c61a7569363b17a41aabf8514edd20d4f38a3b50947be4195"
+    },
+    {
+      "path": "src/write_v2_provenance.py",
+      "sha256": "672fd9a0e24b28f9b6940d1a1f824d44402a8a27d96ed9a8047f5ca8ecd37a32"
+    },
+    {
+      "path": "src/write_v2_manifest.py",
+      "sha256": "984aa71f0c5eff799e6df1a41041b13f88fae920238b423b6a89623d976148b4"
+    }
+  ],
+  "raw_and_processed_data": "Excluded from Git; input hashes are recorded in graph sidecars.",
+  "freeze_status": "READY FOR REVIEW; not tagged features-v2"
+}

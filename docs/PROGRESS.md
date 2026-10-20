@@ -1,28 +1,57 @@
 # Project Progress
 
-The active plan and phase definitions are in [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md). Historical detail remains in the technical and timeline ledgers.
+The authoritative plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md). [CONTEXT.md](CONTEXT.md) is the concise AI handoff. The ledgers preserve current technical detail and history.
 
-## Status as of 2026-10-17
+## Status as of 2026-10-20
 
-| Phase | Subphase | Status | Outputs / evidence | Next action |
-|---|---|---|---|---|
-| Legacy | Figshare preprocessing and spectral feature extraction | DONE | `features/figshare_features.csv`, `features/figshare_patient_features.csv` | Preserve as v1 reference |
-| Legacy | Spectral modeling benchmark | DONE | `src/train_models.py`; weak, unstable near-baseline result recorded in ledgers | Do not tune repeatedly |
-| Legacy | v1 graph feature extraction | DONE | `src/graph_features.py`, `features/figshare_graph_features.csv`, `features/figshare_combined_features.csv` | Treat as biased baseline |
-| Legacy | v1 graph audit | DONE | Epoch-count dependence identified, especially for `MeanHomotopic` | Correct with fixed-epoch v2 design |
-| V2 | Phase 0: handoff reconciliation | DONE | `EXECUTION_GUIDE_CURRENT.md`; operational docs corrected | Follow current guide |
-| V2 | Phase 1 / A0: metadata audit | DONE | `docs/METADATA_AUDIT.md` and `features/v2/subject_meta.csv`; 22 left and 28 right mapped lesion cases | A2/T3 is feasible |
-| V2 | Phase 2 / A1: absolute spectral table | DONE | `features/v2/spectral_abs.csv` and `.meta.json`; shape 50×20, finite and label-free | Preserve output; continue to A3 when inputs exist |
-| V2 | Phase 2 / A2: lesion-aligned spectral table | DONE | `features/v2/spectral_lesion.csv` and `.meta.json`; 50×20; 3 acceptance tests pass | Preserve output; lesion mapping is provenance-bound |
-| V2 | Phase 3 / A3: channel and epoch design lock | DONE | `docs/GRAPH_DESIGN_LOCK.md`, audit JSON, and both configs; G8f N=15, G24f N=6 | Implement v2 graph library |
-| V2 | Phase 4 / A4: graph v2 library and tests | DONE | `src/graph_features_v2.py`; 5 synthetic tests pass | Preserve implementation; no v1 edits |
-| V2 | Phase 5 / A5-A6: generation and QC | DONE WITH FLAGS | Screen mismatch corrected; both graph tables regenerated 48×17 with screen applied to sampling pool; 9 tests pass | Report residual bias/instability; do not tune against labels |
-| V2 | Phase 6 / A7: freeze and registry handoff | BLOCKED | Feature outputs, provenance, manifest, changelog, and handoff decision are complete; external reviews and Group B registry remain | Complete reviews and registry freeze; do not tag yet |
-| V2 | Phase 7: UCLH transfer and reporting | NOT STARTED | UCLH validation not complete | Defer until Figshare v2 is frozen |
+| Phase | Status | Evidence | Next action |
+|---|---|---|---|
+| Legacy baseline | DONE; frozen | Legacy spectral/graph tables and benchmark | Preserve only |
+| A0-A2 metadata/spectral v2 | DONE | `METADATA_AUDIT.md`; 50-subject absolute/lesion tables; T3 feasible under documented contralateral assumption | Preserve provenance limitation |
+| A3-A6 graph v2 | DONE WITH FLAGS | G8f N=15, G24f N=6; graph tables 48 x 17; screen fix, QC, sidecars and manifest | Report residual bias/instability |
+| B1 registry | OWNER APPROVED; FREEZE IN PROGRESS | Current 42-artifact digest approved on 2026-10-20 | Commit/tag and verify frozen content |
+| B2-B3 engine/statistics | IMPLEMENTED; SYNTHETIC ACCEPTANCE PASSED | Gate A p=.005; Gate B 168/200 (84%); current 32/32 tests pass; validation JSON | Preserve implementation |
+| Phase 6 freeze/evaluation | AUTHORIZED; IN PROGRESS | Owner approval covers the current snapshot and continuation through the primary run | Verify tags/guard and execute T1-T9 once |
+| UCLH transfer | PARTIAL HANDOFF; VALIDATION NOT STARTED | UCLH audit/montage documents | Verify acquisition/reference/duration/common montage after Figshare freeze |
 
-## Open issues
+## Fixed decisions and limitations
 
-- `participants.tsv` semantics are documented; lesion alignment is feasible under the contralateral mapping rule.
-- `docs/PHASE5_CONTEXT.md` is missing; `EXECUTION_GUIDE_CURRENT.md` is the replacement authority.
-- The original `PROJECT_EXECUTION_GUIDE.md` is retained as historical reference and is not the current v2 execution plan.
-- No v2 result may be described as an improvement before the fixed-epoch comparison is run under the frozen evaluation protocol.
+- Current cohort: 33 mild, 17 moderate, no severe subjects. Do not build a three-class model.
+- Retain subjects 04/05, 11/15 and 47/49 as distinct IDs. Their identical/highly similar signals remain a dependence and CV/permutation limitation. The full audit is in `RECORDING_INTEGRITY_AUDIT_V2.md`/`.json`.
+- Both graph exclusions, sub-13 and sub-40, are moderate; graph subsets contain 33 mild and 15 moderate.
+- G8f is primary. G24f is registered secondary T6 inside the nine-test Holm family.
+- Original moderate positive controls failed and remain recorded. The user-authorized Option 3 replacement passed; `REGISTRY_VALIDATION_RESULTS.json` has `acceptance_passed: true`.
+- Group A completed its work and will not return. Agrim is the sole project owner and the only required reviewer. AI-model, model-family and multi-group review dependencies have been removed.
+- One active record, `reviews/registry_review.json`, binds the latest owner decision to the final digest. Earlier supplied reviews are historical evidence only and never block ordinary development.
+- Agrim's 2026-10-20 instruction grants the outstanding approvals and authority to continue. Owner approval, scoped freeze commit/tags and the registered primary run are authorized. Scientific settings and all nine tests remain fixed.
+
+## Documentation structure after cleanup
+
+- `ANALYSIS_REGISTRY.md`: scientific protocol, amendments, freeze criteria and grouped-split sensitivity.
+- `PROGRESS.md`: only current status, blockers and next actions.
+- `CONTEXT.md`: concise handoff for a new AI session.
+- `FEATURE_QC_V2.md`, `METADATA_AUDIT.md`, `GRAPH_DESIGN_LOCK.md`, and recording-integrity audit: distinct scientific evidence.
+- `V2_FEATURE_HANDOFF.md` and `FEATURE_CHANGELOG.md`: completed Group A handoff/provenance.
+- `UCLH_AUDIT.md` and `UCLH_MONTAGE.md`: future external-validation evidence.
+- `reviews/`: one active machine-readable owner-review record plus historical supplied review evidence.
+- `Ledgers/`: current technical state and append-only history.
+- JSON manifests/results/audits remain because code or reproducibility checks consume their structured fields.
+
+Redundant `B2_B3_IMPLEMENTATION.md`, `FREEZE_READINESS_REVIEW.md`, and `FREEZE_AND_SENSITIVITY_PLAN.md` were removed after their unique current content was consolidated into the registry, this status board and the ledgers.
+
+## Freeze checklist
+
+1. DONE: owner approved digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898` on 2026-10-20; snapshot self-check passes.
+2. Commit the reviewed project changes and create the authorized `registry-v1` and `features-v2` tags.
+3. Verify the tagged freeze with `verify_freeze()`.
+4. Execute the authorized one-shot T1-T9 primary evaluation and independently check its saved results.
+
+## Next major work
+
+1. Complete the refreshed freeze described above.
+2. Run and report the one-shot registered T1-T9 evaluation without tuning or selective omission.
+3. Implement the separately registered grouped-split and other descriptive sensitivities, then complete UCLH prerequisite verification before external validation.
+
+## Latest verification
+
+After simplifying review to one owner record, all 32 unit/integration tests passed in 22.515 seconds. On 2026-10-20 the same 42-artifact snapshot passed self-check and Agrim's approval was recorded. The first primary run is authorized; its execution and outcomes will be recorded below.

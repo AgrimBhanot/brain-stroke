@@ -1,71 +1,35 @@
 # Immediate Operational Context
 
-The authoritative execution plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md). Read it before acting.
+Use [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md) as operational authority, [PROGRESS.md](PROGRESS.md) for current status, [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md) for the frozen scientific plan, and `Ledgers/` for technical/history detail.
 
 ## Current state
 
-- Legacy Figshare spectral and v1 graph feature extraction exists and is frozen.
-- Legacy modeling found weak, unstable performance near the dummy baseline.
-- Legacy graph features have a known epoch-count bias, especially in `MeanHomotopic`.
-- The v2 design is specified but not implemented.
-- `features/v2/`, `configs/`, and `tests/` do not yet exist.
-- `participants.tsv` and verified lesion-side semantics are not currently available in the repository.
-- `docs/PHASE5_CONTEXT.md` is missing and is superseded by the current guide.
+- Group A completed A0-A6 and is no longer participating. Agrim is the sole project owner and human reviewer from now on.
+- Figshare has 50 subjects: 33 mild, 17 moderate, no severe. T3 is feasible under the documented contralateral lesion-side assumption, not imaging confirmation.
+- G8f is primary (`N_fixed=15`); G24f is registered secondary T6 (`N_fixed=6`). Both graph tables have 48 subjects after label-blind exclusion of sub-13 and sub-40, both moderate.
+- Group A fixed artifact screening before sampling and regenerated/provenanced graph outputs. Residual epoch-count correlation and seed instability must be reported.
+- Retain 04/05, 11/15 and 47/49 as distinct subjects. Their identical/highly similar EEG remains an unresolved dependence limitation. All named channels are identical for 04/05; demographics/location differ.
+- B1 and the B2/B3 engine are implemented. Option 3 synthetic validation passed: Gate A p=.005; Gate B 168/200 (84%, exact 95% CI 78.17-88.79%). Original failures remain preserved; the last complete suite had 32 passing tests.
+- The registry includes T1-T9, nine-test Holm correction, nested standardized Ridge, exact tails/seeds/failure rules, and a separate descriptive grouped-split sensitivity for T1-T6.
 
 ## Active subphase
 
-**Phase 6 / freeze and registry handoff.** A0-A2 are complete, A3 locked G8f at N_fixed=15 and secondary G24f at N_fixed=6, A4 tests pass, and A5-A6 produced both 48-subject label-free graph tables. QC flags residual epoch bias and seed instability; these are documented and must not be tuned against labels. Freeze/registry work is now blocked on the Group B registry and required reviews.
+Phase 6: documentation consolidation and review-mechanism simplification are complete. All 32 tests passed in 22.515 seconds. The regenerated 42-artifact snapshot passed its self-check; digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`.
 
-## Required operating behavior
+The freeze mechanism requires only Agrim's latest owner review. `reviews/registry_review.json` now approves the current digest, following Agrim's 2026-10-20 instruction granting all outstanding approvals and authority to continue. Earlier supplied reviews are historical evidence only.
 
-- Do not overwrite v1 files.
-- Do not read labels during v2 feature construction.
-- Keep v2 feature CSVs label-free.
-- Record every completed or blocked subphase in `docs/PROGRESS.md`.
-- Stop and document blockers instead of guessing.
-# Immediate Operational Context & Handoff Guide
+The scoped freeze commit, `registry-v1`/`features-v2` tags and first real-label T1-T9 run are authorized. Verify the existing snapshot/tag guard, then execute once and retain every outcome. Do not ask again for approvals already provided; escalate only substantive scientific ambiguity or a result-changing problem.
 
-## Role & Purpose of This File
-This file serves as the **single source of immediate context, active operational constraints, feature specifications, and execution instructions** required by the next AI prompt or subagent working on this repository. Incoming agents read this file to immediately execute current tasks without needing to inspect background log files or project ledgers.
+## Required behavior
 
----
+- Never modify legacy v1 artifacts for v2 or put IDs, NIHSS, severity, metadata or epoch counts in X.
+- All preprocessing/tuning stays within training folds. Feature engineering remains label-blind.
+- Preserve and report every registered test/failure; do not tune after observing labels.
+- Update `PROGRESS.md`, rewrite the technical ledger and append the timeline after changes.
+- Stop and record uncertainty rather than guessing.
 
-## Active Task Goal: Graph Feature Generation & 3-Way Feature Ablation
-- **Current Phase:** Phase 3b (Graph / Connectivity Branch) & Phase 5 Feature Ablation.
-- **Immediate Task 1:** Execute `src/graph_features.py` to extract 16 wPLI network features from stored epoch FIFs (`data/processed/figshare/*-epo.fif`) and write `features/figshare_graph_features.csv` (50×17) and `features/figshare_combined_features.csv` (50×36).
-- **Immediate Task 2:** Run a 3-way feature family ablation study comparing Spectral-Only (19 features), Graph-Only (16 features), and Combined (35 features) using `src/train_models.py` under identical cross-validation protocol.
+## Next three milestones
 
----
-
-## Technical Constraints & Guardrails
-1. **Target Problem:** Binary Classification (`0: mild` [NIHSS 1–4, n=33] vs `1: moderate` [NIHSS 5–11, n=17]). Severe stroke count on Figshare is 0.
-2. **Feature Matrix ($X$):**
-   - **Spectral Set (19 features):** `all_AI_delta_F3F4`, `all_AI_delta_C3C4`, `all_AI_delta_P3P4`, `all_AI_delta_O1O2`, `all_AI_theta_F3F4`, `all_AI_theta_C3C4`, `all_AI_theta_P3P4`, `all_AI_theta_O1O2`, `all_AI_alpha_F3F4`, `all_AI_alpha_C3C4`, `all_AI_alpha_P3P4`, `all_AI_alpha_O1O2`, `all_AI_beta_F3F4`, `all_AI_beta_C3C4`, `all_AI_beta_P3P4`, `all_AI_beta_O1O2`, `all_pdBSI`, `all_DAR`, `all_DTABR`.
-   - **Graph Set (16 features):** `wPLI_{band}_{metric}` where bands are `delta`, `theta`, `alpha`, `beta` and metrics are `GlobalEff_AI`, `ClustCoeff_AI`, `MeanHomotopic`, `FrobeniusDist`.
-   - **Combined Set (35 features):** 19 Spectral + 16 Graph.
-   - **Strict Separation:** Column names containing `nihss`, `severity`, `subject_id`, or epoch counts must NEVER enter $X$.
-3. **Pipeline Integrity:** All scaling (`StandardScaler`) and feature selection (`SelectKBest`) MUST live inside an `sklearn.pipeline.Pipeline` to guarantee zero data leakage across CV folds.
-4. **Cross-Validation Setup:** `RepeatedStratifiedKFold(n_splits=5, n_repeats=10, random_state=42)`.
-5. **Evaluation Metrics:** `f1_macro`, `balanced_accuracy`, `roc_auc` (binary mode). Always benchmark against `DummyClassifier(strategy='most_frequent')`.
-6. **Model Constraints:** Classical ML only (Dummy, SVM, KNN, Random Forest, Logistic Regression). No deep learning. No heavy hyperparameter tuning. Skip SHAP for distance-based models.
-7. **Graph Feature Bias:** Note that `MeanHomotopic` wPLI features were calculated without epoch-count sub-sampling and are strongly negatively correlated with the number of available epochs (`n_epochs_all`). Consider this bias during interpretation.
-
----
-
-## File & Data Input/Output Locations
-- **Processed Epoch Files:** `data/processed/figshare/*-epo.fif` (50 subjects).
-- **Spectral Feature Table:** `features/figshare_features.csv` (50 rows × 63 columns).
-- **Graph Feature Table:** `features/figshare_graph_features.csv` (50 rows × 17 columns).
-- **Combined Feature Table:** `features/figshare_combined_features.csv` (50 rows × 36 columns).
-- **Graph Extractor:** `src/graph_features.py`.
-- **ML Trainer:** `src/train_models.py`.
-
----
-
-## Immediate Handoff Instructions for Next Prompt
-1. **Run Graph Feature Extraction:**
-   Run `python src/graph_features.py`. Confirm `features/figshare_graph_features.csv` (50×17) and `features/figshare_combined_features.csv` (50×36) are generated with zero `NaN` or `inf` values.
-2. **Execute Feature Family Ablation:**
-   Run `src/train_models.py` (or adapt it) across the three feature representations (Spectral-19, Graph-16, Combined-35) under identical 5×10 CV protocol.
-3. **Save Results & Update Ledgers:**
-   Store output metrics under `results/metrics/` and document findings in `docs/Ledgers/project_technical_ledger_clean.md` and `docs/Ledgers/project_timeline_ledger_clean.md`.
+1. Run tests, regenerate/check the snapshot and obtain Agrim's one exact-digest review.
+2. With explicit Git authorization, commit/tag and verify the freeze; then separately authorize the one-shot T1-T9 run.
+3. Implement/report grouped and other descriptive sensitivities, then resolve UCLH reference/duration/common-montage prerequisites before external validation.

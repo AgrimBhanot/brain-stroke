@@ -1,8 +1,14 @@
 # v2 Graph Feature QC
 
-All checks below are label-free.
+Feature-engineering checks below are label-free. The explicitly authorized exclusion-class disclosure is separate descriptive metadata accounting and did not alter feature engineering or eligibility.
+
+## Exclusion class balance - 2026-10-19
+
+The user authorized reading `subject_meta.csv` for this disclosure. `sub-13` has NIHSS 9 (moderate) and `sub-40` NIHSS 6 (moderate). Both exclusions are therefore moderate. The 50-subject cohort has 33 mild / 17 moderate (66% / 34%); both 48-subject graph subsets have 33 mild / 15 moderate (68.75% / 31.25%). The moderate fraction decreases by 2.75 percentage points. The epoch eligibility rule was fixed before this inspection; no feature, subject selection or threshold was changed. Spectral tests retain all 50 subjects. Between-table comparisons remain descriptive because membership differs.
 
 ## g8f
+
+Paired-recording integrity was additionally checked across all 33 raw channels on 2026-10-19. Sub-04/05 are identical on all 32 named channels but differ on the unnamed channel and in age/sex/stroke-location metadata. The other two pairs remain highly similar without exact all-channel equality. Every audited metadata field agrees with its source TSV. See `RECORDING_INTEGRITY_AUDIT_V2.md` and `.json`; the user-approved separate-ID policy is unchanged and its dependence limitation remains.
 
 - Rows: 48; features: 16.
 - Finite values: True.

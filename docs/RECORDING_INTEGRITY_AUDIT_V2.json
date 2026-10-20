@@ -1,0 +1,1610 @@
+{
+  "date": "2026-10-19T10:07:27.118042+00:00",
+  "mne_version": "1.13.2",
+  "scope": "Exact decoded sample comparison for every signal channel, without filtering, resampling or alignment search; non-outcome metadata only.",
+  "config_sha256": "0277ed4fe01f965f9b98ed956f519c7231b122b1b7267d2d3b271cc928a465a2",
+  "source_sha256": "07fa15beb3321b268e1b8afaa6aad870e0cf5cb075cb1fde0cdf6571c17aeb2f",
+  "metadata_hashes": {
+    "data/raw/figshare/participants.tsv": "0367302fd7448173ebc110d21051b4a27e253e32e725cd64b5460ac32a6566f6",
+    "features/v2/subject_meta.csv": "951ee16bb07095bfdcb448952a02731bbc8f0015fe02c937ec8c6e1f6eed7f68"
+  },
+  "pairs": [
+    {
+      "subjects": [
+        "sub-04",
+        "sub-05"
+      ],
+      "recordings": [
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-04/eeg/sub-04_task-motor-imagery_eeg.edf",
+          "sha256": "1ea037f139bb8df8a4a7c8c1d1e73060ea17f1016eaffabd58489b22e8b2be1d",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        },
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-05/eeg/sub-05_task-motor-imagery_eeg.edf",
+          "sha256": "e447d85ec4efaa585ec8bdc96fc1f47ea930b4817f7485ddd6761217a8143c17",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        }
+      ],
+      "same_channel_names": true,
+      "same_channel_order": true,
+      "comparable_all_channels": true,
+      "metadata": {
+        "age": {
+          "values": [
+            "56",
+            "44"
+          ],
+          "match": false
+        },
+        "sex": {
+          "values": [
+            "male",
+            "female"
+          ],
+          "match": false
+        },
+        "stroke_location": {
+          "values": [
+            "Left frontal parietal cortex, Left centrum semiovale",
+            "Left pons"
+          ],
+          "match": false
+        },
+        "duration": {
+          "values": [
+            "14",
+            "4"
+          ],
+          "match": false
+        },
+        "handedness": {
+          "values": [
+            "right",
+            "right"
+          ],
+          "match": true
+        }
+      },
+      "source_vs_subject_meta": {
+        "age": {
+          "sub-04": {
+            "source": "56",
+            "stored": "56",
+            "match": true
+          },
+          "sub-05": {
+            "source": "44",
+            "stored": "44",
+            "match": true
+          }
+        },
+        "sex": {
+          "sub-04": {
+            "source": "male",
+            "stored": "male",
+            "match": true
+          },
+          "sub-05": {
+            "source": "female",
+            "stored": "female",
+            "match": true
+          }
+        },
+        "stroke_location": {
+          "sub-04": {
+            "source": "Left frontal parietal cortex, Left centrum semiovale",
+            "stored": "Left frontal parietal cortex, Left centrum semiovale",
+            "match": true
+          },
+          "sub-05": {
+            "source": "Left pons",
+            "stored": "Left pons",
+            "match": true
+          }
+        },
+        "duration": {
+          "sub-04": {
+            "source": "14",
+            "stored": "14",
+            "match": true
+          },
+          "sub-05": {
+            "source": "4",
+            "stored": "4",
+            "match": true
+          }
+        },
+        "handedness": {
+          "sub-04": {
+            "source": "right",
+            "stored": "right",
+            "match": true
+          },
+          "sub-05": {
+            "source": "right",
+            "stored": "right",
+            "match": true
+          }
+        }
+      },
+      "files_byte_identical": false,
+      "channels": [
+        {
+          "channel": "FP1",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FP2",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "Fz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999999,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "F3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "F4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "F7",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "F8",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999999,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FCz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FC3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FC4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999998,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FT7",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "FT8",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "Cz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "C3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999998,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "C4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999999,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "T3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999998,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "T4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "CPz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": null,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "CP3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "CP4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "TP7",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999998,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "TP8",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "Pz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "P3",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "P4",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "T5",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "T6",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "Oz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "O1",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 0.9999999999999999,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "O2",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "HEOL",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "HEOR",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": 1.0,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "",
+          "samples": 160000,
+          "equal_samples": 159950,
+          "exactly_equal": false,
+          "pearson_correlation": 0.597955828747053,
+          "max_absolute_difference_in_mne_units": 3e-06
+        }
+      ],
+      "all_decoded_samples_exactly_equal": false,
+      "decoded_float64_bitwise_equal": false,
+      "core_decoded_samples_exactly_equal": true
+    },
+    {
+      "subjects": [
+        "sub-11",
+        "sub-15"
+      ],
+      "recordings": [
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-11/eeg/sub-11_task-motor-imagery_eeg.edf",
+          "sha256": "865355275b51fb37f723c10294b842c8211b71ff178822e81752e7b5fc79b3d5",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        },
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-15/eeg/sub-15_task-motor-imagery_eeg.edf",
+          "sha256": "367ab54dca4ed358776aae217caaf00fee375691beb9380ce2c65162a50c209b",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        }
+      ],
+      "same_channel_names": true,
+      "same_channel_order": true,
+      "comparable_all_channels": true,
+      "metadata": {
+        "age": {
+          "values": [
+            "31",
+            "63"
+          ],
+          "match": false
+        },
+        "sex": {
+          "values": [
+            "male",
+            "male"
+          ],
+          "match": true
+        },
+        "stroke_location": {
+          "values": [
+            "Right paraventricular",
+            "Right fronto-parietal temporo-occipital lobe, Right inner watershed"
+          ],
+          "match": false
+        },
+        "duration": {
+          "values": [
+            "7",
+            "1"
+          ],
+          "match": false
+        },
+        "handedness": {
+          "values": [
+            "right",
+            "left"
+          ],
+          "match": false
+        }
+      },
+      "source_vs_subject_meta": {
+        "age": {
+          "sub-11": {
+            "source": "31",
+            "stored": "31",
+            "match": true
+          },
+          "sub-15": {
+            "source": "63",
+            "stored": "63",
+            "match": true
+          }
+        },
+        "sex": {
+          "sub-11": {
+            "source": "male",
+            "stored": "male",
+            "match": true
+          },
+          "sub-15": {
+            "source": "male",
+            "stored": "male",
+            "match": true
+          }
+        },
+        "stroke_location": {
+          "sub-11": {
+            "source": "Right paraventricular",
+            "stored": "Right paraventricular",
+            "match": true
+          },
+          "sub-15": {
+            "source": "Right fronto-parietal temporo-occipital lobe, Right inner watershed",
+            "stored": "Right fronto-parietal temporo-occipital lobe, Right inner watershed",
+            "match": true
+          }
+        },
+        "duration": {
+          "sub-11": {
+            "source": "7",
+            "stored": "7",
+            "match": true
+          },
+          "sub-15": {
+            "source": "1",
+            "stored": "1",
+            "match": true
+          }
+        },
+        "handedness": {
+          "sub-11": {
+            "source": "right",
+            "stored": "right",
+            "match": true
+          },
+          "sub-15": {
+            "source": "left",
+            "stored": "left",
+            "match": true
+          }
+        }
+      },
+      "files_byte_identical": false,
+      "channels": [
+        {
+          "channel": "FP1",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999204887026117,
+          "max_absolute_difference_in_mne_units": 1.6042949202716075e-05
+        },
+        {
+          "channel": "FP2",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999364090621967,
+          "max_absolute_difference_in_mne_units": 8.036202635233068e-06
+        },
+        {
+          "channel": "Fz",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999553613054842,
+          "max_absolute_difference_in_mne_units": 2.1380929243915538e-06
+        },
+        {
+          "channel": "F3",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999082903790324,
+          "max_absolute_difference_in_mne_units": 2.3300158190280127e-06
+        },
+        {
+          "channel": "F4",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998611620874112,
+          "max_absolute_difference_in_mne_units": 7.034777676050947e-06
+        },
+        {
+          "channel": "F7",
+          "samples": 160000,
+          "equal_samples": 129581,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999968579409921,
+          "max_absolute_difference_in_mne_units": 6.3919850461585384e-06
+        },
+        {
+          "channel": "F8",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999850309308309,
+          "max_absolute_difference_in_mne_units": 5.298293141069652e-06
+        },
+        {
+          "channel": "FCz",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999399474785186,
+          "max_absolute_difference_in_mne_units": 1.0929857648584763e-06
+        },
+        {
+          "channel": "FC3",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998214617618545,
+          "max_absolute_difference_in_mne_units": 4.469372503242532e-06
+        },
+        {
+          "channel": "FC4",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999340041612971,
+          "max_absolute_difference_in_mne_units": 2.6216848859388585e-06
+        },
+        {
+          "channel": "FT7",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997806478793422,
+          "max_absolute_difference_in_mne_units": 6.591879026474401e-06
+        },
+        {
+          "channel": "FT8",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999136649570597,
+          "max_absolute_difference_in_mne_units": 7.153390875104919e-06
+        },
+        {
+          "channel": "Cz",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999827899314768,
+          "max_absolute_difference_in_mne_units": 1.3621436179140711e-06
+        },
+        {
+          "channel": "C3",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9996979501525922,
+          "max_absolute_difference_in_mne_units": 4.094590341039115e-06
+        },
+        {
+          "channel": "C4",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999274178042504,
+          "max_absolute_difference_in_mne_units": 1.9599739528496124e-06
+        },
+        {
+          "channel": "T3",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9993695363945932,
+          "max_absolute_difference_in_mne_units": 1.1685269672693975e-05
+        },
+        {
+          "channel": "T4",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9996817819451684,
+          "max_absolute_difference_in_mne_units": 1.1068695017929368e-05
+        },
+        {
+          "channel": "CPz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": null,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "CP3",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9996547480624072,
+          "max_absolute_difference_in_mne_units": 1.9595334309910688e-06
+        },
+        {
+          "channel": "CP4",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997762782799805,
+          "max_absolute_difference_in_mne_units": 1.5558002182040237e-06
+        },
+        {
+          "channel": "TP7",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9994728337953818,
+          "max_absolute_difference_in_mne_units": 8.430820096131841e-06
+        },
+        {
+          "channel": "TP8",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998453542192719,
+          "max_absolute_difference_in_mne_units": 3.907868938735034e-06
+        },
+        {
+          "channel": "Pz",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.99986741946286,
+          "max_absolute_difference_in_mne_units": 8.745331670099954e-07
+        },
+        {
+          "channel": "P3",
+          "samples": 160000,
+          "equal_samples": 115800,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998969130912733,
+          "max_absolute_difference_in_mne_units": 2.4253328740367734e-06
+        },
+        {
+          "channel": "P4",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997807185787045,
+          "max_absolute_difference_in_mne_units": 1.6287722194247359e-06
+        },
+        {
+          "channel": "T5",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998474731346674,
+          "max_absolute_difference_in_mne_units": 4.333296626230257e-06
+        },
+        {
+          "channel": "T6",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998127744545893,
+          "max_absolute_difference_in_mne_units": 4.387356887159523e-06
+        },
+        {
+          "channel": "Oz",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997705285147513,
+          "max_absolute_difference_in_mne_units": 4.200852918287945e-06
+        },
+        {
+          "channel": "O1",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997954346991872,
+          "max_absolute_difference_in_mne_units": 4.511556832227064e-06
+        },
+        {
+          "channel": "O2",
+          "samples": 160000,
+          "equal_samples": 0,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9996726447009315,
+          "max_absolute_difference_in_mne_units": 5.55824292515449e-06
+        },
+        {
+          "channel": "HEOL",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999663396496814,
+          "max_absolute_difference_in_mne_units": 5.0412593270771315e-06
+        },
+        {
+          "channel": "HEOR",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999849476248949,
+          "max_absolute_difference_in_mne_units": 6.744081300068657e-06
+        },
+        {
+          "channel": "",
+          "samples": 160000,
+          "equal_samples": 159646,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9146571115683139,
+          "max_absolute_difference_in_mne_units": 3e-06
+        }
+      ],
+      "all_decoded_samples_exactly_equal": false,
+      "decoded_float64_bitwise_equal": false,
+      "core_decoded_samples_exactly_equal": false
+    },
+    {
+      "subjects": [
+        "sub-47",
+        "sub-49"
+      ],
+      "recordings": [
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-47/eeg/sub-47_task-motor-imagery_eeg.edf",
+          "sha256": "ffbffdc0b78fc56603fb05aaa0808414151ea2da8f6bbbc0f48a1c2f5d70c6ee",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        },
+        {
+          "path": "data/raw/figshare/extracted/edffile/sub-49/eeg/sub-49_task-motor-imagery_eeg.edf",
+          "sha256": "e21ae95cbe6fceb0de4e44178b91299658dd6e7614e8b6d1acccb87f2103b308",
+          "channels": [
+            "FP1",
+            "FP2",
+            "Fz",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "FCz",
+            "FC3",
+            "FC4",
+            "FT7",
+            "FT8",
+            "Cz",
+            "C3",
+            "C4",
+            "T3",
+            "T4",
+            "CPz",
+            "CP3",
+            "CP4",
+            "TP7",
+            "TP8",
+            "Pz",
+            "P3",
+            "P4",
+            "T5",
+            "T6",
+            "Oz",
+            "O1",
+            "O2",
+            "HEOL",
+            "HEOR",
+            ""
+          ],
+          "channel_types": [
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg",
+            "eeg"
+          ],
+          "sfreq": 500.0,
+          "samples": 160000
+        }
+      ],
+      "same_channel_names": true,
+      "same_channel_order": true,
+      "comparable_all_channels": true,
+      "metadata": {
+        "age": {
+          "values": [
+            "40",
+            "52"
+          ],
+          "match": false
+        },
+        "sex": {
+          "values": [
+            "male",
+            "male"
+          ],
+          "match": true
+        },
+        "stroke_location": {
+          "values": [
+            "Right medulla oblongata",
+            "Right basal ganglia"
+          ],
+          "match": false
+        },
+        "duration": {
+          "values": [
+            "4",
+            "3"
+          ],
+          "match": false
+        },
+        "handedness": {
+          "values": [
+            "right",
+            "right"
+          ],
+          "match": true
+        }
+      },
+      "source_vs_subject_meta": {
+        "age": {
+          "sub-47": {
+            "source": "40",
+            "stored": "40",
+            "match": true
+          },
+          "sub-49": {
+            "source": "52",
+            "stored": "52",
+            "match": true
+          }
+        },
+        "sex": {
+          "sub-47": {
+            "source": "male",
+            "stored": "male",
+            "match": true
+          },
+          "sub-49": {
+            "source": "male",
+            "stored": "male",
+            "match": true
+          }
+        },
+        "stroke_location": {
+          "sub-47": {
+            "source": "Right medulla oblongata",
+            "stored": "Right medulla oblongata",
+            "match": true
+          },
+          "sub-49": {
+            "source": "Right basal ganglia",
+            "stored": "Right basal ganglia",
+            "match": true
+          }
+        },
+        "duration": {
+          "sub-47": {
+            "source": "4",
+            "stored": "4",
+            "match": true
+          },
+          "sub-49": {
+            "source": "3",
+            "stored": "3",
+            "match": true
+          }
+        },
+        "handedness": {
+          "sub-47": {
+            "source": "right",
+            "stored": "right",
+            "match": true
+          },
+          "sub-49": {
+            "source": "right",
+            "stored": "right",
+            "match": true
+          }
+        }
+      },
+      "files_byte_identical": false,
+      "channels": [
+        {
+          "channel": "FP1",
+          "samples": 160000,
+          "equal_samples": 146163,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999963674514365,
+          "max_absolute_difference_in_mne_units": 6.45776333257038e-06
+        },
+        {
+          "channel": "FP2",
+          "samples": 160000,
+          "equal_samples": 136985,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999851230530606,
+          "max_absolute_difference_in_mne_units": 3.706913618677041e-06
+        },
+        {
+          "channel": "Fz",
+          "samples": 160000,
+          "equal_samples": 133194,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998136347385491,
+          "max_absolute_difference_in_mne_units": 4.1181713298237585e-06
+        },
+        {
+          "channel": "F3",
+          "samples": 160000,
+          "equal_samples": 133745,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998897083170939,
+          "max_absolute_difference_in_mne_units": 2.707687336537729e-06
+        },
+        {
+          "channel": "F4",
+          "samples": 160000,
+          "equal_samples": 136016,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999276568948653,
+          "max_absolute_difference_in_mne_units": 3.052326445410848e-06
+        },
+        {
+          "channel": "F7",
+          "samples": 160000,
+          "equal_samples": 142992,
+          "exactly_equal": false,
+          "pearson_correlation": 0.999996694224394,
+          "max_absolute_difference_in_mne_units": 3.935437262531473e-06
+        },
+        {
+          "channel": "F8",
+          "samples": 160000,
+          "equal_samples": 143422,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999959673361146,
+          "max_absolute_difference_in_mne_units": 2.6502201876859596e-06
+        },
+        {
+          "channel": "FCz",
+          "samples": 160000,
+          "equal_samples": 133390,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999139042031797,
+          "max_absolute_difference_in_mne_units": 1.5327923628595402e-06
+        },
+        {
+          "channel": "FC3",
+          "samples": 160000,
+          "equal_samples": 133915,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9995750911897388,
+          "max_absolute_difference_in_mne_units": 6.907166540016785e-06
+        },
+        {
+          "channel": "FC4",
+          "samples": 160000,
+          "equal_samples": 138511,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999515728581557,
+          "max_absolute_difference_in_mne_units": 2.1412857251850178e-06
+        },
+        {
+          "channel": "FT7",
+          "samples": 160000,
+          "equal_samples": 133419,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998212485415704,
+          "max_absolute_difference_in_mne_units": 6.46474456397345e-06
+        },
+        {
+          "channel": "FT8",
+          "samples": 160000,
+          "equal_samples": 139346,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999797927398124,
+          "max_absolute_difference_in_mne_units": 2.833121446555282e-06
+        },
+        {
+          "channel": "Cz",
+          "samples": 160000,
+          "equal_samples": 133113,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999250300107644,
+          "max_absolute_difference_in_mne_units": 8.91274818036164e-07
+        },
+        {
+          "channel": "C3",
+          "samples": 160000,
+          "equal_samples": 133869,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9995682050940691,
+          "max_absolute_difference_in_mne_units": 3.852183118944073e-06
+        },
+        {
+          "channel": "C4",
+          "samples": 160000,
+          "equal_samples": 136953,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997456173489873,
+          "max_absolute_difference_in_mne_units": 2.600013421835658e-06
+        },
+        {
+          "channel": "T3",
+          "samples": 160000,
+          "equal_samples": 133337,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998441573341134,
+          "max_absolute_difference_in_mne_units": 5.718119432364385e-06
+        },
+        {
+          "channel": "T4",
+          "samples": 160000,
+          "equal_samples": 135296,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998428945936747,
+          "max_absolute_difference_in_mne_units": 5.21258704509041e-06
+        },
+        {
+          "channel": "CPz",
+          "samples": 160000,
+          "equal_samples": 160000,
+          "exactly_equal": true,
+          "pearson_correlation": null,
+          "max_absolute_difference_in_mne_units": 0.0
+        },
+        {
+          "channel": "CP3",
+          "samples": 160000,
+          "equal_samples": 133828,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997717385269704,
+          "max_absolute_difference_in_mne_units": 2.4078376440070183e-06
+        },
+        {
+          "channel": "CP4",
+          "samples": 160000,
+          "equal_samples": 135329,
+          "exactly_equal": false,
+          "pearson_correlation": 0.999865799432303,
+          "max_absolute_difference_in_mne_units": 1.4974739238574803e-06
+        },
+        {
+          "channel": "TP7",
+          "samples": 160000,
+          "equal_samples": 134492,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999197194686165,
+          "max_absolute_difference_in_mne_units": 2.485362183566031e-06
+        },
+        {
+          "channel": "TP8",
+          "samples": 160000,
+          "equal_samples": 135982,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998879570381255,
+          "max_absolute_difference_in_mne_units": 3.156808953994049e-06
+        },
+        {
+          "channel": "Pz",
+          "samples": 160000,
+          "equal_samples": 132566,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997432025236207,
+          "max_absolute_difference_in_mne_units": 1.915236359197376e-06
+        },
+        {
+          "channel": "P3",
+          "samples": 160000,
+          "equal_samples": 132562,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997265562016412,
+          "max_absolute_difference_in_mne_units": 1.8711963454642551e-06
+        },
+        {
+          "channel": "P4",
+          "samples": 160000,
+          "equal_samples": 1,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998877857969319,
+          "max_absolute_difference_in_mne_units": 1.0435751262684076e-06
+        },
+        {
+          "channel": "T5",
+          "samples": 160000,
+          "equal_samples": 133608,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9998804512606265,
+          "max_absolute_difference_in_mne_units": 2.2665038147554745e-06
+        },
+        {
+          "channel": "T6",
+          "samples": 160000,
+          "equal_samples": 133673,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999430451694614,
+          "max_absolute_difference_in_mne_units": 1.3652073517967498e-06
+        },
+        {
+          "channel": "Oz",
+          "samples": 160000,
+          "equal_samples": 132726,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997483344469039,
+          "max_absolute_difference_in_mne_units": 5.808762032501716e-06
+        },
+        {
+          "channel": "O1",
+          "samples": 160000,
+          "equal_samples": 130944,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9995531345657885,
+          "max_absolute_difference_in_mne_units": 7.965243447013046e-06
+        },
+        {
+          "channel": "O2",
+          "samples": 160000,
+          "equal_samples": 133441,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9997955202980625,
+          "max_absolute_difference_in_mne_units": 2.9391902052338435e-06
+        },
+        {
+          "channel": "HEOL",
+          "samples": 160000,
+          "equal_samples": 134233,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999126915370757,
+          "max_absolute_difference_in_mne_units": 4.161288499275196e-06
+        },
+        {
+          "channel": "HEOR",
+          "samples": 160000,
+          "equal_samples": 135626,
+          "exactly_equal": false,
+          "pearson_correlation": 0.9999605446294674,
+          "max_absolute_difference_in_mne_units": 4.676133852140076e-06
+        },
+        {
+          "channel": "",
+          "samples": 160000,
+          "equal_samples": 159948,
+          "exactly_equal": false,
+          "pearson_correlation": 0.5818740618969344,
+          "max_absolute_difference_in_mne_units": 3e-06
+        }
+      ],
+      "all_decoded_samples_exactly_equal": false,
+      "decoded_float64_bitwise_equal": false,
+      "core_decoded_samples_exactly_equal": false
+    }
+  ],
+  "interpretation": "Signal identity/similarity does not establish participant identity. Metadata disagreement requires source-data review. Retain the user-approved subject IDs/splits; disclose unresolved dependence."
+}

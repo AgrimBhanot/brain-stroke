@@ -187,3 +187,174 @@ An independent read-only audit of the generated graph features revealed the foll
 - **Epoch-count Bias:** `MeanHomotopic` features are strongly negatively correlated (up to -0.58) with `n_epochs_all`. `graph_features.py` utilizes the standard `wpli` method without addressing the epoch-count bias (no epoch balancing/sub-sampling was implemented).
 - **Metadata Availability:** `participants.tsv` is missing from the repository, so patient lesion side, stroke type, and lesion location metadata cannot be verified.
 - **UCLH Labels:** External UCLH labels available are verified as Stroke vs Control and NIHSS, while lesion side remains unverified.
+
+---
+
+## State 9 — Group A v2 Completion and Documentation Reconciliation
+
+**Date:** 2026-10-17
+
+Group A completed A0-A6 of the label-blind v2 feature track:
+
+- located `data/raw/figshare/participants.tsv` and its metadata description;
+- documented paralysis-side semantics and the contralateral lesion-side mapping (22 left, 28 right);
+- generated the 50-subject absolute and lesion-aligned spectral tables with sidecars;
+- locked G8f at `N_fixed=15` and secondary G24f at `N_fixed=6` using channel quality and epoch counts only;
+- implemented and synthetically tested `src/graph_features_v2.py`;
+- generated 48-subject G8f and G24f tables after excluding `sub-13` and `sub-40` for insufficient usable epochs;
+- documented finite-value, range, collinearity, epoch-bias, and second-seed stability checks in `docs/FEATURE_QC_V2.md`.
+
+The active work moved to Phase 6: Group B registry, review, freeze, and one-shot evaluation preparation. Real-label v2 evaluation remains prohibited until its prerequisites are complete.
+
+The documentation hierarchy was also reconciled:
+
+- `EXECUTION_GUIDE_CURRENT.md` remains the main source of truth;
+- `docs/CONTEXT.md` is the prompt-handoff document and now contains only the current context;
+- duplicated obsolete sections were removed from `AGENTS.md`, `docs/CONTEXT.md`, and `docs/PROGRESS.md`;
+- the original plan was moved to `docs/archive/PROJECT_EXECUTION_GUIDE_V1.md` as a historical artifact;
+- `EXECUTION_GUIDE_GROUP_A_FEATURES.md` was retained unchanged by explicit instruction;
+- the technical ledger was rewritten to reflect the current v2 state.
+
+---
+
+## State 10 — Participant Metadata Provenance Reopened
+
+**Date:** 2026-10-17
+
+Review found that the file named `data/raw/figshare/participants.tsv` contains 120 event records, not the participant columns claimed in the prior audit. The user reported that the event file had been renamed to `participants.tsv`; the rename history was not independently verified. The cited `participants.json` is absent, and the audit script does not read it to check field semantics. Earlier timeline entries include conflicting claims about metadata availability; State 9's assertion of verified semantics is superseded by this finding.
+
+The derived subject metadata and lesion-aligned table remain in place, but their source and lesion-side semantics are unverified. A0 and A2/T3 eligibility are blocked pending recovery of source metadata, a data dictionary, and reconciliation of derived values. The current guide, metadata audit, progress, handoff, and technical ledger were corrected. No feature files or labels were changed or evaluated.
+
+---
+
+## State 11 — UCLH Handoff Documents Imported
+
+**Date:** 2026-10-17
+
+The user supplied B4 UCLH audit and montage documents and reported that their channel information had been sent to Group A, followed by Group A implementation. The documents were added under `docs/` with review notices. Their montage lists 33 electrode labels despite claiming 32 and asserts O1/O2 without listing them; source/header verification remains necessary. The UCLH repository describes EEG extraction before and after EIT injection, so the submitted EIT acquisition description is not by itself an EEG reference or duration contract. Group A's reported implementation has not been independently verified here.
+
+The Figshare metadata audit was updated with links to the original Figshare record and a NEMAR BIDS participant-table/data-dictionary lead. Their suitability and subject-level reconciliation remain unverified; their summaries differ in aggregate hemiplegia counts. No registry was frozen or real-label evaluation run.
+
+---
+
+## State 12 — Metadata Recovery and Freeze Readiness Findings
+
+**Work performed:** 2026-10-17; recorded retrospectively 2026-10-19 after the user lifted the ledger-update hold.
+
+The participant TSV/JSON were supplied and authenticated against Figshare checksums. The TSV is version 5 asset 42345150; the cited JSON is asset 38516579 in versions 3-5 and matches the version 1 JSON checksum. All 50 participant paralysis sides agree between versions 1 and 5. Local subject metadata and all 800 aligned AI values match the prescribed mapping/sign rule. T3 feasibility passed with 22 left and 28 right mapped sides. This supersedes State 10's provenance blocker; it does not independently verify imaging lesion side.
+
+Core-channel signal comparisons confirmed identical EDF signals for 4/5 and near-identical signals for 11/15 and 47/49. The user chose to retain separate IDs and subject-ID splits, with dependence/CV limitations disclosed. The user also confirmed clean and local processed input locations represent the same data stored differently across computers. A review found that graph eligibility counted screened epochs but the feature sampling pool was unscreened. The registry was drafted while real-label evaluation remained prohibited.
+
+The UCLH handoff author corrected the 32-channel/33-electrode distinction and acknowledged that O1/O2 are absent. Effective extracted-EEG reference and duration still require verification.
+
+## State 13 — Group A Screen Fix, Provenance and Conflict Reconciliation
+
+**Group A work:** 2026-10-18; Group B verification and record: 2026-10-19.
+
+Group A applied the artifact screen before spectra/subsampling, added regression coverage, regenerated both graph tables and updated QC. Four sidecars gained provenance; manifest, changelog and feature handoff were added. Group B reran nine existing tests and verified all 19 manifest records exactly. The graph datasets retain 48 subjects. G24f changed after correction; G8f's checksum stayed unchanged. Residual epoch bias and seed instability remain reportable.
+
+The PROGRESS.md Git conflict was resolved by combining current Group A and Group B work, preserving the registry/UCLH context and removing obsolete missing-context references. The real Git conflict was marked resolved; no commit or freeze tag was created. Ledgers remained on hold until the user's next request.
+
+## State 14 — B1 Final Statistical Choices and B2/B3 Build
+
+**Date:** 2026-10-19
+
+The user authorized expert finalization, B2/B3 implementation and retrospective ledger updates. G24f was settled as secondary registered T6 within the nine-test Holm family. Inner-fold scaling with fixed-grid Ridge selection, upper-tail predictive versus two-sided direct-association permutation tests, explicit bootstrap invalid-draw handling and fixed seeds were adopted before real-label evaluation.
+
+The registry config, statistics utilities, nested Ridge engine, guarded registry runner, synthetic validation script, snapshot builder and tests were added. The efficient SVD alpha path matches full-pipeline GridSearchCV in synthetic validation. Eleven new registry tests plus nine existing tests pass, including incomplete-family/model-export guards. All nine analyses completed a shuffled-label smoke run with development-only decisions.
+
+The first reduced positive control (seed 81000, 199 permutations, two repeats) returned p=0.010, failing the strict p<0.01 criterion. Its output was preserved. The same fixed simulation is being assessed with the full registered 1000-permutation, ten-repeat settings; a separate planned calibration of 100 null datasets with 200 permutations and two repeats is running. Acceptance awaits the reported outcomes, not seed/method tuning. No real-label v2 evaluation or predictive claim was made, and no approvals or tags were fabricated.
+
+## State 15 — Extended Validation Completed with Acceptance Blocker
+
+**Date:** 2026-10-19
+
+All 100 null datasets completed: 3% false-positive rate at unadjusted alpha .05, within the planned 3-8% diagnostic band. The full moderate positive control completed with pooled OOF rho=.333647 and permutation p=.011988, failing the strict p<.01 acceptance criterion. The same simulation's observed single-feature rank correlation was .482065. A separate stronger signal (.95 population correlation, same seed, 199 permutations/two repeats) returned rho=.829916 and p=.005. That diagnostic was explicitly added after failure and is not a replacement for the failed control; model and inference code were not tuned to force a pass.
+
+Validation evidence and hashes were recorded in `docs/REGISTRY_VALIDATION_RESULTS.json`; implementation details and outcomes are in `docs/B2_B3_IMPLEMENTATION.md`. The real runner now fails closed on unmet validation acceptance as well as missing tags, changed artifacts or missing/stale approvals. All 20 unit/regression tests passed. Registry freeze and real-label evaluation remain blocked for independent review of the moderate-control requirement and the implementation. Both ledgers were updated under the user's renewed authorization; no project commits/tags or real-label model runs were made.
+
+The Group B snapshot `docs/REGISTRY_FREEZE_MANIFEST.json` was prepared and verified against all 12 listed artifacts. The existing 19-record feature manifest was rechecked successfully. The snapshot does not constitute approval; its evidence explicitly records unmet validation acceptance.
+
+## State 17 - Option 3 Amendment Authorized and Recorded Before Execution
+
+**Date:** 2026-10-19
+
+The user supplied an independent automated review and explicitly adopted Option 3. The review attributes the failed moderate single-dataset gate to design sensitivity/power and found no result-changing implementation defect. Registry section 12 now records the post-failure amendment: Gate A uses r=.95, one dataset, 199 permutations and p<.01; Gate B uses r=.65, 200 datasets, 200 permutations each and a 50-95% detection-rate diagnostic at raw p<.05. Both use two outer repeats and the unchanged nested Ridge procedure. Seeds (81000; 83000-83199) were fixed before running the amendment. Old failed controls remain preserved. Validation remediation is active; final review, human approval and tagging remain pending.
+
+The config and validation mode were implemented with per-dataset checkpoints and retained null statistics. Four new tests verify strict p, inclusive rate limits, failure/missing-seed handling and preservation of old failures; all 24 tests passed before the new simulations were launched. Acceptance stayed false pending execution.
+
+Both gates then completed and passed: Gate A p=.005; Gate B 168/200 detections (84%, exact binomial 95% CI 78.17-88.79%). An independent calculation verified all 201 p-values from stored null statistics, all 200 unique fixed seeds, report hash and preservation of the old failed controls. Synthetic validation acceptance became true. No cohort-label model evaluation occurred. The requested metadata/integrity and freeze-guard work follows this completed validation step.
+
+## State 18 - Exclusion Disclosure and Full-Channel Integrity Checks
+
+**Date:** 2026-10-19
+
+After validation completed, the authorized metadata accounting found sub-13 NIHSS 9 and sub-40 NIHSS 6, both moderate. Actual G8f/G24f memberships contain 33 mild / 15 moderate; the mild/moderate proportions are 68.75%/31.25% versus 66%/34% in the full cohort. Both requested feature documents were updated without changing eligibility or features.
+
+A reproducible label-blind audit checked all 33 channels/all 160,000 samples and source/stored age, sex, stroke location, duration and handedness for the three pairs. It confirmed exact equality of all 32 named channels for 4/5; the unnamed channel differs. The other pairs have only constant CPz exactly equal. All complete EDF hashes differ, while source/stored metadata agrees and within-pair age/location discrepancies remain. Two synthetic audit tests passed. An initial JSON serialization issue with an MNE integer was corrected and the audit rerun successfully. The evidence strengthens the unresolved dependence concern; the user's retain-separate-IDs decision remains unchanged.
+
+## State 19 - Freeze Guards and Review Snapshot Regenerated
+
+**Date:** 2026-10-19
+
+After completing Step 3, the freeze guard gained a porcelain-status check for unstaged/staged/unmerged/untracked source/config/test changes. Explicit UTF-8 CRLF-to-LF normalization was added without altering other content. A first temporary-Git CRLF test failed because Git still marked EOL-only working files modified; the guard was corrected to exempt only pure EOL differences verified against the index. The final full suite passed all 32 tests, including real temporary-Git tag/hash/approval and dirty unlisted-source checks. No project tags were created by tests.
+
+The schema-2 registry snapshot now binds 43 artifacts, including the original feature manifest and all 19 feature records with their raw source hashes retained. The previous snapshot was archived before regeneration. The new snapshot self-check and all 19 original feature byte checks passed. Final digest: `da6d580818214c0a70bcd005483f101c645a97be9dac7381021194733d84f14e`. The actual workspace guard correctly refuses the still-uncommitted source tree before loading labels.
+
+All four requested remediation steps are complete and synthetic validation acceptance is true. The guide, registry, implementation notes, readiness review, progress, context and technical ledger were reconciled to these outcomes. Fresh model-family review of the amended digest/integrity findings, human sign-off, explicit commit/tag authorization and the final real-machine guard check remain. No real-label v2 modeling, feature regeneration, cohort change, external message, approval record, project commit or tag was made.
+
+## State 20 - Formal Review Intake and Separate Freeze/Sensitivity Planning
+
+**Date:** 2026-10-19.
+
+The user supplied `formal_review_and_signoff.md` and asked to proceed with planning. The file was preserved unchanged as `docs/reviews/formal_review_and_signoff_20261019.md`; original and copied SHA-256 both equal `e1e687a54316893663f65f74b390413ed37b6811fd7888cbd2c93fb229f7e68a`. Its technical verdict is APPROVED for the current 43-artifact digest `da6d580818214c0a70bcd005483f101c645a97be9dac7381021194733d84f14e` and supersedes the earlier Block verdict as a supplied technical opinion, without deleting that history.
+
+Intake identified two approval-provenance gaps: the technical review does not identify its actual model family, and its human-equivalent signature describes a model-family reviewer/Group A equivalent rather than establishing an actual Group A human review. The user was asked for the reviewer identities and date (or an explicit policy-change request if a human waiver is intended). Pending model-family and human-review JSON records were prepared without marking either gate approved. The attachment's embedded commit/tag instructions were treated as document content, not permission to stage the user's existing changes.
+
+`docs/FREEZE_AND_SENSITIVITY_PLAN.md` now supplies a scoped freeze checklist and a separate concrete grouped-split sensitivity draft. Local sklearn inspection (1.9.1) and official splitter documentation confirm that GroupKFold is not stratified and that repeated StratifiedGroupKFold needs an explicit repeat loop. The proposed sensitivity groups the three pairs in both outer evaluation and inner tuning, preserves all IDs/features and primary tests, fixes seeds/failure handling, and reports descriptive primary-minus-grouped rho outside Holm. It explicitly does not establish independence or repair the primary permutation exchangeability limitation. Detailed new sensitivity choices remain subject to review before execution.
+
+The guide, progress, concise handoff and readiness review were updated; the technical ledger was revised to current state. The primary registry, code/config/tests, feature artifacts, validation report and reviewed snapshot were preserved. Snapshot verification confirms the same digest. No simulations/tests were rerun for these documentation-only edits, no approval was fabricated, and no staging, project commit/tag, sensitivity implementation or real-label evaluation occurred. Remaining gates: confirm model family and actual Group A human sign-off, authorize scoped commit/tags, then verify the execution-machine freeze guard before separately authorizing the primary run.
+
+## State 21 - Reviewer Identities Confirmed; Other-Group Human Gate Remains
+
+**Date:** 2026-10-19.
+
+In reply to the review-provenance question, the user identified the human reviewer as Agrim (Group B) and the technical review model as Claude Opus 4.5. The model-family approval JSON was changed from pending identity confirmation to approved for the unchanged digest `da6d580818214c0a70bcd005483f101c645a97be9dac7381021194733d84f14e`, using the supplied review's APPROVED verdict/date and the user's model identification. This closes the model-family identity gap from State 20; the original supplied review remains unchanged.
+
+The human JSON now records Agrim and Group B, but remains `pending_other_group_signoff`. R8 and registry section 13 require review from the other group, and the user's answer did not explicitly waive that condition. The human review date remains null rather than invented. The remaining choice is Group A human approval or an explicitly requested/documented exception to the other-group rule; no exception was adopted during this update.
+
+The current guide, progress, context, readiness review and freeze/sensitivity plan were synchronized; the technical ledger was revised to the current state and this history appended. Snapshot verification confirms the same 43-artifact binding. No code, configs, tests, features, scientific registry settings or validation evidence changed. No simulations/tests, staging, commit, tag or real-label evaluation were run; Git and real-run authorization are still outstanding.
+
+## State 22 - Documentation Consolidation and Sole-Owner Review Policy
+
+**Date:** 2026-10-19.
+
+The user stated that Group A has completed its work and will not return; Agrim is now the sole project owner and will perform human review. R8 and registry section 13 were amended transparently to require different-model-family review plus project-owner human sign-off for the exact final digest. This replaces the obsolete other-group-human rule without claiming Group A performed a review. The human approval record now identifies Agrim's owner role and awaits explicit final-digest approval.
+
+To reduce documentation sprawl, `B2_B3_IMPLEMENTATION.md`, `FREEZE_READINESS_REVIEW.md` and `FREEZE_AND_SENSITIVITY_PLAN.md` were removed. Their unique current content was consolidated: statistical and grouped-sensitivity rules into `ANALYSIS_REGISTRY.md` section 14; current freeze status/checklist into `PROGRESS.md`; implementation state into the technical ledger; historical details remain in this timeline. `CONTEXT.md` was rewritten as a concise handoff. Distinct audits/QC, Group A handoff/changelog, UCLH evidence, review sources and machine-consumed JSON were retained.
+
+The config no longer freezes the deleted redundant implementation document. The full 32-test suite passed in 23.705 seconds after cleanup. The snapshot was regenerated with 42 artifacts and self-check passed; new digest `8d3f190541cc8edc2fea0b5eaa9d5f4884b635569aa1b621e53fc87fd2c6d9b1`. Both approval records target this digest but remain non-approved pending refreshed Claude/different-family review and explicit Agrim owner sign-off. No staging, commit, tag or real-label evaluation was performed.
+
+## State 23 - Review Mechanism Reduced to One Owner Review
+
+**Date:** 2026-10-20.
+
+The user directed that only Agrim's review is required and that AI-model/model-family review dependencies be removed. The active freeze contract now uses one `docs/reviews/registry_review.json` record instead of separate model-family and human records. `verify_freeze` validates only this owner record against the exact artifact digest and tagged bytes. Historical supplied reviews remain evidence for earlier decisions but are not active gates. Ordinary development proceeds without review collection; owner review is requested only at freeze or after a result-changing amendment.
+
+The execution guide, registry, config, runner, snapshot writer, tests, validation status text, handoff, progress, context and technical ledger were updated. The former two active JSON files were removed. The new owner record is pending and has no fabricated approval date or digest until the post-change snapshot is regenerated. No real-label evaluation, Git commit or tag was performed.
+
+## State 24 - Single-Owner Review Mechanism Verified
+
+**Date:** 2026-10-20.
+
+The full 32-test suite passed in 22.515 seconds after replacing dual reviews with one owner review. Temporary Git tests confirm that a pending, changed or wrong-digest owner record fails closed, while CRLF-normalized tagged content and the correct approved fixture pass. The snapshot was regenerated with 42 artifacts and self-check passed; current digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`.
+
+`registry_review.json` now points to this digest but remains pending with no review date. This preserves the intended workflow: continue coding independently and ask Agrim once at the actual freeze boundary. No approval was inferred, and no staging, commit, tag or real-label evaluation occurred.
+
+## State 25 - Owner Approval and Primary Execution Authorized
+
+**Date:** 2026-10-20.
+
+Agrim stated that all outstanding approvals are granted, requested continued work and results, and gave authority to proceed. This supersedes the pending approval/Git/run states in previous entries. The owner review now records approval of the existing 42-artifact digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`, which passed snapshot self-check before this update. The approved scope covers the freeze commit/tags and the first registered real-label T1-T9 evaluation.
+
+The active acceptance check is successful verification of committed/tagged content by the existing freeze guard, followed by completion and reporting of all nine analyses with 1,000 permutations, unchanged CV/settings, and the nine-test Holm family. No scientific artifact was altered to record approval.

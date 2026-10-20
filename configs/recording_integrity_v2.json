@@ -1,0 +1,9 @@
+{
+  "pairs": [["sub-04", "sub-05"], ["sub-11", "sub-15"], ["sub-47", "sub-49"]],
+  "participants": "data/raw/figshare/participants.tsv",
+  "subject_meta": "features/v2/subject_meta.csv",
+  "edf_template": "data/raw/figshare/extracted/edffile/{subject}/eeg/{subject}_task-motor-imagery_eeg.edf",
+  "metadata_fields": {"Age": "age", "Gender": "sex", "StrokeLocation": "stroke_location", "Duration": "duration", "Handedness": "handedness"},
+  "core_channels": ["F3", "C3", "P3", "O1", "F4", "C4", "P4", "O2"],
+  "output": "docs/RECORDING_INTEGRITY_AUDIT_V2.json"
+}

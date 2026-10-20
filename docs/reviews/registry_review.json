@@ -1,0 +1,14 @@
+{
+  "status": "approved",
+  "reviewer": "Agrim",
+  "reviewed_at": "2026-10-20",
+  "artifact_digest": "57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898",
+  "scope": "Latest owner review for the registry freeze snapshot",
+  "approval_source": "Agrim's 2026-10-20 chat instruction: You have all the approvals needed from my end as of now. Continue working on the project; you have full authority.",
+  "authorization_scope": "Approve the current snapshot, complete the scoped freeze commit and tags, and execute the registered analysis under the existing protocol and disclosed limitations.",
+  "required_acknowledgements": [
+    "The retained 04/05, 11/15 and 47/49 recording pairs may violate independence and can make nominal CV and permutation inference optimistic.",
+    "The grouped-split analysis is descriptive and cannot rescue or invalidate the registered T1-T9 decisions.",
+    "The study is exploratory, contains no severe subjects, and does not establish clinical utility or predictive improvement."
+  ]
+}

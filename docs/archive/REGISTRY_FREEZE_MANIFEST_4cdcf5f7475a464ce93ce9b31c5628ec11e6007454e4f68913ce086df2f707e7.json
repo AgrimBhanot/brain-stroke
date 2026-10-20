@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "status": "SNAPSHOT ONLY; independent approvals and tags required",
+  "artifact_digest": "1cc01daca7634bfb600a96411d1b9243821bfb91e187add1edec37a9e4273d0c",
+  "artifacts": [
+    {
+      "path": "docs/ANALYSIS_REGISTRY.md",
+      "sha256": "a20498d58c661f7995f4653f35d24e1306922f7fae286199d95cf70f17a4185c"
+    },
+    {
+      "path": "configs/registry_v1.json",
+      "sha256": "017cde52f28e804ac003cbd8b6d93ad8eab96a7ae1996136ed2e13b80dfa5fc8"
+    },
+    {
+      "path": "src/stats_utils.py",
+      "sha256": "4684984e03bdf5be6f48bc582c8b56f23fb69529e99b8ea7cf477e7ff918ff93"
+    },
+    {
+      "path": "src/train_regression.py",
+      "sha256": "eca0ca6420a0da5fd310b941a412b118f24674ab61bc6351836e77aaab7d9737"
+    },
+    {
+      "path": "src/run_registry.py",
+      "sha256": "1d0b8997025fe842f284e7b91c6e549dde8dfc73f22284a14178ae8f4fab7476"
+    },
+    {
+      "path": "src/validate_registry_v2.py",
+      "sha256": "b82bc5936b4d7f8a1e3e438559f86a40364403ee50c693481842aa48fcf9965e"
+    },
+    {
+      "path": "src/write_registry_freeze_v2.py",
+      "sha256": "9e4165a776d393e497605a75f40c55b526aeb1fe573d1f817fa49b69f8cb6a5c"
+    },
+    {
+      "path": "tests/test_registry_v2.py",
+      "sha256": "60cd1a93be9f25639176cc49250e3c62e583975235453961acea5be574786638"
+    },
+    {
+      "path": "docs/B2_B3_IMPLEMENTATION.md",
+      "sha256": "1a255283df273ec1ab9bd3e6df660a0cd0f0368bcefbd1e45dbfa0d8e6134235"
+    },
+    {
+      "path": "features/figshare_features.csv",
+      "sha256": "f5a646c7e12e8b7aec25d3f034aef1e2d425cd40cc1d13e162c8588565a78ac0"
+    },
+    {
+      "path": "features/figshare_graph_features.csv",
+      "sha256": "b2ec486e91e8aee8539600b004b43a539981eff9f27f29675f66badcad4f8b58"
+    },
+    {
+      "path": "docs/REGISTRY_VALIDATION_RESULTS.json",
+      "sha256": "1372b04a7e6f673106236e51d2ae433d5d46bdcd42902ccb6f27cc37501821f3"
+    }
+  ]
+}

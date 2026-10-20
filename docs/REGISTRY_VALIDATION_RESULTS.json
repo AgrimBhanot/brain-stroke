@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-19",
+  "acceptance_passed": true,
+  "blocking_reason": null,
+  "unit_tests": {
+    "total": 32,
+    "passed": 32,
+    "command": "python -B -m unittest -v tests.test_freeze_portability_v2 tests.test_validation_amendment_v2 tests.test_recording_integrity_v2 tests.test_registry_v2 tests.test_graph_features_v2 tests.test_lesion_align"
+  },
+  "shuffled_smoke": {
+    "tests": 9,
+    "completed": 9,
+    "run": "results/v2/smoke/shuffled_20261019",
+    "inference": false
+  },
+  "controls": {
+    "reduced_positive": {
+      "path": "results/v2/validation/positive_control_20261019.json",
+      "sha256": "29097b8a4ea3e9185c4d7e61ded301117e14c8655d2bb4c830b4e484a79c7997",
+      "passed": false,
+      "permutations": 199,
+      "outer_repeats": 2,
+      "rho": 0.3549579831932773,
+      "p_raw": 0.01,
+      "seed": 81000
+    },
+    "full_positive": {
+      "path": "results/v2/validation/positive_full_20261019.json",
+      "sha256": "35c64ec5270369ff34d0f39c88f8b4dc8970a30d5e6b11590e9e6da31f4bb6e3",
+      "passed": false,
+      "permutations": 1000,
+      "outer_repeats": 10,
+      "rho": 0.3336470588235294,
+      "p_raw": 0.011988011988011988,
+      "seed": 81000
+    },
+    "null_calibration": {
+      "path": "results/v2/validation/null_calibration_20261019.json",
+      "sha256": "5fd6b12eb13581afd6fbbea610db52530879d002481f451aa1f604e12aa3f4e3",
+      "passed": true,
+      "permutations": 200,
+      "outer_repeats": 2,
+      "datasets": 100,
+      "false_positive_rate": 0.03,
+      "p_decile_histogram": [
+        9,
+        11,
+        6,
+        8,
+        4,
+        12,
+        12,
+        10,
+        15,
+        13
+      ],
+      "uniform_ks_statistic": 0.13243781094527363
+    },
+    "strong_diagnostic": {
+      "path": "results/v2/validation/strong_positive_20261019.json",
+      "sha256": "655108806a4608d5501f0f948f4c473f5e8028e28d1105d943504c668176b164",
+      "passed": true,
+      "permutations": 199,
+      "outer_repeats": 2,
+      "rho": 0.8299159663865546,
+      "p_raw": 0.005,
+      "seed": 81000
+    }
+  },
+  "real_label_evaluation_performed": false,
+  "positive_control_policy": "Option 3; post-failure amendment 2026-10-19; original controls preserved",
+  "power_diagnostic": {
+    "path": "results/v2/validation/power_diagnostic_option3_20261019.json",
+    "sha256": "99793e1bf69909388dc6987488d1bea8f03ca33224e6c8a783a6b6c0178ff27c",
+    "plan": {
+      "amendment": "2026-10-19 Option 3",
+      "workers": 4,
+      "gate_a": {
+        "seed": 81000,
+        "test_number": 1,
+        "population_correlation": 0.95,
+        "permutations": 199,
+        "outer_repeats": 2,
+        "bootstrap_resamples": 100,
+        "target_p": 0.01
+      },
+      "gate_b": {
+        "seed": 83000,
+        "datasets": 200,
+        "population_correlation": 0.65,
+        "permutations": 200,
+        "outer_repeats": 2,
+        "bootstrap_resamples": 10,
+        "alpha": 0.05,
+        "expected_rate": [
+          0.5,
+          0.95
+        ]
+      }
+    },
+    "gate_a": {
+      "seed": 81000,
+      "test_number": 1,
+      "p": 0.005,
+      "rho": 0.8299159663865546,
+      "failure_reason": null,
+      "passed": true
+    },
+    "gate_b": {
+      "datasets_planned": 200,
+      "datasets_completed": 200,
+      "complete": true,
+      "detections": 168,
+      "alpha": 0.05,
+      "detection_rate": 0.84,
+      "expected_rate": [
+        0.5,
+        0.95
+      ],
+      "binomial_exact_95_ci": [
+        0.7817009846486592,
+        0.8879125023541982
+      ],
+      "passed": true
+    },
+    "passed": true
+  },
+  "prerequisites": {
+    "null_calibration_passed_and_hash_verified": true,
+    "recorded_unit_tests_passed": true,
+    "recorded_shuffled_smoke_completed": true
+  },
+  "review_status": "Latest snapshot requires Agrim's owner approval; tags pending.",
+  "freeze_guard_verification": {
+    "dirty_unlisted_unstaged_staged_and_untracked_code_rejected": true,
+    "crlf_checkout_against_lf_tags_passed": true,
+    "substantive_content_and_approval_tampering_rejected": true,
+    "feature_byte_provenance_bound_to_registry_snapshot": true,
+    "environment": "Temporary synthetic Git repositories with core.autocrlf=true; no project tags created."
+  }
+}

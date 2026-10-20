@@ -1,19 +1,20 @@
 # v2 Feature Handoff Decision
 
-**Status:** Ready for independent review; not yet tagged `features-v2`
+**Status:** Ready for project-owner review; not yet tagged `features-v2`
 **Date:** 2026-10-18
 
 ## Final design decision
 
 - **Primary graph representation:** G8f, the audited 8-channel core with `N_fixed=15`.
-- **Secondary sensitivity representation:** G24f, the expanded 22-channel symmetric set with `N_fixed=6`.
+- **Secondary registered representation (T6):** G24f, the expanded 22-channel symmetric set with `N_fixed=6`, included in Group B's nine-test Holm family (decision finalized 2026-10-19).
 - **Spectral tables:** `spectral_abs.csv` and `spectral_lesion.csv` remain registered feature alternatives.
 - **Excluded subjects:** `sub-13` and `sub-40` are absent from both graph tables because they do not meet the relevant fixed-epoch minimum.
+- **Exclusion class disclosure (2026-10-19, explicitly authorized):** `sub-13` NIHSS 9 and `sub-40` NIHSS 6 are both moderate. The graph subsets therefore have 33 mild / 15 moderate (68.75% / 31.25%), compared with 33 / 17 (66% / 34%) in the full cohort. The moderate proportion decreases by 2.75 percentage points; the locked epoch rule and feature values are unchanged.
 - **No representation is claimed to improve prediction before the registry run.**
 
 ## Why G8f is primary
 
-G8f uses the established clean channel core and supports 15 fixed usable epochs. G24f retains more channels but the expanded screen reduces the feasible fixed count to 6, making it less stable and more vulnerable to sampling variability. G24f is therefore retained as a secondary sensitivity analysis rather than the primary result.
+G8f uses the established clean channel core and supports 15 fixed usable epochs. G24f retains more channels but the expanded screen reduces the feasible fixed count to 6, making it less stable and more vulnerable to sampling variability. G24f is retained as secondary registered test T6. Its secondary status does not remove it from multiplicity correction or change the registered decision rule.
 
 ## Fixed graph contract
 
@@ -25,6 +26,8 @@ G8f uses the established clean channel core and supports 15 fixed usable epochs.
 - Metrics: absolute efficiency asymmetry, absolute clustering asymmetry, mean homotopic wPLI, and aligned normalized Frobenius distance.
 
 ## QC limitations to report
+
+- The 2026-10-19 all-channel integrity audit found exact equality across all 32 named channels for sub-04/05, despite different age, sex and stroke location; the unnamed channel differs. No pair is byte-identical as a complete EDF. Source and stored metadata agree for the audited fields. See `RECORDING_INTEGRITY_AUDIT_V2.md` and `.json`; retain the existing subject policy and explicitly review the unresolved recording dependence.
 
 - G8f retains residual epoch-count correlations for some features, including alpha Frobenius distance (approximately -0.36).
 - G24f has stronger residual epoch-count correlations for several features.
@@ -47,4 +50,4 @@ G8f uses the established clean channel core and supports 15 fixed usable epochs.
 
 ## Group B boundary
 
-Group B may use the frozen schemas and sidecars to build the registry and evaluation harness. It must not alter feature values, channel sets, epoch counts, or registered feature definitions after registry freeze. Real-label evaluation remains prohibited until the independent review, human review, registry freeze, and `features-v2` tag are complete.
+The current project may use the frozen schemas and sidecars to build the registry and evaluation harness. It must not alter feature values, channel sets, epoch counts, or registered feature definitions after registry freeze. Real-label evaluation remains prohibited until Agrim's latest owner review, registry freeze, and `features-v2` tag are complete.

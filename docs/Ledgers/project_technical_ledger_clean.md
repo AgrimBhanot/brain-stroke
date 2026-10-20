@@ -1,213 +1,89 @@
 # Project Technical Ledger
 
-## Purpose
+**Current state updated:** 2026-10-20, owner approval recorded and freeze/primary execution authorized.
 
-This document describes only the **current technical state** of the project. It is continuously rewritten as the implementation changes. Historical evolution belongs in the Timeline Ledger.
+## Purpose and authority
 
----
+This ledger is rewritten to describe current technical state; the timeline ledger preserves events. `EXECUTION_GUIDE_CURRENT.md` is authoritative, `AGENTS.md` gives repository rules, `docs/PROGRESS.md` gives status and `docs/CONTEXT.md` supplies the concise handoff. The original plan is archived at `docs/archive/PROJECT_EXECUTION_GUIDE_V1.md`. Group A's original assignment remains unchanged.
 
-# I. Technical Details
+## Cohort, metadata and integrity
 
-### Project objective and data
+Figshare contains 50 subject IDs: 33 mild (NIHSS 1-4), 17 moderate (5-11), no severe. Labels and metadata are in `features/v2/subject_meta.csv` and never enter X. The authenticated participant TSV is version 5 asset 42345150; JSON asset 38516579 appears in versions 3-5 and matches the version 1 JSON checksum. All 50 version 1/version 5 paralysis sides agree. The dictionary defines limb paralysis side. The project's contralateral mapping gives 22 left and 28 right lesion sides, an alignment assumption rather than imaging confirmation. All 800 aligned AI values and three unchanged globals match the construction; T3 remains feasible. See `METADATA_AUDIT.md` for hashes and sources.
 
-The project is an EEG-based machine-learning study for stroke-severity classification. The current Figshare cohort contains 50 subjects and supports only a binary problem in practice: 33 mild subjects and 17 moderate subjects; no severe subjects are present.
+Explicitly authorized exclusion accounting found sub-13 NIHSS 9 and sub-40 NIHSS 6, both moderate. Each actual graph subset is 33 mild / 15 moderate (68.75%/31.25%), versus 66%/34% in the full cohort. The two feature documents now disclose the 2.75-percentage-point decrease in moderate prevalence. Eligibility and feature values were not changed.
 
-The primary target is `severity_class`, encoded as:
-- mild → 0
-- moderate → 1
+`src/audit_recording_integrity_v2.py` with `configs/recording_integrity_v2.json` audited all 33 raw EDF signal channels and all 160,000 samples per channel at 500 Hz for pairs 04/05, 11/15 and 47/49. Reports: `docs/RECORDING_INTEGRITY_AUDIT_V2.md`/`.json`, including file/config/source hashes and per-channel statistics. All 32 named channels for 04/05 are exactly identical; the unnamed channel differs. Other pairs have only constant CPz exactly equal, with nonconstant named-channel correlations about .99937-.999997 and .99955-.999997 respectively. No complete EDF pair has equal file hashes or identical all-channel values.
 
-NIHSS validation currently shows:
-- mild: NIHSS 1–4
-- moderate: NIHSS 5–11
+Age and stroke location differ within all pairs; sex also differs for 04/05. Age/sex/location/duration/handedness for every paired ID agree between the source TSV and stored metadata. The discrepancy is therefore present in source metadata/signals, not a local transcription mismatch. The cause and participant identities remain unresolved. The user retains distinct IDs and subject-ID splits; this does not establish exchangeability and reviewers must assess the risk to CV and permutation inference. No pair outcomes were inspected in this integrity audit.
 
-The planned external-validation dataset is UCLH.
+## Legacy and Group A feature state
 
-### Repository and important files
+Legacy spectral/graph sources, feature files and results remain frozen. Spectral classification was weak near the dummy baseline; v1 graph features had epoch-count dependence. No original-label v2 result or improvement has been computed.
 
-The project is a Python scientific/ML repository. The important current files/components are:
+- Absolute and lesion-aligned spectral tables: 50 subjects, 19 features plus ID.
+- G8f: primary, eight core channels, N_fixed=15, 16 features.
+- G24f: secondary registered T6 within the nine-test Holm family, 22 channels/11 pairs, N_fixed=6, 16 features.
+- Both graph tables contain 48 subjects after excluding 13/40 under locked epoch requirements.
+- Bands: delta 1-4, theta 4-8, alpha 8-13, beta 13-30 Hz.
+- Graph metrics: absolute efficiency/clustering asymmetry, homotopic wPLI, normalized aligned Frobenius distance.
+- Group A corrected the 150-microvolt screen to restrict the actual sampling pool before spectra/subsampling. Fixed-size sampling is without replacement, with 100 deterministic draws and median adjacency.
+- Nine existing graph/lesion tests pass; residual epoch bias and second-seed instability remain reportable.
+- Four provenance sidecars, feature manifest, changelog and handoff exist. All 19 original Group A byte hashes still match after this remediation. No full feature regeneration was repeated.
 
-- `PROJECT_EXECUTION_GUIDE.md`: overall execution plan and phase definitions.
-- `AGENTS.md`: repository-level constraints for the modeling work.
-- `docs/PHASE5_CONTEXT.md`: Phase 5 implementation context.
-- `docs/PROGRESS.md`: concise project progress record.
-- `src/load_figshare.py`: loads the Figshare EEG data and establishes the available EEG channels.
-- `src/preprocessing.py`: preprocessing, filtering, epoch creation, and saving of processed epochs.
-- `src/feature_extraction.py`: spectral power, asymmetry, and global spectral feature calculations.
-- `src/aggregate_patient_features.py`: converts epoch-level features into patient-level summaries.
-- `src/extract_labels.py`: extracts clinical labels.
-- `src/labels.py`: defines the NIHSS-to-severity mapping.
-- `src/build_feature_table.py`: creates the final labeled Figshare feature table.
-- `src/train_models.py`: Phase 5 model training and evaluation.
-- `src/graph_features.py`: Phase 3b graph feature extractor (wPLI/multitaper, 16 network-level features). Implemented; legacy graph CSV outputs exist and have been audited.
-- `features/figshare_features.csv`: current 50-subject, labeled spectral modeling table.
-- `features/figshare_patient_features.csv`: patient-level feature table without the final merged labels.
-- `features/figshare_graph_features.csv`: graph-only subject-level table (written at runtime by graph_features.py).
-- `features/figshare_combined_features.csv`: spectral + graph combined table, 35 features (written at runtime by graph_features.py).
+The user confirms the local processed epochs and the other computer's clean folder represent the same data. The generator still needs explicit local path mapping; the aggregate input hash does not provide individual cross-computer reconciliation.
 
-### Spectral feature pipeline
+## B1 specification and B2/B3 implementation
 
-The existing spectral pipeline uses four EEG frequency bands:
+The primary model is standardized Ridge with a 20-alpha grid from .01 to 1000, selected by five inner shuffled KFold splits (seed 42), using scaling fitted inside each training fold. The efficient SVD path matches full-pipeline GridSearchCV. Outer CV is five folds by ten repeats, stratified by severity while predicting NIHSS. Pool OOF predictions within each repeat, then average ten Spearman correlations. Joint target/class permutations regenerate splits and refit the complete pipeline.
 
-- delta: 1–4 Hz
-- theta: 4–8 Hz
-- alpha: 8–13 Hz
-- beta: 13–30 Hz
+T1-T6 use upper-tail predictive inference; T7-T9 direct associations use two-sided inference. Use 1,000 permutations with plus-one/tie-inclusive correction and Holm over all nine tests. A signal requires adjusted p<.05 and rho>=.30 (absolute rho for T7-T9). The 2,000-draw subject bootstrap is descriptive/conditional on saved OOF predictions, with an explicit 1% invalid-draw rule. Undefined required statistics fail the family. No inference settings or memberships changed in this remediation.
 
-Interhemispheric asymmetry is calculated using the established left-minus-right formulation:
+Implementation includes `stats_utils.py`, `train_regression.py`, `run_registry.py`, `validate_registry_v2.py`, `write_registry_freeze_v2.py` and `freeze_io_v2.py`. Exact feature whitelists and memberships are in `configs/registry_v1.json`. All nine tests/failures, OOF folds/predictions/targets, alphas, nulls and metrics are retained in immutable run outputs. Whole-family failures withhold decisions and model export. Only qualifying predictive T1-T6 sets can promote a model. SVR/RF/combined sensitivities and later reporting remain separate work.
 
-\[
-AI = \frac{P_{left}-P_{right}}{P_{left}+P_{right}}
-\]
+## Post-failure validation amendment and results
 
-The primary homologous channel pairs used for the 19-feature model are:
-- F3/F4
-- C3/C4
-- P3/P4
-- O1/O2
+The independent review supplied by the user is preserved at `docs/reviews/independent_review_20261019.md`. It found no result-changing code defect and attributes the original moderate control's p=.011988 to a design-sensitivity/power mismatch. The user explicitly adopted Option 3. Registry section 12 recorded the amendment before new simulations; it preserves the failed reduced p=.010/full p=.011988 controls and the prior strong diagnostic.
 
-The model input is restricted to the 19 `all_*` patient-level features:
-16 band/channel asymmetry features plus:
-- `all_pdBSI`
-- `all_DAR`
-- `all_DTABR`
+Gate A: population Pearson r=.95, dataset seed 81000, 199 permutations, two outer repeats, strict p<.01. Result: OOF Spearman rho=.8299159664, p=.005, PASS.
 
-The `left_hand_*` and `right_hand_*` feature families are not part of the Phase 5 model input, and epoch-count columns are excluded.
+Gate B: 200 independent r=.65 datasets, fixed seeds 83000-83199, 200 permutations and two repeats each, require 50-95% detection at raw p<.05. Result: 168/200 (84%), exact binomial 95% CI [78.1701%,88.7913%], PASS. No dataset failed or was omitted. All 201 p-values were independently recomputed from saved null statistics. These two-repeat uncorrected diagnostics do not estimate exact ten-repeat Holm power; the upper bound is an adopted operational criterion, not a theoretical power limit.
 
-Spectral power is based on Welch PSD with `n_fft=256`. Current preprocessing uses a 1–40 Hz band-pass and 50 Hz notch filter. Epochs are 4.0 s, with the end time adjusted to account for the final sample. Patient-level features are obtained by mean aggregation over clean epochs per condition; the Phase 5 model uses the `all` condition.
+`docs/REGISTRY_VALIDATION_RESULTS.json` records `acceptance_passed: true`, all historical controls, the full report's hash and current 32/32 test outcome. The prior 100-null-dataset calibration remains 3% (passed), its file hash matches, and nine shuffled smoke analyses completed. The full Option 3 report is `results/v2/validation/power_diagnostic_option3_20261019.json`, SHA-256 `99793e1bf69909388dc6987488d1bea8f03ca33224e6c8a783a6b6c0178ff27c`; a JSONL checkpoint and all per-dataset nulls are retained.
 
-### Phase 5 model family
+## Freeze guards, manifests and remaining gates
 
-`src/train_models.py` currently evaluates 20 candidate configurations including the dummy baseline.
+The real runner checks `git status --porcelain` before reading labels and refuses unstaged/staged/unmerged/untracked changes in src/configs/tests. Only pure CRLF/LF changes verified against the index are exempt. Snapshot schema 2 uses UTF-8 text normalized solely from CRLF to LF; other whitespace, encoding and data changes fail. Both tag contents must match the same reviewed bindings.
 
-The classifier families are:
-- majority-class DummyClassifier;
-- linear SVM;
-- RBF SVM;
-- KNN with k = 3, 5, 7;
-- Random Forest;
-- regularized logistic regression.
+Before documentation consolidation, the registry snapshot bound 43 artifacts with digest `da6d580818214c0a70bcd005483f101c645a97be9dac7381021194733d84f14e`. After consolidation it used 42 artifacts with digest `8d3f190541cc8edc2fea0b5eaa9d5f4884b635569aa1b621e53fc87fd2c6d9b1`. The one-owner review change then produced the current 42-artifact digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`; self-check passes. It still binds the Group A feature manifest/all 19 records, implementation/tests, amendment, historical review source and integrity/class-disclosure evidence; original Group A raw byte hashes remain preserved as `source_sha256`.
 
-Feature representations include:
-- all 19 spectral features;
-- 8 features selected with `SelectKBest(f_classif, k=8)` from the 19;
-- the 3 global spectral features (`all_pdBSI`, `all_DAR`, `all_DTABR`).
+All 32 tests passed after the single-review change in 22.515 seconds. Temporary synthetic Git repositories verify dirty unlisted code, staged/untracked changes, CRLF checkouts versus LF tags, stable snapshot reconstruction and content/data/owner-review tamper rejection. The actual workspace guard refuses the current uncommitted code before label access, as intended.
 
-Scaling and feature selection are contained inside sklearn pipelines so that they are fitted within CV folds rather than before CV.
+Older supplied reviews remain historical evidence for the positive-control amendment and earlier snapshots. They are not active freeze dependencies and cannot block ongoing coding.
 
-The canonical evaluation uses:
-- `RepeatedStratifiedKFold`
-- 5 folds
-- 10 repeats
-- random seed 42
-- macro-F1
-- balanced accuracy
-- binary ROC-AUC
+Group A has finished and will no longer participate. Agrim is the sole project owner and the only required reviewer. R8 and registry section 13 now require one authoritative Agrim review of the exact final digest, explicitly acknowledging unresolved limitations. No AI-model, model-family, Group A or multi-review dependency remains. Review is requested only at a genuine freeze or result-changing amendment boundary.
 
-The implementation also contains model export and metadata generation. SVC models use `decision_function` for scoring rather than relying on probability calibration.
+`docs/reviews/registry_review.json` replaces the former model-family and human JSON pair. It has a minimal contract: status, reviewer, review date, artifact digest, scope and required limitation acknowledgements. `verify_freeze` reads only this one path, checks approved status/identity/date, matches its digest to the current artifact list and matches its tagged bytes. Explicit commit/tag authorization, `registry-v1`/`features-v2` and the final execution-machine guard check still remain. No project staging, commit, tag or real-label evaluation was performed.
 
-### Current spectral-model result
+Agrim's 2026-10-20 instruction grants all outstanding approvals and authority to proceed. The single owner record now has approved status and review date 2026-10-20 for digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`, with the user's authorization source recorded. The scoped freeze commit/tags and one-shot primary run are authorized; the existing freeze guard must pass before the data loader runs. Statistical methods and feature content remain as reviewed.
 
-The canonical run establishes the following current benchmark:
+Primary source, tests, features and validation evidence were not altered by documentation cleanup. The scientific registry gained the already-planned grouped sensitivity and new review governance; config dropped only the removed redundant implementation document from `freeze_artifacts`. The full suite and regenerated snapshot now pass. Synthetic acceptance and technical verification are not authorization for real-label evaluation.
 
-- Dummy: macro-F1 0.3971, balanced accuracy 0.5000, ROC-AUC 0.5000.
-- Best macro-F1: `knn5_kbest8`, macro-F1 0.4999 ± 0.1579.
-- Highest ROC-AUC: `logreg_l2_global3`, ROC-AUC 0.5844 ± 0.1737, with balanced accuracy 0.4876 ± 0.1396.
+## Separate grouped-split sensitivity plan
 
-The current interpretation is that spectral asymmetry alone has weak and unstable predictive value for this 50-subject mild-vs-moderate classification problem.
+The sensitivity specification is now registry section 14 rather than a separate planning document. Preserve all primary subjects/features/targets and group 04/05, 11/15 and 47/49, leaving other IDs singleton: 47 groups for N=50 and 45 for N=48. Keep groups out of X and separate in both outer evaluation and inner alpha selection.
 
-### Graph/connectivity branch — `src/graph_features.py` (legacy v1 implemented and audited)
+The review incorrectly describes GroupKFold as stratified. Installed scikit-learn 1.9.1 provides StratifiedGroupKFold but no RepeatedStratifiedGroupKFold. The proposal uses ten deterministic five-fold StratifiedGroupKFold repeats (seeds 42 through 51), five-fold inner StratifiedGroupKFold (seed 10042+5*r+f), the original alpha grid and fold-local scaling. Exact class balance is not guaranteed; keep fixed seeds, disclose class/group counts and duplicate split assignments, and fail rather than search seeds or change membership when required checks fail. These detailed choices remain proposals for review, not an already approved primary amendment.
 
-The second feature family uses the stored time-domain epochs rather than PSD tables.
+Compare grouped mean pooled-repeat OOF rho with the saved one-shot primary results, reporting signed delta and the proposed absolute .05 descriptive flag outside Holm. No new p-values, model promotion, dependence-adjusted confidence intervals or significance claims are planned. Grouping addresses within-pair cross-fold contamination but does not resolve source identity, prove independence of other records, or validate the primary individual-level permutation exchangeability assumption. The numerical difference also reflects changed folds/training sets, not exclusively leakage bias.
 
-The audited Figshare montage contains 30 channels:
+Future sensitivity implementation will use separate v2 files/config/tests and provenance without modifying the frozen primary engine. Plan approval precedes outcome inspection; actual sensitivity execution follows the authorized primary run and independent checks of the new implementation. Next milestones are review/sign-off and authorized freeze, separately authorized one-shot T1-T9 evaluation, then descriptive robustness/UCLH readiness work. No sensitivity code was implemented or executed during this intake.
 
-Left hemisphere: FP1, F3, F7, FC3, FT7, C3, T3, CP3, TP7, P3, T5, O1  
-Right hemisphere: FP2, F4, F8, FC4, FT8, C4, T4, CP4, TP8, P4, T6, O2  
-Midline: Fz, FCz, Cz, CPz, Pz, Oz
+## Documentation structure
 
-**Node set (fixed; same 8 as spectral pipeline):**
-- Left: F3, C3, P3, O1  (indices 0–3 in 8-node graph)
-- Right: F4, C4, P4, O2  (indices 4–7 in 8-node graph)
+Three overlapping live documents were removed after consolidation: `B2_B3_IMPLEMENTATION.md`, `FREEZE_READINESS_REVIEW.md` and `FREEZE_AND_SENSITIVITY_PLAN.md`. Current implementation state belongs here; current blockers/checklist belong in `PROGRESS.md`; statistical and sensitivity specifications belong in `ANALYSIS_REGISTRY.md`; historical events remain in the timeline. Distinct scientific audits/QC, Group A handoff/changelog, UCLH evidence, immutable review sources and machine-consumed JSON remain separate. New standalone planning documents should not be created unless they are required distinct artifacts.
 
-**Homologous pairs (cross-hemisphere):** F3↔F4, C3↔C4, P3↔P4, O1↔O2.
+## UCLH and reporting limitations
 
-**Connectivity:** `mne_connectivity.spectral_connectivity_epochs`, `method='wpli'`, `mode='multitaper'`, `faverage=True`. One 8×8 adjacency matrix per band per subject, symmetrised, diagonal zeroed, clipped to [0, 1].
+UCLH audit/montage handoff docs exist. The corrected source distinguishes 32 EEG channels plus STATUS from 33 electrode entries including NFpz. O1/O2 are absent; I1/O9 and I2/O10 cannot be silently substituted. Source generation code specifies 16384 Hz/common reference, but effective extracted-EEG reference, eye condition, usable duration and local common-montage implementation still require verification. Group A implementation is user-reported; `configs/graph_common.json` was not found locally.
 
-**Graph metrics (NetworkX):**
-- Global efficiency: Dijkstra on 1/weight distances, normalised by n(n−1).
-- Mean clustering coefficient: Onnela et al. 2005 geometric-mean formulation.
-
-**Asymmetry formula (consistent with spectral pipeline):** AI = (L − R) / (L + R); safe-divide returns 0.0.
-
-**Frobenius distance:** ‖A_L − A_R‖_F / (‖A_L‖_F + ‖A_R‖_F).
-
-**The 16 canonical feature names** (module constant `GRAPH_FEATURE_NAMES`, deterministic order):
-- `wPLI_delta_GlobalEff_AI`, `wPLI_delta_ClustCoeff_AI`, `wPLI_delta_MeanHomotopic`, `wPLI_delta_FrobeniusDist`
-- `wPLI_theta_GlobalEff_AI`, `wPLI_theta_ClustCoeff_AI`, `wPLI_theta_MeanHomotopic`, `wPLI_theta_FrobeniusDist`
-- `wPLI_alpha_GlobalEff_AI`, `wPLI_alpha_ClustCoeff_AI`, `wPLI_alpha_MeanHomotopic`, `wPLI_alpha_FrobeniusDist`
-- `wPLI_beta_GlobalEff_AI`, `wPLI_beta_ClustCoeff_AI`, `wPLI_beta_MeanHomotopic`, `wPLI_beta_FrobeniusDist`
-
-**Sampling-rate guard:** raises ValueError if sfreq deviates > 1 Hz from 500 Hz.
-
-**Outputs (written at runtime):**
-- `features/figshare_graph_features.csv` — 50 × 17 (subject_id + 16 features).
-- `features/figshare_combined_features.csv` — inner join on subject_id with spectral CSV; retains all spectral columns (including severity_class) + 16 graph features = 35 ML-candidate features.
-
-### Expected experimental structure
-
-The graph branch will eventually be evaluated through a controlled three-way ablation:
-
-**Spectral only:** 19 features  
-**Graph only:** 16 features  
-**Combined:** 35 features
-
-The comparisons should use the same CV philosophy and leakage safeguards as the spectral baseline.
-
----
-
-# II. Notes on Future Implementations and Things to Keep in Mind
-
-The legacy graph CSV output exists and has been audited. Its epoch-count dependence means it is a baseline, not the corrected v2 graph solution. The active execution task is now the label-blind v2 audit and fixed-epoch design described in `EXECUTION_GUIDE_CURRENT.md`.
-
-After the v2 feature tables are built, the registry study will evaluate fixed feature families under the documented CV protocol:
-1. Spectral only (19 features from `figshare_features.csv`).
-2. Graph only (16 features from `figshare_graph_features.csv`).
-3. Combined (35 features from `figshare_combined_features.csv`).
-
-The graph feature contract (node order, pair orientation, formula, band edges) must match this implementation exactly when reproducing features on UCLH data.
-
-The eight-channel restriction should remain in place unless a future artifact audit confirms additional peripheral channels are reliably clean.
-
-The combined experiment should not respond to results by repeatedly expanding the model/search space. The purpose of the ablation is to compare fixed feature families under the same evaluation protocol, not to tune until one representation wins.
-
-The model metadata/feature contract should remain the authoritative description of the spectral feature-generation assumptions needed for UCLH transfer, including the asymmetry formula, channel-pair orientation, bands, PSD settings, filtering, epoch settings, aggregation, feature names, and label map.
-
-The graph branch should explicitly verify EDF sampling frequency and the actual epoch timing relative to the motor-imagery cue before implementation is treated as final.
-
----
-
-# III. Limitations / Drawbacks
-
-The primary limitation is sample size: N=50 with only 17 moderate subjects. This produces substantial variance in model estimates and makes selection among many candidate models intrinsically unstable.
-
-The Figshare dataset contains no severe cases, so the current empirical study cannot support a three-class mild/moderate/severe classifier. Its demonstrated task is binary mild-vs-moderate classification.
-
-The spectral baseline is near chance. The small numerical advantages of individual models are not sufficient to establish clinical or cross-dataset generalization.
-
-`n_fft=256` at the assumed 500 Hz sampling rate gives approximately 1.95 Hz frequency resolution. Consequently, the 1–4 Hz delta band is represented by only a small number of frequency bins. This is a known spectral-resolution trade-off of the existing feature pipeline.
-
-The 500 Hz sampling-rate value is documented in project context but has not been independently asserted by the preprocessing source itself. It therefore remains a verification item rather than an unquestioned implementation fact.
-
-Artifact rejection/quality control is strongest for the eight core channels used by the established spectral pipeline. Extending connectivity analysis to the remaining peripheral channels could introduce undetected artifacts, which is why the graph branch is currently restricted to the eight core channels.
-
-Adding graph features increases dimensionality from 19 to 35 candidate features in the combined table. With N=50, this increases overfitting risk; the design therefore avoids hundreds of edge-level ML features and keeps the representation at network level.
-
-The graph metrics may still be sensitive to channel availability and montage differences. UCLH may not contain an identical montage, so cross-dataset transfer requires a carefully defined channel intersection and feature-construction contract.
-
-The confusion matrix and full-dataset RF Gini/logistic coefficient plots from Phase 5 are descriptive/exploratory outputs rather than unbiased estimates of generalization performance.
-
-The project is not yet a validated clinical tool. The current evidence establishes a reproducible research baseline and motivates testing whether functional connectivity adds information beyond spectral asymmetry.
- 
-**Recent Findings (State 8 Audit):**
-- **wPLI Epoch Bias:** Graph features were extracted using the standard `wpli` method without addressing epoch-count sensitivity (e.g., via sub-sampling). As a result, `MeanHomotopic` connectivity is strongly negatively correlated with the number of clean epochs.
-- **Missing Metadata:** `participants.tsv` is missing from the repository. Consequently, patient lesion side, stroke type, and lesion location cannot be verified or incorporated.
+The study is pre-specified exploratory research. Small sample/no severe class, assumed lesion mapping, possible recording dependence, graph instability/residual bias and transfer mismatches remain. Report no effect detected when appropriate; neither synthetic validation nor the review establishes clinical utility or a predictive improvement.

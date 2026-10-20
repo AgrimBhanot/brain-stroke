@@ -1,7 +1,7 @@
 # Current Execution Guide
 
 **Project:** EEG-based stroke-severity analysis from interhemispheric EEG asymmetry
-**Status date:** 2026-10-17
+**Status date:** 2026-10-20
 **Authority:** This is the current operational guide. It reconciles the original phase plan, the completed legacy work, and the proposed Group A v2 feature track.
 
 ## 1. How agents must use this guide
@@ -86,7 +86,7 @@ Use fixed-size epoch sampling without replacement, deterministic per-subject see
 
 ### R8: Review before freeze
 
-v2 implementation requires a code review by a different model family and a human reviewer from the other group before tables are frozen.
+Before freeze, Agrim performs one authoritative project-owner review of the latest snapshot. No AI-model, model-family, Group A, or multi-review dependency is required. Earlier supplied reviews remain historical evidence only. The single active review must approve the exact final digest and acknowledge unresolved limitations. Ordinary coding proceeds without review collection; ask Agrim only at a real freeze or result-changing amendment boundary.
 
 ### R9: Escalate blockers
 
@@ -126,13 +126,13 @@ The planned v2 graph feature set has four metrics per band:
 
 - **0.1** Verify the four legacy feature CSVs exist and have 50 subjects.
 - **0.2** Confirm the legacy spectral benchmark and known graph epoch-count bias from the ledgers.
-- **0.3** Keep `PROJECT_EXECUTION_GUIDE.md` as historical reference only.
+- **0.3** Keep `docs/archive/PROJECT_EXECUTION_GUIDE_V1.md` as historical reference only.
 
 Gate: legacy inputs exist; v1 files are treated as immutable.
 
 ### Phase 1: A0 metadata audit
 
-**Status: DONE.**
+**Status: DONE for side semantics, subject mapping, and T3 feasibility under the prescribed contralateral assumption.**
 
 - **1.1** Search repository and available data for `participants.tsv` and related metadata.
 - **1.2** Record exact columns and source semantics for paralysis/hemiplegia side, lesion side, stroke location, age, sex, handedness, and onset.
@@ -140,7 +140,7 @@ Gate: legacy inputs exist; v1 files are treated as immutable.
 - **1.4** Create `docs/METADATA_AUDIT.md` and `features/v2/subject_meta.csv` with provenance and unresolved values.
 - **1.5** Decide whether lesion alignment is feasible: verified semantics plus at least 10 clear left and 10 clear right lesion subjects. If not, mark T3 dropped and continue without lesion alignment.
 
-Gate: metadata provenance is documented; 22 left and 28 right lesion-side cases meet the A2 feasibility rule.
+Gate: passed for T3 feasibility. Figshare checksums authenticate the supplied files, the JSON defines paralysis side, all 50 source sides match subject metadata, and the prescribed mapping yields 22 left and 28 right derived lesion sides. The 800 lesion-aligned AI values and three globals match the prescribed construction. The TSV is version 5, not version 1; all 50 paralysis sides match version 1. See `docs/METADATA_AUDIT.md`.
 
 ### Phase 2: A1 absolute spectral table
 
@@ -177,26 +177,26 @@ Gate: passed. G8f is primary with N_fixed=15; G24f is secondary with N_fixed=6 a
 - **4.5** Create `tests/test_graph_features_v2.py` using synthetic data only.
 - **4.6** Verify symmetry, left/right invariance, reproducibility, `N_fixed` dependence, graph metric values, and wPLI equivalence or document a measured tolerance.
 
-Gate: passed. Five synthetic graph tests pass; no label or clinical metadata access is used by the graph library.
+Gate: six graph tests, including the artifact-screen regression test, pass locally; three lesion-alignment tests also pass (nine total, 2026-10-19). The tests do not replace independent review.
 
 ### Phase 5: A5 generation and A6 quality control
 
-**Status: DONE with reported QC flags.**
+**Status: DONE WITH FLAGS; screen/sampling correction verified, independent review remains.**
 
 - **5.1** Generate `features/v2/graph_g8f.csv` and `graph_g24f.csv` with sidecars.
 - **5.2** Add `n_epochs_g8f` and `n_epochs_g24f` to `subject_meta.csv`.
 - **5.3** Log exclusions, runtime, and exact configs.
 - **5.4** Write `docs/FEATURE_QC_V2.md` covering finite values, constants, ranges, epoch bias, second-seed stability, collinearity, and absence of labels.
 
-Gate: passed. Both tables are finite and label-free; residual epoch-bias correlations and seed-instability failures are documented in `docs/FEATURE_QC_V2.md` and must not be tuned against labels.
+Gate: the screen is now applied before spectra/subsampling, and its regression test passes. Group A regenerated the two 48-subject tables and updated QC and provenance. All 19 manifest entries match the local files exactly (2026-10-19). Full EEG regeneration was not repeated in this review. The user confirms input-location equivalence across computers; local reproduction still requires path mapping. Residual epoch-bias and seed-instability flags remain reportable limitations.
 
 ### Phase 6: Registry, freeze, and handoff
 
-**Status: BLOCKED until Phases 1-5 and Group B registry work are ready.**
+**Status: OWNER APPROVED; scoped freeze commit/tags and one-shot T1-T9 evaluation authorized on 2026-10-20.**
 
 - **6.1** Group B freezes `docs/ANALYSIS_REGISTRY.md` before real-label evaluation.
 - **6.2** Write `features/v2/MANIFEST.json` and `docs/FEATURE_CHANGELOG.md`.
-- **6.3** Complete independent model-family and human review.
+- **6.3** Obtain Agrim's single project-owner review for the exact final digest.
 - **6.4** Tag frozen tables `features-v2`; record hashes and handoff message.
 - **6.5** Run the registry once, report all registered tests, and keep sensitivity analyses outside the registered claims.
 
@@ -230,9 +230,15 @@ Expected outputs, in order:
 
 ## 7. Current blockers and decisions
 
-- `participants.tsv` and verified lesion-side semantics are not currently present in the repository. A0 must search for them before A2.
-- `docs/PHASE5_CONTEXT.md` is referenced by older files but is missing. This guide replaces it as the operational authority.
-- The v2 guide supplied by the team is a proposal, not completed implementation. No v2 output may be described as finished.
+- Figshare checksum verification and subject-level checks support T3 inclusion under the prescribed contralateral mapping. The supplied TSV is version 5; its 50 paralysis sides match the version 1 TSV. The mapping is an assumption and not direct imaging verification of lesion hemisphere; see `docs/METADATA_AUDIT.md`.
+- `docs/CONTEXT.md` is the concise prompt-handoff document. This guide remains the operational authority.
+- Group A corrected graph screening, regenerated graph outputs, enriched all four sidecars, and added the feature manifest, changelog and handoff. Local tests and manifest checks pass. The completed handoff is retained in `docs/V2_FEATURE_HANDOFF.md`; the current freeze state is tracked only in `docs/PROGRESS.md`.
+- Local core-channel EEG checks reveal identical signals for subjects 4/5 and extremely similar signals for 11/15 and 47/49. The user's decision is to retain them as different subjects using the planned subject-ID splits. Report the possible dependence and train/test similarity as limitations.
+- `docs/ANALYSIS_REGISTRY.md` specifies T1-T9 with statistical choices finalized before label evaluation. The authorized Option 3 amendment passed synthetic validation. Agrim is the sole project owner and the only required reviewer. The freeze guard reads one latest owner-review record bound to the final digest; historical AI/Group A reviews are not active dependencies.
+- G24f is settled as secondary registered T6 in the nine-test Holm family (user authorization 2026-10-19); handoff and registry wording agree.
+- B1 is specified and B2/B3 are implemented. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true, original failures remain documented, and all 32 tests passed at the last code-validation run. Implementation state is consolidated in the technical ledger; results remain in `docs/REGISTRY_VALIDATION_RESULTS.json`.
+- The only active review record is `docs/reviews/registry_review.json`. Agrim approved the current snapshot on 2026-10-20 and authorized continued work, including the scoped freeze commit/tags and one-shot T1-T9 run. Verify the frozen content with the existing guard before evaluation; record all results and any failures.
+- The authorized exclusion-class disclosure confirms sub-13 (NIHSS 9) and sub-40 (NIHSS 6) are both moderate; graph subsets contain 33 mild / 15 moderate. The full-channel audit finds sub-04/05 identical on all 32 named signals, differing on the unnamed channel and in age/sex/location metadata; all paired stored metadata agrees with the source. The retained-ID policy is unchanged and dependence remains unresolved. See `docs/RECORDING_INTEGRITY_AUDIT_V2.md`.
 - The legacy graph CSVs exist, but their epoch-count bias means they are a baseline, not the corrected graph solution.
 - No severe-class model should be built from the current Figshare cohort.
 

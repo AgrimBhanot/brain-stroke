@@ -11,6 +11,7 @@ Use [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md) as operational a
 - Retain 04/05, 11/15 and 47/49 as distinct subjects. Their identical/highly similar EEG remains an unresolved dependence limitation. All named channels are identical for 04/05; demographics/location differ.
 - B1 and the B2/B3 engine are implemented. Option 3 synthetic validation passed: Gate A p=.005; Gate B 168/200 (84%, exact 95% CI 78.17-88.79%). Original failures remain preserved; the last complete suite had 32 passing tests.
 - The registry includes T1-T9, nine-test Holm correction, nested standardized Ridge, exact tails/seeds/failure rules, and a separate descriptive grouped-split sensitivity for T1-T6.
+- The separate sensitivity runner/config/tests are implemented: six grouped Ridge, six fixed SVR, six fixed random forest, and one combined absolute-spectral/G8f Ridge. All 39 tests pass (seven new); real sensitivity execution waits for the primary run to complete.
 
 ## Active subphase
 
@@ -18,7 +19,7 @@ Phase 6: documentation consolidation and review-mechanism simplification are com
 
 The freeze mechanism requires only Agrim's latest owner review. `reviews/registry_review.json` now approves the current digest, following Agrim's 2026-10-20 instruction granting all outstanding approvals and authority to continue. Earlier supplied reviews are historical evidence only.
 
-The scoped freeze commit, `registry-v1`/`features-v2` tags and first real-label T1-T9 run are authorized. Verify the existing snapshot/tag guard, then execute once and retain every outcome. Do not ask again for approvals already provided; escalate only substantive scientific ambiguity or a result-changing problem.
+The approved snapshot was committed at `42ff54d`, both annotated freeze tags were created, and `verify_freeze()` passed for all 42 inputs. The first run `primary_20261020` is in progress under the full registered settings. Do not restart it or change frozen artifacts. Agrim authorized continued work; do not ask again for approvals already provided.
 
 ## Required behavior
 
@@ -30,6 +31,6 @@ The scoped freeze commit, `registry-v1`/`features-v2` tags and first real-label 
 
 ## Next three milestones
 
-1. Run tests, regenerate/check the snapshot and obtain Agrim's one exact-digest review.
-2. With explicit Git authorization, commit/tag and verify the freeze; then separately authorize the one-shot T1-T9 run.
-3. Implement/report grouped and other descriptive sensitivities, then resolve UCLH reference/duration/common-montage prerequisites before external validation.
+1. Complete and verify the current one-shot T1-T9 run.
+2. Execute and report the already implemented descriptive sensitivities in separate outputs; preserve the frozen primary artifacts and all primary decisions.
+3. Resolve UCLH reference/duration/common-montage prerequisites before external validation.

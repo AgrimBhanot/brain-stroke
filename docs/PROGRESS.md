@@ -9,9 +9,10 @@ The authoritative plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURREN
 | Legacy baseline | DONE; frozen | Legacy spectral/graph tables and benchmark | Preserve only |
 | A0-A2 metadata/spectral v2 | DONE | `METADATA_AUDIT.md`; 50-subject absolute/lesion tables; T3 feasible under documented contralateral assumption | Preserve provenance limitation |
 | A3-A6 graph v2 | DONE WITH FLAGS | G8f N=15, G24f N=6; graph tables 48 x 17; screen fix, QC, sidecars and manifest | Report residual bias/instability |
-| B1 registry | OWNER APPROVED; FREEZE IN PROGRESS | Current 42-artifact digest approved on 2026-10-20 | Commit/tag and verify frozen content |
+| B1 registry | FROZEN | Commit `42ff54d`; annotated `registry-v1` and `features-v2`; 42 inputs verified | Preserve frozen scientific artifacts |
 | B2-B3 engine/statistics | IMPLEMENTED; SYNTHETIC ACCEPTANCE PASSED | Gate A p=.005; Gate B 168/200 (84%); current 32/32 tests pass; validation JSON | Preserve implementation |
-| Phase 6 freeze/evaluation | AUTHORIZED; IN PROGRESS | Owner approval covers the current snapshot and continuation through the primary run | Verify tags/guard and execute T1-T9 once |
+| Phase 6 freeze/evaluation | PRIMARY RUNNING | `results/v2/runs/primary_20261020`; full registered settings | Finish and verify all nine results |
+| Registered descriptive robustness | IMPLEMENTED; 7 NEW TESTS PASS | Separate `run_sensitivities_v2.py`, config and tests; 19 analyses | Run after the primary family completes; no new inference or tuning |
 | UCLH transfer | PARTIAL HANDOFF; VALIDATION NOT STARTED | UCLH audit/montage documents | Verify acquisition/reference/duration/common montage after Figshare freeze |
 
 ## Fixed decisions and limitations
@@ -42,16 +43,20 @@ Redundant `B2_B3_IMPLEMENTATION.md`, `FREEZE_READINESS_REVIEW.md`, and `FREEZE_A
 ## Freeze checklist
 
 1. DONE: owner approved digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898` on 2026-10-20; snapshot self-check passes.
-2. Commit the reviewed project changes and create the authorized `registry-v1` and `features-v2` tags.
-3. Verify the tagged freeze with `verify_freeze()`.
-4. Execute the authorized one-shot T1-T9 primary evaluation and independently check its saved results.
+2. DONE: commit `42ff54d` and both annotated freeze tags created.
+3. DONE: `verify_freeze()` passed against all 42 bound inputs on the execution machine.
+4. IN PROGRESS: `primary_20261020` uses 1,000 permutations/test, five outer folds, ten repeats, nested Ridge and 2,000 bootstrap draws. Independently check the saved results after completion.
 
 ## Next major work
 
-1. Complete the refreshed freeze described above.
-2. Run and report the one-shot registered T1-T9 evaluation without tuning or selective omission.
-3. Implement the separately registered grouped-split and other descriptive sensitivities, then complete UCLH prerequisite verification before external validation.
+1. Finish and independently verify the running one-shot T1-T9 evaluation without tuning or selective omission.
+2. Run and report the separately implemented grouped-split, SVR, RF and combined-feature descriptive sensitivities.
+3. Complete UCLH prerequisite verification before any external validation.
 
 ## Latest verification
 
 After simplifying review to one owner record, all 32 unit/integration tests passed in 22.515 seconds. On 2026-10-20 the same 42-artifact snapshot passed self-check and Agrim's approval was recorded. The first primary run is authorized; its execution and outcomes will be recorded below.
+
+The expanded suite now passes 39 tests in 26.493 seconds, including seven synthetic sensitivity tests. These cover both CV levels' group isolation, exactly-once OOF coverage, deterministic splits, fold-local scaling/alpha selection, ID-based intersection, matching alternative-model folds, incomplete-primary refusal, no overwrites, no inference/model export, and preservation of primary artifacts. The same frozen snapshot still passes self-check; no primary methods or files were changed.
+
+- Registry invocation 2026-10-20T12:56:33.499416+00:00: START real run=primary_20261020; rerun_reason=None

@@ -192,7 +192,7 @@ Gate: the screen is now applied before spectra/subsampling, and its regression t
 
 ### Phase 6: Registry, freeze, and handoff
 
-**Status: OWNER APPROVED; scoped freeze commit/tags and one-shot T1-T9 evaluation authorized on 2026-10-20.**
+**Status: FROZEN at 42ff54d; first registered T1-T9 run `primary_20261020` is in progress.**
 
 - **6.1** Group B freezes `docs/ANALYSIS_REGISTRY.md` before real-label evaluation.
 - **6.2** Write `features/v2/MANIFEST.json` and `docs/FEATURE_CHANGELOG.md`.
@@ -238,6 +238,7 @@ Expected outputs, in order:
 - G24f is settled as secondary registered T6 in the nine-test Holm family (user authorization 2026-10-19); handoff and registry wording agree.
 - B1 is specified and B2/B3 are implemented. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true, original failures remain documented, and all 32 tests passed at the last code-validation run. Implementation state is consolidated in the technical ledger; results remain in `docs/REGISTRY_VALIDATION_RESULTS.json`.
 - The only active review record is `docs/reviews/registry_review.json`. Agrim approved the current snapshot on 2026-10-20 and authorized continued work, including the scoped freeze commit/tags and one-shot T1-T9 run. Verify the frozen content with the existing guard before evaluation; record all results and any failures.
+- Freeze commit `42ff54d` now carries both annotated tags, `registry-v1` and `features-v2`. The real-machine guard passed for all 42 bound inputs before starting `primary_20261020`. BLAS/OpenMP thread counts are one for this run; all scientific settings are unchanged.
 - The authorized exclusion-class disclosure confirms sub-13 (NIHSS 9) and sub-40 (NIHSS 6) are both moderate; graph subsets contain 33 mild / 15 moderate. The full-channel audit finds sub-04/05 identical on all 32 named signals, differing on the unnamed channel and in age/sex/location metadata; all paired stored metadata agrees with the source. The retained-ID policy is unchanged and dependence remains unresolved. See `docs/RECORDING_INTEGRITY_AUDIT_V2.md`.
 - The legacy graph CSVs exist, but their epoch-count bias means they are a baseline, not the corrected graph solution.
 - No severe-class model should be built from the current Figshare cohort.

@@ -358,3 +358,19 @@ The full 32-test suite passed in 22.515 seconds after replacing dual reviews wit
 Agrim stated that all outstanding approvals are granted, requested continued work and results, and gave authority to proceed. This supersedes the pending approval/Git/run states in previous entries. The owner review now records approval of the existing 42-artifact digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`, which passed snapshot self-check before this update. The approved scope covers the freeze commit/tags and the first registered real-label T1-T9 evaluation.
 
 The active acceptance check is successful verification of committed/tagged content by the existing freeze guard, followed by completion and reporting of all nine analyses with 1,000 permutations, unchanged CV/settings, and the nine-test Holm family. No scientific artifact was altered to record approval.
+
+## State 26 - Freeze Verified and Primary Run Started
+
+**Date:** 2026-10-20.
+
+Created freeze commit `42ff54d` with the approved evaluation implementation and prior scoped project changes. The already staged legacy-guide removal is represented as its earlier authorized archive move. Created annotated `registry-v1` and `features-v2` tags at this commit. `verify_freeze()` passed for all 42 bound inputs with a clean source/config/test tree.
+
+Started the first registered real-label evaluation through `src/run_registry.py --mode real --run-id primary_20261020`. All scientific settings are unchanged; BLAS/OpenMP thread counts were set to one for execution efficiency. The runner retains all test outputs and applies nine-test Holm correction after the family completes. No run had existed before this invocation.
+
+## State 27 - Registered Descriptive Sensitivities Implemented and Tested
+
+**Date:** 2026-10-20.
+
+While the first primary run computed its fixed permutations, implemented registry sections 10/14 in separate `src/run_sensitivities_v2.py`, `configs/sensitivities_v2.json` and `tests/test_sensitivities_v2.py`. This covers all six predictive feature sets with grouped nested Ridge, fixed SVR and fixed random forest, plus the absolute-spectral/G8f combined Ridge intersection: 19 descriptive analyses. No primary result was used to select methods or settings; no frozen file changed.
+
+Seven new tests passed, including a complete synthetic 19-analysis run, strict no-overwrite/incomplete-primary behavior, preservation of primary files, pair isolation at both CV levels and fold-local scaling/alpha verification. The full suite passes 39 tests in 26.493 seconds. Snapshot self-check still matches all 42 approved artifacts. Actual sensitivity execution waits for the primary family to finish, and will produce no new p-values, confidence intervals or model promotion. Updated existing progress/context and rewrote the technical ledger to current state without creating more planning documents.

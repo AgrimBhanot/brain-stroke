@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scope": "Descriptive analyses specified in registry sections 10 and 14",
+  "primary_artifact_digest": "57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898",
+  "predictive_tests": ["T1", "T2", "T3", "T4", "T5", "T6"],
+  "grouped": {
+    "pairs": [["sub-04", "sub-05"], ["sub-11", "sub-15"], ["sub-47", "sub-49"]],
+    "outer_seed_base": 42,
+    "inner_seed_base": 10042,
+    "material_delta": 0.05,
+    "search_n_jobs": 1
+  },
+  "models": {
+    "svr": {"kernel": "rbf", "C": 1, "epsilon": 0.1, "gamma": "scale"},
+    "random_forest": {"max_depth": 3, "n_estimators": 300, "random_state": 42, "n_jobs": 1}
+  },
+  "combined": {"left_test": "T2", "right_test": "T5", "expected_n": 48},
+  "inference": false
+}

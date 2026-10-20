@@ -1,6 +1,6 @@
 # Project Technical Ledger
 
-**Current state updated:** 2026-10-20, owner approval recorded and freeze/primary execution authorized.
+**Current state updated:** 2026-10-20, freeze verified, first primary run in progress, separate sensitivity implementation tested.
 
 ## Purpose and authority
 
@@ -18,7 +18,7 @@ Age and stroke location differ within all pairs; sex also differs for 04/05. Age
 
 ## Legacy and Group A feature state
 
-Legacy spectral/graph sources, feature files and results remain frozen. Spectral classification was weak near the dummy baseline; v1 graph features had epoch-count dependence. No original-label v2 result or improvement has been computed.
+Legacy spectral/graph sources, feature files and results remain frozen. Spectral classification was weak near the dummy baseline; v1 graph features had epoch-count dependence. The first registered original-label run is now in progress; results have not yet been interpreted.
 
 - Absolute and lesion-aligned spectral tables: 50 subjects, 19 features plus ID.
 - G8f: primary, eight core channels, N_fixed=15, 16 features.
@@ -38,7 +38,7 @@ The primary model is standardized Ridge with a 20-alpha grid from .01 to 1000, s
 
 T1-T6 use upper-tail predictive inference; T7-T9 direct associations use two-sided inference. Use 1,000 permutations with plus-one/tie-inclusive correction and Holm over all nine tests. A signal requires adjusted p<.05 and rho>=.30 (absolute rho for T7-T9). The 2,000-draw subject bootstrap is descriptive/conditional on saved OOF predictions, with an explicit 1% invalid-draw rule. Undefined required statistics fail the family. No inference settings or memberships changed in this remediation.
 
-Implementation includes `stats_utils.py`, `train_regression.py`, `run_registry.py`, `validate_registry_v2.py`, `write_registry_freeze_v2.py` and `freeze_io_v2.py`. Exact feature whitelists and memberships are in `configs/registry_v1.json`. All nine tests/failures, OOF folds/predictions/targets, alphas, nulls and metrics are retained in immutable run outputs. Whole-family failures withhold decisions and model export. Only qualifying predictive T1-T6 sets can promote a model. SVR/RF/combined sensitivities and later reporting remain separate work.
+Implementation includes `stats_utils.py`, `train_regression.py`, `run_registry.py`, `validate_registry_v2.py`, `write_registry_freeze_v2.py` and `freeze_io_v2.py`. Exact feature whitelists and memberships are in `configs/registry_v1.json`. All nine tests/failures, OOF folds/predictions/targets, alphas, nulls and metrics are retained in immutable run outputs. Whole-family failures withhold decisions and model export. Only qualifying predictive T1-T6 sets can promote a model. SVR/RF/combined sensitivities are implemented separately and cannot change the primary inference.
 
 ## Post-failure validation amendment and results
 
@@ -56,27 +56,33 @@ The real runner checks `git status --porcelain` before reading labels and refuse
 
 Before documentation consolidation, the registry snapshot bound 43 artifacts with digest `da6d580818214c0a70bcd005483f101c645a97be9dac7381021194733d84f14e`. After consolidation it used 42 artifacts with digest `8d3f190541cc8edc2fea0b5eaa9d5f4884b635569aa1b621e53fc87fd2c6d9b1`. The one-owner review change then produced the current 42-artifact digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`; self-check passes. It still binds the Group A feature manifest/all 19 records, implementation/tests, amendment, historical review source and integrity/class-disclosure evidence; original Group A raw byte hashes remain preserved as `source_sha256`.
 
-All 32 tests passed after the single-review change in 22.515 seconds. Temporary synthetic Git repositories verify dirty unlisted code, staged/untracked changes, CRLF checkouts versus LF tags, stable snapshot reconstruction and content/data/owner-review tamper rejection. The actual workspace guard refuses the current uncommitted code before label access, as intended.
+All 32 tests passed after the single-review change in 22.515 seconds; the expanded suite now passes 39 tests in 26.493 seconds. Temporary synthetic Git repositories verify dirty unlisted code, staged/untracked changes, CRLF checkouts versus LF tags, stable snapshot reconstruction and content/data/owner-review tamper rejection. The actual workspace guard passed at the authorized primary-run start.
 
 Older supplied reviews remain historical evidence for the positive-control amendment and earlier snapshots. They are not active freeze dependencies and cannot block ongoing coding.
 
 Group A has finished and will no longer participate. Agrim is the sole project owner and the only required reviewer. R8 and registry section 13 now require one authoritative Agrim review of the exact final digest, explicitly acknowledging unresolved limitations. No AI-model, model-family, Group A or multi-review dependency remains. Review is requested only at a genuine freeze or result-changing amendment boundary.
 
-`docs/reviews/registry_review.json` replaces the former model-family and human JSON pair. It has a minimal contract: status, reviewer, review date, artifact digest, scope and required limitation acknowledgements. `verify_freeze` reads only this one path, checks approved status/identity/date, matches its digest to the current artifact list and matches its tagged bytes. Explicit commit/tag authorization, `registry-v1`/`features-v2` and the final execution-machine guard check still remain. No project staging, commit, tag or real-label evaluation was performed.
+`docs/reviews/registry_review.json` replaces the former model-family and human JSON pair. It has a minimal contract: status, reviewer, review date, artifact digest, scope and required limitation acknowledgements. `verify_freeze` reads only this one path, checks approved status/identity/date, matches its digest to the current artifact list and matches its tagged bytes. Approval, freeze commit, both tags and the execution-machine guard are now complete.
 
 Agrim's 2026-10-20 instruction grants all outstanding approvals and authority to proceed. The single owner record now has approved status and review date 2026-10-20 for digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`, with the user's authorization source recorded. The scoped freeze commit/tags and one-shot primary run are authorized; the existing freeze guard must pass before the data loader runs. Statistical methods and feature content remain as reviewed.
 
-Primary source, tests, features and validation evidence were not altered by documentation cleanup. The scientific registry gained the already-planned grouped sensitivity and new review governance; config dropped only the removed redundant implementation document from `freeze_artifacts`. The full suite and regenerated snapshot now pass. Synthetic acceptance and technical verification are not authorization for real-label evaluation.
+Freeze commit `42ff54d` contains the scoped prior project work and owner approval. Both `registry-v1` and `features-v2` are annotated tags at this commit. The execution-machine guard passed on all 42 bound inputs. The first run is `results/v2/runs/primary_20261020`, launched through the frozen CLI with OPENBLAS_NUM_THREADS, MKL_NUM_THREADS and OMP_NUM_THREADS all set to one. It uses the full registered 1,000 permutations/test, five-fold/ten-repeat outer CV, five-fold inner selection and 2,000 bootstrap resamples. No inference settings were changed.
 
-## Separate grouped-split sensitivity plan
+Primary source, tests, features and validation evidence have not been altered since freeze. The later sensitivity implementation uses separate new files outside the primary artifact list. The full suite and unchanged snapshot pass. Real evaluation is authorized by Agrim's instruction, not merely by synthetic acceptance.
+
+## Separate descriptive sensitivity implementation
 
 The sensitivity specification is now registry section 14 rather than a separate planning document. Preserve all primary subjects/features/targets and group 04/05, 11/15 and 47/49, leaving other IDs singleton: 47 groups for N=50 and 45 for N=48. Keep groups out of X and separate in both outer evaluation and inner alpha selection.
 
-The review incorrectly describes GroupKFold as stratified. Installed scikit-learn 1.9.1 provides StratifiedGroupKFold but no RepeatedStratifiedGroupKFold. The proposal uses ten deterministic five-fold StratifiedGroupKFold repeats (seeds 42 through 51), five-fold inner StratifiedGroupKFold (seed 10042+5*r+f), the original alpha grid and fold-local scaling. Exact class balance is not guaranteed; keep fixed seeds, disclose class/group counts and duplicate split assignments, and fail rather than search seeds or change membership when required checks fail. These detailed choices remain proposals for review, not an already approved primary amendment.
+Installed scikit-learn 1.9.1 provides StratifiedGroupKFold but no RepeatedStratifiedGroupKFold. Registry section 14 specifies ten deterministic five-fold StratifiedGroupKFold repeats (seeds 42 through 51), five-fold inner StratifiedGroupKFold (seed 10042+5*r+f), the original alpha grid and fold-local scaling. Exact class balance is not guaranteed; keep fixed seeds, disclose class/group counts and duplicate split assignments, and fail rather than search seeds or change membership when required checks fail. These approved descriptive choices do not amend the primary method.
 
-Compare grouped mean pooled-repeat OOF rho with the saved one-shot primary results, reporting signed delta and the proposed absolute .05 descriptive flag outside Holm. No new p-values, model promotion, dependence-adjusted confidence intervals or significance claims are planned. Grouping addresses within-pair cross-fold contamination but does not resolve source identity, prove independence of other records, or validate the primary individual-level permutation exchangeability assumption. The numerical difference also reflects changed folds/training sets, not exclusively leakage bias.
+Compare grouped mean pooled-repeat OOF rho with the saved one-shot primary results, reporting signed/absolute delta and the absolute .05 descriptive flag outside Holm. No new p-values, model promotion, dependence-adjusted confidence intervals or significance claims are planned. Grouping addresses within-pair cross-fold contamination but does not resolve source identity, prove independence of other records, or validate the primary individual-level permutation exchangeability assumption. The numerical difference also reflects changed folds/training sets, not exclusively leakage bias.
 
-Future sensitivity implementation will use separate v2 files/config/tests and provenance without modifying the frozen primary engine. Plan approval precedes outcome inspection; actual sensitivity execution follows the authorized primary run and independent checks of the new implementation. Next milestones are review/sign-off and authorized freeze, separately authorized one-shot T1-T9 evaluation, then descriptive robustness/UCLH readiness work. No sensitivity code was implemented or executed during this intake.
+`src/run_sensitivities_v2.py`, `configs/sensitivities_v2.json` and `tests/test_sensitivities_v2.py` implement all 19 descriptive analyses before primary outcomes are inspected: six grouped Ridge, six fixed RBF SVR, six fixed shallow random forest and one combined T2/T5 Ridge. They reuse strict frozen feature loading and prediction metrics. Alternative models require the same subjects and exact outer folds as their primary comparator; the combined table joins by subject ID and requires the 48-subject intersection. The grouped models use explicit Pipeline/GridSearchCV rather than changing the optimized primary engine.
+
+Seven new synthetic tests passed, including a full 19-analysis synthetic invocation. Tests cover pair isolation at both CV levels, deterministic/complete OOF assignments, inner-fold scaling and manually checked alpha selection, unchanged matrix width (no IDs/groups added), strict ID/intersection and target consistency, matched alternative-model folds/dummy predictions, refusing an incomplete primary, preventing overwrites, preserving every primary file, and absence of inferential outputs/model promotion. The expanded full suite passes 39 tests; the 42-artifact snapshot remains unchanged.
+
+The sensitivity runner requires a completed real primary run, the working freeze guard, matching primary digest/settings/feature hashes and a complete nine-test family. It records primary-run file hashes, its own source/config/test hashes, versions, timestamps, folds, class/group counts, OOF predictions and descriptive metrics in a separate immutable output directory. Real sensitivities have not yet run; the current primary process is left undisturbed.
 
 ## Documentation structure
 

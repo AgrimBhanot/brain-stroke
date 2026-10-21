@@ -2,7 +2,7 @@
 
 The authoritative plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md). [CONTEXT.md](CONTEXT.md) is the concise AI handoff. The ledgers preserve current technical detail and history.
 
-## Status as of 2026-10-20
+## Status as of 2026-10-21
 
 | Phase | Status | Evidence | Next action |
 |---|---|---|---|
@@ -10,10 +10,10 @@ The authoritative plan is [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURREN
 | A0-A2 metadata/spectral v2 | DONE | `METADATA_AUDIT.md`; 50-subject absolute/lesion tables; T3 feasible under documented contralateral assumption | Preserve provenance limitation |
 | A3-A6 graph v2 | DONE WITH FLAGS | G8f N=15, G24f N=6; graph tables 48 x 17; screen fix, QC, sidecars and manifest | Report residual bias/instability |
 | B1 registry | FROZEN | Commit `42ff54d`; annotated `registry-v1` and `features-v2`; 42 inputs verified | Preserve frozen scientific artifacts |
-| B2-B3 engine/statistics | IMPLEMENTED; SYNTHETIC ACCEPTANCE PASSED | Gate A p=.005; Gate B 168/200 (84%); current 32/32 tests pass; validation JSON | Preserve implementation |
-| Phase 6 freeze/evaluation | PRIMARY RUNNING | `results/v2/runs/primary_20261020`; full registered settings | Finish and verify all nine results |
+| B2-B3 engine/statistics | IMPLEMENTED; SYNTHETIC ACCEPTANCE PASSED | Gate A p=.005; Gate B 168/200 (84%); frozen 32-test evidence preserved; expanded suite 39/39 | Preserve implementation |
+| Phase 6 freeze/evaluation | INTERRUPTED AFTER T5; CONTINUATION PREPARED | T1-T5 validated in `primary_20261020`; separate continuation adapter/tests | Reuse saved prefix and compute T6-T9 through the frozen runner |
 | Registered descriptive robustness | IMPLEMENTED; 7 NEW TESTS PASS | Separate `run_sensitivities_v2.py`, config and tests; 19 analyses | Run after the primary family completes; no new inference or tuning |
-| UCLH transfer | PARTIAL HANDOFF; VALIDATION NOT STARTED | UCLH audit/montage documents | Verify acquisition/reference/duration/common montage after Figshare freeze |
+| UCLH transfer | SOURCE AUDIT UPDATED; EXTERNAL VALIDATION BLOCKED | Pinned source, hashes and archive DOI/licences verified in existing audit/montage docs | Establish compatible clinical targets, raw EEG usability and common montage |
 
 ## Fixed decisions and limitations
 
@@ -49,7 +49,7 @@ Redundant `B2_B3_IMPLEMENTATION.md`, `FREEZE_READINESS_REVIEW.md`, and `FREEZE_A
 
 ## Next major work
 
-1. Finish and independently verify the running one-shot T1-T9 evaluation without tuning or selective omission.
+1. Complete the interrupted primary family in a new continuation directory and independently verify all nine tests.
 2. Run and report the separately implemented grouped-split, SVR, RF and combined-feature descriptive sensitivities.
 3. Complete UCLH prerequisite verification before any external validation.
 
@@ -59,4 +59,10 @@ After simplifying review to one owner record, all 32 unit/integration tests pass
 
 The expanded suite now passes 39 tests in 26.493 seconds, including seven synthetic sensitivity tests. These cover both CV levels' group isolation, exactly-once OOF coverage, deterministic splits, fold-local scaling/alpha selection, ID-based intersection, matching alternative-model folds, incomplete-primary refusal, no overwrites, no inference/model export, and preservation of primary artifacts. The same frozen snapshot still passes self-check; no primary methods or files were changed.
 
+UCLH source audit on 2026-10-20 verified 32 EEG channels plus STATUS (33 electrode entries including NFpz), 16384 Hz metadata, common/CMS acquisition description, absent O1/O2, and trigger-delimited EEG extraction with a 2 Hz high-pass. Corrected the healthy-volunteer concept DOI versus patient/code archive identities. The published participant table has no NIHSS field; usable raw EEG duration, eye condition, effective reference and clinical-target compatibility remain unresolved. Existing UCLH docs were rewritten, removing unsupported specifications; no new planning documents or raw-data download.
+
 - Registry invocation 2026-10-20T12:56:33.499416+00:00: START real run=primary_20261020; rerun_reason=None
+
+On 2026-10-21, the old process/session is gone; T1-T5 have complete saved outputs and T6-T9 are absent. The old `run.json` still says running because finalization was interrupted. All five saved tests passed contract, target/class, OOF coverage/folds, dummy/metric, alpha, permutation and bootstrap checks. `continue_registry_v2.py` uses the frozen runner for the complete family, copies verified prefix files byte-for-byte into a new directory, and computes only missing tests. It preserves the original run and records interruption provenance. Windows initial legacy hashes are checked using the already-registered LF normalization. No inference or feature setting changed.
+
+Recovery verification: 47/47 tests passed in 29.848 seconds, including eight continuation tests. The same 42-artifact snapshot passes self-check. Planned continuation ID: `primary_20261021_continued`, preserving `primary_20261020`.

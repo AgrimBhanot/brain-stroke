@@ -15,11 +15,11 @@ Use [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md) as operational a
 
 ## Active subphase
 
-Phase 6: documentation consolidation and review-mechanism simplification are complete. All 32 tests passed in 22.515 seconds. The regenerated 42-artifact snapshot passed its self-check; digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`.
+Phase 6: interrupted primary recovery; separate descriptive sensitivities implemented. The expanded suite passes 47 tests in 29.848 seconds (eight new continuation tests). The unchanged 42-artifact snapshot passes self-check; digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`. Continuation ID: `primary_20261021_continued`.
 
 The freeze mechanism requires only Agrim's latest owner review. `reviews/registry_review.json` now approves the current digest, following Agrim's 2026-10-20 instruction granting all outstanding approvals and authority to continue. Earlier supplied reviews are historical evidence only.
 
-The approved snapshot was committed at `42ff54d`, both annotated freeze tags were created, and `verify_freeze()` passed for all 42 inputs. The first run `primary_20261020` is in progress under the full registered settings. Do not restart it or change frozen artifacts. Agrim authorized continued work; do not ask again for approvals already provided.
+The approved snapshot was committed at `42ff54d`; both annotated freeze tags exist and all 42 inputs still verify. On resuming 2026-10-21, the old process/session is gone: `primary_20261020` has validated T1-T5, but no T6-T9 or final family table. Its running status is stale. A new `src/continue_registry_v2.py` adapter reuses complete saved tests byte-for-byte and calls the frozen runner for missing computations/family finalization. Use a new run directory, preserve the interrupted one, and record the interruption reason; do not restart the full analysis or alter scientific settings. Agrim's approvals persist.
 
 ## Required behavior
 
@@ -31,6 +31,8 @@ The approved snapshot was committed at `42ff54d`, both annotated freeze tags wer
 
 ## Next three milestones
 
-1. Complete and verify the current one-shot T1-T9 run.
+1. Complete and verify the interrupted primary family using the tested continuation adapter; T1-T5 already have verified results.
 2. Execute and report the already implemented descriptive sensitivities in separate outputs; preserve the frozen primary artifacts and all primary decisions.
 3. Resolve UCLH reference/duration/common-montage prerequisites before external validation.
+
+UCLH source/DOI audit is now pinned to upstream commit `52ad25a8cb8ecae867cd8fb9984b4fbe703585c4`. The source has no O1/O2, and its EEG extractor high-passes at 2 Hz (not equivalent to the frozen 1-4 Hz delta input). The public participant TSV does not contain NIHSS. No UCLH raw files/common-montage implementation were found locally; external NIHSS validation remains blocked on target availability and raw preprocessing/montage compatibility. See the two existing UCLH docs for hashes and corrected source references.

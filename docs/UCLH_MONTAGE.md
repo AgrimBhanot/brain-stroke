@@ -1,161 +1,58 @@
-> **Correction / review status (2026-10-17):** The author reports that the 33 entries comprise 32 EEG channels plus the additional NFpz electrode, with STATUS a separate trigger channel. O1/O2 are **not** present in the supplied 32-channel list: the occipital labels are I1/O9, I2/O10 and Oz. The prior O1/O2 assertions below are superseded. The repository's [BIDS generation code](https://github.com/EIT-team/Stroke_EIT_Dataset/blob/master/resource/make_EEG_BIDS.m) specifies 16384 Hz and a common reference and writes one fewer channel than electrodes. The user-provided list has not been independently checked against a raw header; the extracted segments' actual reference, usable duration and eye condition remain unverified. Do not treat I1/O9 and I2/O10 as interchangeable with O1/O2 without an explicit validated montage decision.
-
 # UCLH Channel List and Recording Specifications
 
-## 32-Electrode Montage (10-20 EEG System)
+**Updated:** 2026-10-20. Source list independently verified; raw-header/usable-EEG audit pending. Pinned commit and byte hashes are in [UCLH_AUDIT.md](UCLH_AUDIT.md).
 
-### Left Hemisphere Channels
+## Recorded channels versus electrodes
 
-| Electrode | Type | Region |
-|-----------|------|--------|
-| FP1 | Prefrontal | Anterior |
-| F7 | Frontal | Lateral |
-| F3 | Frontal | Medial |
-| FC5 | Fronto-central | Lateral |
-| FC1 | Fronto-central | Medial |
-| T7 | Temporal | Lateral |
-| C3 | Central | Medial |
-| TP9 | Temporo-parietal | Lateral |
-| CP5 | Centroparietal | Lateral |
-| CP1 | Centroparietal | Medial |
-| P7 | Parietal | Lateral |
-| P3 | Parietal | Medial |
-| PO3 | Parieto-occipital | Medial |
-| I1/O9 | Occipital/Inion | Lateral |
+Sources: [channels](https://github.com/EIT-team/Stroke_EIT_Dataset/blob/52ad25a8cb8ecae867cd8fb9984b4fbe703585c4/resource/_channels.tsv) and [electrodes](https://github.com/EIT-team/Stroke_EIT_Dataset/blob/52ad25a8cb8ecae867cd8fb9984b4fbe703585c4/resource/_electrodes.tsv).
 
-### Right Hemisphere Channels
+| Set | Names in source spelling | Count |
+|---|---|---:|
+| Left EEG | FP1, F7, F3, FC5, FC1, T7, C3, TP9, CP5, CP1, P7, P3, PO3, I1/O9 | 14 |
+| Right EEG | FP2, F8, F4, FC6, FC2, T8, C4, TP10, CP6, CP2, P8, P4, PO4, I2/O10 | 14 |
+| Midline EEG | Fz, CZ, Pz, Oz | 4 |
+| Trigger | STATUS | 1 |
+| Extra electrode entry, not a sampled EEG channel | NFpz | 1 |
 
-| Electrode | Type | Region |
-|-----------|------|--------|
-| FP2 | Prefrontal | Anterior |
-| F8 | Frontal | Lateral |
-| F4 | Frontal | Medial |
-| FC6 | Fronto-central | Lateral |
-| FC2 | Fronto-central | Medial |
-| T8 | Temporal | Lateral |
-| C4 | Central | Medial |
-| TP10 | Temporo-parietal | Lateral |
-| CP6 | Centroparietal | Lateral |
-| CP2 | Centroparietal | Medial |
-| P8 | Parietal | Lateral |
-| P4 | Parietal | Medial |
-| PO4 | Parieto-occipital | Medial |
-| I2/O10 | Occipital/Inion | Lateral |
+Thus channels.tsv contains 32 EEG/EIT rows plus STATUS; electrodes.tsv contains 33 entries including NFpz. Preserve source spelling/order in provenance and document any CZ-to-Cz normalization. STATUS must not enter X.
 
-### Midline Channels
+Exact source EEG order:
 
-| Electrode | Type | Region |
-|-----------|------|--------|
-| NFpz | Frontal pole | Extra electrode entry; not in the reported 32 EEG-channel list |
-| Fz | Frontal | Anterior |
-| Cz | Central | Central |
-| Pz | Parietal | Posterior |
-| Oz | Occipital | Posterior |
+```text
+FP2 FP1 F8 F4 Fz F3 F7 FC6 FC2 FC1 FC5 T8 C4 CZ C3 T7
+TP10 CP6 CP2 CP1 CP5 TP9 P4 Pz P3 P8 PO4 PO3 P7 I2/O10 I1/O9 Oz
+```
 
-### Status Channel
+O1/O2 are absent. I1/O9 and I2/O10 are distinct labels, not authorized replacements.
 
-| Channel | Type | Purpose |
-|---------|------|---------|
-| STATUS | Digital trigger | Records EIT injection timing and other system triggers |
+## Comparison with the actual Figshare configs
 
-## Symmetric Left/Right Pairs (Common-Montage Comparison Set)
+| Contract | Exact matching pairs | Missing / unresolved |
+|---|---|---|
+| G8f, four pairs | F3/F4, C3/C4, P3/P4 | O1/O2 absent |
+| G24f, eleven pairs | F3/F4, F7/F8, C3/C4, P3/P4 | FC3/FC4, FT7/FT8, CP3/CP4, TP7/TP8, O1/O2 lack exact matches |
+| G24f temporal labels | T3/T4 and T5/T6 do not appear literally | T7/T8 and P7/P8 are candidate nomenclature mappings; validate/document geometry and mapping before use |
 
-These are the clinically relevant symmetric pairs for comparison against Figshare montage definitions:
+Local sources: `configs/graph_g8f.json` and `configs/graph_g24f.json`. G24f actually contains 22 channels/11 pairs despite its historical name.
 
-| Pair # | Left | Right | Region | Clinical Use |
-|--------|------|-------|--------|--------------|
-| 1 | F3 | F4 | Frontal | Speech, motor planning |
-| 2 | C3 | C4 | Central | Sensorimotor cortex |
-| 3 | P3 | P4 | Parietal | Spatial processing |
-| 4 | O1 | O2 | Occipital | Absent from the reported UCLH channel list |
+Three shared core pairs establish a six-channel intersection, not compatibility with the existing eight-channel graph model. Changing nodes changes feature meaning. Common-montage features/refitting need a separate explicit contract; do not fill missing electrodes or rename distinct locations to make a frozen model load.
 
-Note: FP1/FP2, FC1/FC2, CP1/CP2, and their lateral counterparts (FC5/FC6, CP5/CP6, etc.) are also available if required for extended comparisons.
+## Recording specifications
 
-## Recording Specifications
+| Field | Source-level evidence | Still required |
+|---|---|---|
+| Sampling | 16384 Hz in channel rows/BIDS code | Verify raw header and extraction output |
+| Hardware | BioSemi ActiveTwo, EasyCap | Confirm calibration/units and selected channels |
+| Mains | 50 Hz; extractor uses a 49-51 Hz stop band | Record applied preprocessing |
+| Reference | BIDS code describes CMS/common | Check loader/output reference and any project rereferencing |
+| State | BIDS task is rest | Eye condition and usable resting intervals unverified |
+| Duration | Trigger-delimited pre/post-injection EEG | Measure clean seconds/epochs; no blanket 60-90-second assumption |
+| Extraction | 2-200 Hz bandpass plus notch | Not equivalent to Figshare's 1-4 Hz delta-band input |
 
-### Sampling and Frequency
+Sources: [BIDS-generation code](https://github.com/EIT-team/Stroke_EIT_Dataset/blob/52ad25a8cb8ecae867cd8fb9984b4fbe703585c4/resource/make_EEG_BIDS.m), [EEG extractor](https://github.com/EIT-team/Stroke_EIT_Dataset/blob/52ad25a8cb8ecae867cd8fb9984b4fbe703585c4/src/Extract_EEG.m).
 
-| Parameter | Value |
-|-----------|-------|
-| Sampling Rate | 16384 Hz |
-| EIT Frequency Range | 5 Hz – 2000 Hz (17 discrete frequencies) |
-| Mains Frequency | 50 Hz |
+The publication locates CMS at NFpz and the additional driven-right-leg electrode at NFp2. The TSV is not a complete count of acquisition hardware contacts. It provides nominal Cartesian positions; the unsupported assertion of normalized 0-1 coordinates is withdrawn. [Publication](https://www.nature.com/articles/sdata2018112)
 
-### Acquisition Details
+## Operational handoff
 
-| Parameter | Value |
-|-----------|-------|
-| Current Injection Pattern | 31 pairs |
-| Measurement Points per Frequency | 930 |
-| Recording Duration per Run | 60–90 seconds |
-| Frames per Recording | 3 |
-
-### Reference Scheme
-
-The BIDS-generation code describes channels with respect to a CMS common electrode and sets `EEGReference='common'`. The reference actually used in extracted EEG segments must be verified from the raw header and extraction code. Pairwise measurements used in EIT acquisition do not by themselves establish the EEG reference.
-
-### Recording Condition
-
-| Parameter | Value |
-|-----------|------|
-| State | Resting state |
-| Eye Position | Eyes-open and eyes-closed blocks |
-| Body Position | Supine |
-| Environment | Acute hospital (HASU, UCLH) |
-| Electrode Contact | EasyCap with Ag/AgCl electrodes |
-
-### Recording Duration by Dataset Type
-
-| Dataset Type | Identifier | Frequencies | Duration | Purpose |
-|--------------|------------|-------------|----------|---------|
-| Multi-Frequency | MF | 17 frequencies | ~60–90 sec per frame | Full spectrum imaging |
-| Time Difference | TD | 3 frequencies | ~60–90 sec | Rapid time-series imaging |
-| Z-Check | Z | Single frequency | ~30–60 sec | Contact impedance verification |
-
-## Electrode Positioning Coordinates
-
-All 33 electrodes (32 recording + 1 reference) have been co-registered to a standard head model (EasyCap placement on a normalized MRI template). Coordinate data (x, y, z) are available in:
-
-- File: resource/_electrodes.tsv
-- Format: Normalized Cartesian coordinates (0–1 scale)
-- Material: Ag/AgCl
-- Cap System: EasyCap
-
-Example positions from the repo:
-- C3: (0.179, 0.126, 0.169)
-- C4: (0.074, 0.126, 0.169)
-- Cz: (0.126, 0.126, 0.191)
-
-## Comparison Against Figshare Common Montage
-
-Current status: F3/F4, C3/C4 and P3/P4 appear in the reported channel list. O1/O2 do not; I1/O9 and I2/O10 are distinct labels and cannot be silently substituted.
-
-Pending: Compare the corrected UCLH channel list against Group A's existing design lock and verify the extracted EEG channel names and order.
-
-Process:
-1. When A3 completes the Figshare montage audit, cross-reference those results against this list.
-2. Identify any additional or non-standard pairs used in Figshare.
-3. Verify the available common pairs in both datasets and resolve the missing O1/O2 pair before defining a feature contract.
-4. Document any divergences or special handling in the final common-montage report.
-
-## Notes for Group A
-
-F3/F4, C3/C4 and P3/P4 are reported present; O1/O2 are absent from the reported UCLH list.  
-✅ Electrode coordinates available: Normalized 3D positions for co-registration  
-✅ Full 10-20 system implemented: Extended coverage beyond core pairs available if needed
-
-To send to Group A immediately:
-- Sampling rate: 16384 Hz
-- EEG reference: BIDS code specifies common; verify extracted EEG reference.
-- Channel list: See the symmetric pairs table above
-- Mains: 50 Hz
-- Recording duration: 60–90 seconds per run
-
----
-
-Data Source:
-- Channel metadata: resource/_channels.tsv, resource/_electrodes.tsv
-- Acquisition settings: EITSETTINGS.json
-- Reference system: BioSemi ActiveTwo with EasyCap EIT adapter
-
-Last Updated: 2026-10-11
+Agrim owns further work; no response from Group A is required. Source-level channel/reference metadata are established, but common-montage implementation, compatible clinical targets and raw-EEG QC remain prerequisites. External validation has not run.

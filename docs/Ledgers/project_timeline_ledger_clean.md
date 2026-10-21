@@ -374,3 +374,21 @@ Started the first registered real-label evaluation through `src/run_registry.py 
 While the first primary run computed its fixed permutations, implemented registry sections 10/14 in separate `src/run_sensitivities_v2.py`, `configs/sensitivities_v2.json` and `tests/test_sensitivities_v2.py`. This covers all six predictive feature sets with grouped nested Ridge, fixed SVR and fixed random forest, plus the absolute-spectral/G8f combined Ridge intersection: 19 descriptive analyses. No primary result was used to select methods or settings; no frozen file changed.
 
 Seven new tests passed, including a complete synthetic 19-analysis run, strict no-overwrite/incomplete-primary behavior, preservation of primary files, pair isolation at both CV levels and fold-local scaling/alpha verification. The full suite passes 39 tests in 26.493 seconds. Snapshot self-check still matches all 42 approved artifacts. Actual sensitivity execution waits for the primary family to finish, and will produce no new p-values, confidence intervals or model promotion. Updated existing progress/context and rewrote the technical ledger to current state without creating more planning documents.
+
+## State 28 - UCLH Source Prerequisites Independently Checked
+
+**Date:** 2026-10-20.
+
+During primary permutation computation, inspected the public UCLH source at commit `52ad25a8cb8ecae867cd8fb9984b4fbe703585c4`, checked Zenodo record metadata and the associated publication, and recorded raw-byte SHA-256 hashes of five source/metadata files. Corrected the volunteer concept DOI versus patient/code archives; independently confirmed 32 EEG channels plus STATUS, NFpz as an extra electrode, absent O1/O2 and 16384 Hz/common acquisition metadata. Identified the source extractor's 2 Hz high-pass mismatch with Figshare's 1-4 Hz delta input.
+
+Rewrote the two existing UCLH documents to remove superseded/unsupported duration, eye-condition and coordinate claims and explicitly separate source evidence from raw-file checks. The published participant table has no NIHSS field; compatible clinical labels, usable raw EEG/reference and common-montage implementation remain prerequisites. No raw download, external evaluation or new planning document was created. Existing progress/context/technical state were synchronized. Sensitivity implementation is committed separately at `f6fd0c3`; freeze tags remain on `42ff54d`.
+
+## State 29 - Interrupted Primary Run Recovery
+
+**Date:** 2026-10-21.
+
+The user resumed work after requesting a save. No Python registry process remains and the former execution session no longer exists. The first run saved complete T1-T5 before ending, with no T6-T9 or family summary; its running status is stale. All five saved outputs were validated against current frozen inputs, targets/classes, folds, metrics, alphas, permutations and bootstrap distributions. The original directory is preserved.
+
+Added a separate continuation adapter and synthetic tests. The adapter invokes the unchanged frozen registry runner, copies validated completed test files byte-for-byte and computes missing tests in a new run directory with a documented interruption reason. A synthetic interrupted-versus-uninterrupted comparison yields identical complete-family summaries, nulls and bootstrap arrays; original saved bytes remain unchanged. Tests reject corrupted/incomplete outputs and changed settings/inputs/versions, and verify restoration after errors. Initial legacy canonical hashes require the existing CRLF/LF normalization; a specific test covers this without relaxing content checks. Scientific registry settings and all 42 frozen artifacts remain unchanged.
+
+All 47 tests passed in 29.848 seconds, including eight continuation tests; snapshot self-check passed. Chosen new run ID: `primary_20261021_continued`. No additional review was requested because Agrim's approval and authority to complete the registered computation persist.

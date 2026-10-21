@@ -1,6 +1,6 @@
 # Project Technical Ledger
 
-**Current state updated:** 2026-10-20, freeze verified, first primary run in progress, separate sensitivity implementation tested.
+**Current state updated:** 2026-10-21, interrupted primary recovery prepared; T1-T5 outputs verified and separate sensitivities implemented.
 
 ## Purpose and authority
 
@@ -31,6 +31,14 @@ Legacy spectral/graph sources, feature files and results remain frozen. Spectral
 - Four provenance sidecars, feature manifest, changelog and handoff exist. All 19 original Group A byte hashes still match after this remediation. No full feature regeneration was repeated.
 
 The user confirms the local processed epochs and the other computer's clean folder represent the same data. The generator still needs explicit local path mapping; the aggregate input hash does not provide individual cross-computer reconciliation.
+
+### Primary execution interruption and recovery
+
+On 2026-10-21, no Python registry process or previous tool session remains. `primary_20261020` contains complete T1-T5 files; T6-T9/family finalization are missing and its running metadata is stale. The original folder is preserved. All five saved tests pass exact contract/membership, target/class, OOF folds/coverage, dummy means, metrics, alpha-grid, permutation-tail/p-value and bootstrap checks. Their observed rhos are -.141440, -.222041, -.032221, -.248141 and .105778 respectively; raw p-values .545455, .809191, .310689, .902098 and .124875. No complete nine-test decision is available yet.
+
+New `src/continue_registry_v2.py` and synthetic tests implement a recovery adapter without editing any frozen source. It validates original freeze identity, package versions, settings and input hashes, reuses the saved ordered prefix byte-for-byte, and invokes the frozen registry runner in a new directory to compute missing tests, apply the full nine-test correction and perform the original model-export rule. Original artifacts are hashed before/after and bound in `continuation.json`; functions are restored even on errors. An interrupted initial metadata snapshot stores LF-normalized legacy hashes alongside original-byte v2 manifest hashes, so comparisons honor the existing CRLF/LF contract. Content changes remain rejected. No subject, feature, threshold, seed, model or permutation count changed.
+
+Recovery acceptance: all 47 tests pass in 29.848 seconds, including eight continuation tests. The unchanged 42-artifact snapshot passes self-check. The continuation will use `primary_20261021_continued`, preserving the original folder and reusing verified T1-T5.
 
 ## B1 specification and B2/B3 implementation
 
@@ -90,6 +98,10 @@ Three overlapping live documents were removed after consolidation: `B2_B3_IMPLEM
 
 ## UCLH and reporting limitations
 
-UCLH audit/montage handoff docs exist. The corrected source distinguishes 32 EEG channels plus STATUS from 33 electrode entries including NFpz. O1/O2 are absent; I1/O9 and I2/O10 cannot be silently substituted. Source generation code specifies 16384 Hz/common reference, but effective extracted-EEG reference, eye condition, usable duration and local common-montage implementation still require verification. Group A implementation is user-reported; `configs/graph_common.json` was not found locally.
+UCLH source audit on 2026-10-20 pinned upstream commit `52ad25a8cb8ecae867cd8fb9984b4fbe703585c4` and recorded SHA-256 hashes for channels, electrodes, BIDS generation, extraction code and participant TSV in the rewritten existing `UCLH_AUDIT.md`. Zenodo API checks establish `836841` as the healthy-volunteer concept DOI, `1199523` as its version-specific archive, patient archives `1199529`/`1199630`, radiology `1215676`, and processing-code release `1035910`; all checked version records return CC BY 4.0.
+
+The independent source check confirms 32 EEG channels plus STATUS, 33 electrode entries including NFpz, 16384 Hz and common/CMS metadata. O1/O2 are absent; I1/O9 and I2/O10 cannot be substituted. Exact G8f overlap is three pairs (six channels), not the frozen eight-channel feature contract. The upstream extractor uses trigger-derived pre/post-injection portions with 2-200 Hz filtering and a 49-51 Hz stop band, and contains no explicit rereference; the 2 Hz high-pass is not equivalent to the project's 1-4 Hz delta input. The paper places CMS at NFpz and DRL at NFp2, describes about 20-minute MF/25-minute TD EIT recordings and up to a minute of EEG before/after injection, not a fixed usable-EEG duration. Unsupported old eye-block, normalized-coordinate and 60-90-second assertions were removed from both existing UCLH docs.
+
+External NIHSS validation remains BLOCKED: the public participant TSV contains ID/age/sex/group but no NIHSS; compatible clinical-target availability, effective raw/output reference, eye condition and per-file clean epoch counts are not established. No UCLH source/config implementation, `graph_common.json` or raw BDF file was found locally. A separate clinical task cannot be substituted for NIHSS, nor can new common-montage features be inserted into the frozen Figshare model contract. No raw archive or EEG was downloaded/evaluated and no new planning document was added.
 
 The study is pre-specified exploratory research. Small sample/no severe class, assumed lesion mapping, possible recording dependence, graph instability/residual bias and transfer mismatches remain. Report no effect detected when appropriate; neither synthetic validation nor the review establishes clinical utility or a predictive improvement.

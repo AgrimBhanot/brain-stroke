@@ -1,7 +1,7 @@
 # Current Execution Guide
 
 **Project:** EEG-based stroke-severity analysis from interhemispheric EEG asymmetry
-**Status date:** 2026-10-20
+**Status date:** 2026-10-21
 **Authority:** This is the current operational guide. It reconciles the original phase plan, the completed legacy work, and the proposed Group A v2 feature track.
 
 ## 1. How agents must use this guide
@@ -177,11 +177,11 @@ Gate: passed. G8f is primary with N_fixed=15; G24f is secondary with N_fixed=6 a
 - **4.5** Create `tests/test_graph_features_v2.py` using synthetic data only.
 - **4.6** Verify symmetry, left/right invariance, reproducibility, `N_fixed` dependence, graph metric values, and wPLI equivalence or document a measured tolerance.
 
-Gate: six graph tests, including the artifact-screen regression test, pass locally; three lesion-alignment tests also pass (nine total, 2026-10-19). The tests do not replace independent review.
+Gate: six graph tests, including the artifact-screen regression test, pass locally; three lesion-alignment tests also pass (nine total, 2026-10-19). Agrim approved the final snapshot on 2026-10-20; no additional AI/group review is required.
 
 ### Phase 5: A5 generation and A6 quality control
 
-**Status: DONE WITH FLAGS; screen/sampling correction verified, independent review remains.**
+**Status: DONE WITH FLAGS; screen/sampling correction verified and final snapshot approved by Agrim.**
 
 - **5.1** Generate `features/v2/graph_g8f.csv` and `graph_g24f.csv` with sidecars.
 - **5.2** Add `n_epochs_g8f` and `n_epochs_g24f` to `subject_meta.csv`.
@@ -192,7 +192,7 @@ Gate: the screen is now applied before spectra/subsampling, and its regression t
 
 ### Phase 6: Registry, freeze, and handoff
 
-**Status: FROZEN at 42ff54d; first registered T1-T9 run `primary_20261020` is in progress.**
+**Status: FROZEN at 42ff54d; interrupted primary run has verified T1-T5 and requires T6-T9/finalization.**
 
 - **6.1** Group B freezes `docs/ANALYSIS_REGISTRY.md` before real-label evaluation.
 - **6.2** Write `features/v2/MANIFEST.json` and `docs/FEATURE_CHANGELOG.md`.
@@ -202,14 +202,18 @@ Gate: the screen is now applied before spectra/subsampling, and its regression t
 
 Gate: frozen, hashed, reviewed outputs and a reproducible registry run.
 
+Interruption recovery (2026-10-21): `src/continue_registry_v2.py` validates saved contracts, distributions, OOF folds/metrics and input/version identity, then invokes the unchanged frozen runner in a new directory. Completed test files are copied byte-for-byte; only missing tests are computed. The original run is preserved and a continuation provenance record documents reuse and the interruption reason. This changes execution recovery, not the registered scientific method.
+
 ### Phase 7: UCLH transfer and reporting
 
-**Status: NOT STARTED.**
+**Status: SOURCE AUDIT UPDATED; external NIHSS validation BLOCKED by clinical-target availability and raw-EEG/common-montage compatibility.**
 
 - **7.1** Verify UCLH acquisition, preprocessing, clinical labels, and montage.
 - **7.2** Build only a documented common-montage feature set.
 - **7.3** Perform external validation only after Figshare v2 is frozen.
 - **7.4** Report limitations: small sample, no severe class, task/rest mismatch, reference differences, missing or uncertain metadata, and any remaining epoch bias.
+
+The 2026-10-20 pinned-source audit confirms 32 EEG channels plus STATUS, no O1/O2, and a 2 Hz high-pass in the source EEG extractor. The published participant table has no NIHSS column. Read `docs/UCLH_AUDIT.md` and `docs/UCLH_MONTAGE.md` before transfer; do not substitute stroke subtype for severity or a six-channel graph for the frozen eight-channel feature contract.
 
 ## 6. Required v2 outputs
 
@@ -236,7 +240,7 @@ Expected outputs, in order:
 - Local core-channel EEG checks reveal identical signals for subjects 4/5 and extremely similar signals for 11/15 and 47/49. The user's decision is to retain them as different subjects using the planned subject-ID splits. Report the possible dependence and train/test similarity as limitations.
 - `docs/ANALYSIS_REGISTRY.md` specifies T1-T9 with statistical choices finalized before label evaluation. The authorized Option 3 amendment passed synthetic validation. Agrim is the sole project owner and the only required reviewer. The freeze guard reads one latest owner-review record bound to the final digest; historical AI/Group A reviews are not active dependencies.
 - G24f is settled as secondary registered T6 in the nine-test Holm family (user authorization 2026-10-19); handoff and registry wording agree.
-- B1 is specified and B2/B3 are implemented. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true, original failures remain documented, and all 32 tests passed at the last code-validation run. Implementation state is consolidated in the technical ledger; results remain in `docs/REGISTRY_VALIDATION_RESULTS.json`.
+- B1 is frozen and B2/B3 are implemented. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true and original failures remain documented. The frozen implementation's 32-test evidence remains unchanged; the expanded suite now passes 39 tests including the separately implemented descriptive sensitivities. Implementation state is consolidated in the technical ledger.
 - The only active review record is `docs/reviews/registry_review.json`. Agrim approved the current snapshot on 2026-10-20 and authorized continued work, including the scoped freeze commit/tags and one-shot T1-T9 run. Verify the frozen content with the existing guard before evaluation; record all results and any failures.
 - Freeze commit `42ff54d` now carries both annotated tags, `registry-v1` and `features-v2`. The real-machine guard passed for all 42 bound inputs before starting `primary_20261020`. BLAS/OpenMP thread counts are one for this run; all scientific settings are unchanged.
 - The authorized exclusion-class disclosure confirms sub-13 (NIHSS 9) and sub-40 (NIHSS 6) are both moderate; graph subsets contain 33 mild / 15 moderate. The full-channel audit finds sub-04/05 identical on all 32 named signals, differing on the unnamed channel and in age/sex/location metadata; all paired stored metadata agrees with the source. The retained-ID policy is unchanged and dependence remains unresolved. See `docs/RECORDING_INTEGRITY_AUDIT_V2.md`.

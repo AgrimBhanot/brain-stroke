@@ -392,3 +392,31 @@ The user resumed work after requesting a save. No Python registry process remain
 Added a separate continuation adapter and synthetic tests. The adapter invokes the unchanged frozen registry runner, copies validated completed test files byte-for-byte and computes missing tests in a new run directory with a documented interruption reason. A synthetic interrupted-versus-uninterrupted comparison yields identical complete-family summaries, nulls and bootstrap arrays; original saved bytes remain unchanged. Tests reject corrupted/incomplete outputs and changed settings/inputs/versions, and verify restoration after errors. Initial legacy canonical hashes require the existing CRLF/LF normalization; a specific test covers this without relaxing content checks. Scientific registry settings and all 42 frozen artifacts remain unchanged.
 
 All 47 tests passed in 29.848 seconds, including eight continuation tests; snapshot self-check passed. Chosen new run ID: `primary_20261021_continued`. No additional review was requested because Agrim's approval and authority to complete the registered computation persist.
+
+## State 30 - Continuation Launched
+
+**Date:** 2026-10-21.
+
+Saved recovery source/tests and the previously pending UCLH/doc updates at commit `9c4d11b`. Configured GPG signing failed because the keybox service was unavailable; this commit used `git -c commit.gpgsign=false commit`, leaving configuration and existing freeze tags unchanged. Started the continuation adapter with the documented interruption reason and all three BLAS/OpenMP thread limits set to one. T1-T5 were reused successfully; T6 is computing. The old run remains preserved and subsequent sensitivities wait for complete-family verification.
+
+## State 31 - Primary Family Complete and Independently Verified
+
+**Date:** 2026-10-21.
+
+The continuation completed T6-T9 and the original nine-test correction without failures. Independent checks verified every saved test, SciPy Spearman, raw permutation p-value, bootstrap interval, Holm decision, metric/fold contract and model-promotion eligibility. Every Holm p is 1.000 and all nine decisions are no effect detected. All six predictive models have worse RMSE than their matched dummy; no model was exported. Primary CSV SHA-256: `82815fc03ff71ba8131236d903e03ab68af6aeefe1b6d804b87c820a412c08dd`. All original files and the reused five test directories remain byte-identical.
+
+Started `robustness_20261021` through the separate sensitivity runner after these checks. This executes only the 19 already specified descriptive analyses and does not tune settings or revisit primary significance. Existing guide/progress/context and technical ledger were synchronized with the actual completed result.
+
+## State 32 - All Descriptive Sensitivities Verified and Figshare Results Saved
+
+**Date:** 2026-10-21.
+
+`robustness_20261021` completed all 19 prespecified analyses without failures. Independent verification recomputed every rho, checked provenance hashes and primary comparisons, reconstructed all grouped inner/outer seeded folds, checked class/group counts and pair isolation, and matched alternative-model folds/dummy predictions to the primary. Every grouped run has ten distinct outer partitions; subjects/features were preserved. G8f rho changes .105778 to .099367 (delta .006411). Absolute delta flags occur for T1/T4, whose negative rhos become less negative; changes also reflect different training folds and do not isolate leakage or establish independence.
+
+Every sensitivity RMSE exceeds its matched dummy. Some SVR/RF MAE/AUC values improve descriptively: G8f SVR rho=.208508, AUC=.618990, MAE=2.061930 versus dummy 2.207692, but RMSE=2.842243 versus 2.800602; G24f RF AUC=.636768 and rho=.149340. Combined spectral/G8f Ridge rho=-.172080, RMSE=2.939705 versus 2.800602. No sensitivity p-values, CIs, significance decisions or model promotions were produced.
+
+Saved and visually checked `results/v2/figures/primary_20261021_overview.png`, showing all nine primary estimates/descriptive intervals and grouped comparisons. Sensitivity CSV SHA-256: `0ad8c1a2eba53a9e8e75c8c72e2a1699a6be4f4892549d03b324a419b270c901`; figure SHA-256: `6a951dd4db87461b0062d8699aac0c10db6e2bede9700385659bd9bc5ee5e5bb`. All outputs are saved locally under Git-ignored results; no jobs remain active and no model was exported.
+
+Rewrote progress/context/technical ledger to the completed current state, preserving the invocation audit and full timeline, and updated the operational guide. Recorded actual runtime versions (including NumPy 2.2.5/pandas 2.2.3/matplotlib 3.10.1, which differ from requirements.txt) without changing the evaluation environment. Frozen scientific files, owner review, tags and feature content remain preserved. Next work is final scientific write-up and resolving compatible external clinical targets before raw-EEG/common-montage transfer; UCLH external NIHSS validation remains blocked on documented prerequisites.
+
+Final verification passed: snapshot self-check, actual freeze guard over all 42 bound inputs, and `git diff --check`. No further scientific-code changes occurred after the passing 47-test suite. The completed tables/figure and current handoff are ready to save in the final documentation commit; generated result files remain on disk in their preserved run directories.

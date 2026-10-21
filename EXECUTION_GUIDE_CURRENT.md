@@ -2,7 +2,7 @@
 
 **Project:** EEG-based stroke-severity analysis from interhemispheric EEG asymmetry
 **Status date:** 2026-10-21
-**Authority:** This is the current operational guide. It reconciles the original phase plan, the completed legacy work, and the proposed Group A v2 feature track.
+**Authority:** This is the current operational guide. It reconciles the original phase plan, completed legacy work, Group A v2 features and the completed registered Group B evaluation.
 
 ## 1. How agents must use this guide
 
@@ -122,7 +122,7 @@ The planned v2 graph feature set has four metrics per band:
 
 ### Phase 0: Reconcile and freeze the baseline
 
-**Status: DONE for legacy work; v2 handoff reconciliation active.**
+**Status: DONE for legacy work and v2 handoff reconciliation.**
 
 - **0.1** Verify the four legacy feature CSVs exist and have 50 subjects.
 - **0.2** Confirm the legacy spectral benchmark and known graph epoch-count bias from the ledgers.
@@ -155,7 +155,7 @@ Gate: acceptance checks passed; v1 files unchanged. The sidecar records a maximu
 
 ### Phase 3: A3 channel, epoch, and design audit
 
-**Status: DONE with provisional technical lock.**
+**Status: DONE; design is frozen with the reviewed v2 snapshot.**
 
 - **3.1** Inspect epoch headers and channel names without reading clinical labels.
 - **3.2** Calculate clean epoch counts, sampling rate, actual epoch window, per-channel 150 uV rejection rates, and losses under the expanded screen.
@@ -192,7 +192,7 @@ Gate: the screen is now applied before spectra/subsampling, and its regression t
 
 ### Phase 6: Registry, freeze, and handoff
 
-**Status: FROZEN at 42ff54d; interrupted primary run has verified T1-T5 and requires T6-T9/finalization.**
+**Status: COMPLETE FOR REGISTERED FIGSHARE SCOPE. Primary T1-T9 and all 19 descriptive sensitivities completed and independently verified on 2026-10-21.**
 
 - **6.1** Group B freezes `docs/ANALYSIS_REGISTRY.md` before real-label evaluation.
 - **6.2** Write `features/v2/MANIFEST.json` and `docs/FEATURE_CHANGELOG.md`.
@@ -203,6 +203,10 @@ Gate: the screen is now applied before spectra/subsampling, and its regression t
 Gate: frozen, hashed, reviewed outputs and a reproducible registry run.
 
 Interruption recovery (2026-10-21): `src/continue_registry_v2.py` validates saved contracts, distributions, OOF folds/metrics and input/version identity, then invokes the unchanged frozen runner in a new directory. Completed test files are copied byte-for-byte; only missing tests are computed. The original run is preserved and a continuation provenance record documents reuse and the interruption reason. This changes execution recovery, not the registered scientific method.
+
+Primary outcome: all nine Holm-adjusted p-values equal 1.000; no predictive model qualifies for promotion. All six Ridge RMSE values exceed their matching dummy baseline. Preserve this result and report the planned sensitivities descriptively; do not tune models/features against these findings. Full table and current status: `docs/PROGRESS.md`.
+
+Descriptive outcome: pair-grouped G8f rho=.0994 versus primary .1058; all 19 sensitivity RMSE values exceed their matched dummy, although some fixed SVR/RF runs improve MAE or descriptive AUC. Combined spectral/G8f Ridge rho=-.1721. These findings do not change primary decisions. Results: `results/v2/runs/primary_20261021_continued/`, `results/v2/sensitivities/robustness_20261021/`; figure: `results/v2/figures/primary_20261021_overview.png`. No analysis jobs remain active.
 
 ### Phase 7: UCLH transfer and reporting
 
@@ -240,9 +244,9 @@ Expected outputs, in order:
 - Local core-channel EEG checks reveal identical signals for subjects 4/5 and extremely similar signals for 11/15 and 47/49. The user's decision is to retain them as different subjects using the planned subject-ID splits. Report the possible dependence and train/test similarity as limitations.
 - `docs/ANALYSIS_REGISTRY.md` specifies T1-T9 with statistical choices finalized before label evaluation. The authorized Option 3 amendment passed synthetic validation. Agrim is the sole project owner and the only required reviewer. The freeze guard reads one latest owner-review record bound to the final digest; historical AI/Group A reviews are not active dependencies.
 - G24f is settled as secondary registered T6 in the nine-test Holm family (user authorization 2026-10-19); handoff and registry wording agree.
-- B1 is frozen and B2/B3 are implemented. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true and original failures remain documented. The frozen implementation's 32-test evidence remains unchanged; the expanded suite now passes 39 tests including the separately implemented descriptive sensitivities. Implementation state is consolidated in the technical ledger.
+- B1 is frozen and B2/B3 evaluation is complete. Gate A passed at p=.005; Gate B detected 168/200 moderate simulations (84%, within [50%,95%]). Synthetic acceptance is true and original failures remain documented. The frozen 32-test evidence is preserved; the expanded suite passes 47 tests including separate sensitivity and continuation tests. Current results and technical state are in progress/ledgers.
 - The only active review record is `docs/reviews/registry_review.json`. Agrim approved the current snapshot on 2026-10-20 and authorized continued work, including the scoped freeze commit/tags and one-shot T1-T9 run. Verify the frozen content with the existing guard before evaluation; record all results and any failures.
-- Freeze commit `42ff54d` now carries both annotated tags, `registry-v1` and `features-v2`. The real-machine guard passed for all 42 bound inputs before starting `primary_20261020`. BLAS/OpenMP thread counts are one for this run; all scientific settings are unchanged.
+- Freeze commit `42ff54d` carries both annotated tags, `registry-v1` and `features-v2`. The first run stopped after saving T1-T5; tested continuation `primary_20261021_continued` completed the full family while preserving original bytes. All 42 inputs and both execution guards verify; BLAS/OpenMP thread limits were one and scientific settings were unchanged. `robustness_20261021` also completed all 19 prespecified analyses.
 - The authorized exclusion-class disclosure confirms sub-13 (NIHSS 9) and sub-40 (NIHSS 6) are both moderate; graph subsets contain 33 mild / 15 moderate. The full-channel audit finds sub-04/05 identical on all 32 named signals, differing on the unnamed channel and in age/sex/location metadata; all paired stored metadata agrees with the source. The retained-ID policy is unchanged and dependence remains unresolved. See `docs/RECORDING_INTEGRITY_AUDIT_V2.md`.
 - The legacy graph CSVs exist, but their epoch-count bias means they are a baseline, not the corrected graph solution.
 - No severe-class model should be built from the current Figshare cohort.

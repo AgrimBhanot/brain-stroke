@@ -1,38 +1,38 @@
 # Immediate Operational Context
 
-Use [EXECUTION_GUIDE_CURRENT.md](../EXECUTION_GUIDE_CURRENT.md) as operational authority, [PROGRESS.md](PROGRESS.md) for current status, [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md) for the frozen scientific plan, and `Ledgers/` for technical/history detail.
+**Updated:** 2026-10-21. Read `EXECUTION_GUIDE_CURRENT.md` first, `PROGRESS.md` for status/results, `ANALYSIS_REGISTRY.md` for the frozen protocol and `Ledgers/` for technical/history detail.
 
-## Current state
+## Completed state
 
-- Group A completed A0-A6 and is no longer participating. Agrim is the sole project owner and human reviewer from now on.
-- Figshare has 50 subjects: 33 mild, 17 moderate, no severe. T3 is feasible under the documented contralateral lesion-side assumption, not imaging confirmation.
-- G8f is primary (`N_fixed=15`); G24f is registered secondary T6 (`N_fixed=6`). Both graph tables have 48 subjects after label-blind exclusion of sub-13 and sub-40, both moderate.
-- Group A fixed artifact screening before sampling and regenerated/provenanced graph outputs. Residual epoch-count correlation and seed instability must be reported.
-- Retain 04/05, 11/15 and 47/49 as distinct subjects. Their identical/highly similar EEG remains an unresolved dependence limitation. All named channels are identical for 04/05; demographics/location differ.
-- B1 and the B2/B3 engine are implemented. Option 3 synthetic validation passed: Gate A p=.005; Gate B 168/200 (84%, exact 95% CI 78.17-88.79%). Original failures remain preserved; the last complete suite had 32 passing tests.
-- The registry includes T1-T9, nine-test Holm correction, nested standardized Ridge, exact tails/seeds/failure rules, and a separate descriptive grouped-split sensitivity for T1-T6.
-- The separate sensitivity runner/config/tests are implemented: six grouped Ridge, six fixed SVR, six fixed random forest, and one combined absolute-spectral/G8f Ridge. All 39 tests pass (seven new); real sensitivity execution waits for the primary run to complete.
+- Agrim is the sole owner/reviewer. Group A finished and will not return. All approvals and authority granted on 2026-10-20 persist; no AI-model or other-group review dependency remains.
+- Figshare: 50 IDs, 33 mild/17 moderate, no severe. T3 uses verified paralysis semantics with the prescribed contralateral lesion mapping (22 left/28 right), not imaging confirmation.
+- Group A corrected artifact screening before sampling and regenerated/provenanced graph features. G8f is primary with 15 fixed epochs; G24f is secondary T6 with six fixed epochs and 22 channels. Both have 48 subjects after excluding sub-13/sub-40, both moderate.
+- Retain 04/05, 11/15 and 47/49 as separate IDs. Similar/identical signals remain an unresolved dependence/CV/permutation limitation. Residual graph epoch bias/seed instability also remains.
+- B1/B2/B3 are complete. Original moderate synthetic controls failed; the authorized Option 3 replacement passed (Gate A p=.005; Gate B 168/200=.84). Frozen validation evidence preserves the history.
+- All **47 tests pass** (29.848 seconds), including seven descriptive-sensitivity and eight continuation tests. The frozen validation JSON keeps its freeze-time 32-test evidence; do not edit it to update the current count.
 
-## Active subphase
+## Frozen artifacts and execution recovery
 
-Phase 6: interrupted primary recovery; separate descriptive sensitivities implemented. The expanded suite passes 47 tests in 29.848 seconds (eight new continuation tests). The unchanged 42-artifact snapshot passes self-check; digest `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898`. Continuation ID: `primary_20261021_continued`.
+Approved digest: `57044770c2e18c0fb31929a569cbd8523946e955c06152304d3d758d3e07f898` (42 artifacts). Both annotated tags `registry-v1` and `features-v2` point to freeze commit `42ff54d`. Single owner record: `docs/reviews/registry_review.json`. Separate sensitivity implementation: `f6fd0c3`; tested continuation adapter: `9c4d11b`.
 
-The freeze mechanism requires only Agrim's latest owner review. `reviews/registry_review.json` now approves the current digest, following Agrim's 2026-10-20 instruction granting all outstanding approvals and authority to continue. Earlier supplied reviews are historical evidence only.
+The first run `primary_20261020` stopped after saving T1-T5. Its `run.json` has stale running status; preserve it as historical evidence. `src/continue_registry_v2.py` validated/reused all five saved test directories byte-for-byte and called the unchanged frozen runner for T6-T9 and full-family finalization. New run `primary_20261021_continued` is COMPLETE. Its `continuation.json` records source hashes and confirms every original file is unchanged. GPG keybox signing failed for the recovery commit; a command-local unsigned exception was used without changing Git settings or freeze tags.
 
-The approved snapshot was committed at `42ff54d`; both annotated freeze tags exist and all 42 inputs still verify. On resuming 2026-10-21, the old process/session is gone: `primary_20261020` has validated T1-T5, but no T6-T9 or final family table. Its running status is stale. A new `src/continue_registry_v2.py` adapter reuses complete saved tests byte-for-byte and calls the frozen runner for missing computations/family finalization. Use a new run directory, preserve the interrupted one, and record the interruption reason; do not restart the full analysis or alter scientific settings. Agrim's approvals persist.
+## Results: completed and independently verified
 
-## Required behavior
+- Primary: `results/v2/runs/primary_20261021_continued/registry_results.csv`. All nine decisions are `no_effect_detected`; every Holm p=1.000. T1-T6 predictive rhos: -.1414, -.2220, -.0322, -.2481, .1058, -.0615. T7-T9 associations: .0101, .1657, .2128.
+- Every primary Ridge RMSE exceeds its matched dummy. No predictive model qualifies for promotion; no model was exported. No effect detected does not prove that all effects are absent.
+- Sensitivities: `results/v2/sensitivities/robustness_20261021/sensitivity_results.csv`. All 19 descriptive analyses completed. Grouped G8f rho=.0994 versus primary .1058; all six grouped runs preserve pair isolation in both CV levels and have ten distinct outer partitions.
+- All sensitivity RMSE values also exceed their dummy. Some MAE/AUC improve descriptively (G8f SVR rho=.2085, AUC=.6190); combined spectral/G8f Ridge rho=-.1721. No sensitivity inference or promotion is allowed.
+- Figure: `results/v2/figures/primary_20261021_overview.png`.
+- Independent verification covered all primary statistics/null p-values/intervals/Holm decisions, all sensitivity rhos, source hashes, OOF folds, group/class counts and seeded inner/outer split reconstruction. Primary/sensitivity CSV hashes are recorded in the technical ledger.
+- **No jobs remain active. Do not launch another primary or sensitivity run.** The files are saved locally under Git-ignored `results/`; preserve them.
 
-- Never modify legacy v1 artifacts for v2 or put IDs, NIHSS, severity, metadata or epoch counts in X.
-- All preprocessing/tuning stays within training folds. Feature engineering remains label-blind.
-- Preserve and report every registered test/failure; do not tune after observing labels.
-- Update `PROGRESS.md`, rewrite the technical ledger and append the timeline after changes.
-- Stop and record uncertainty rather than guessing.
+## Next 2-3 major steps
 
-## Next three milestones
+1. Use existing results, figure and ledgers for the final methods/results/limitations write-up. Preserve all registered findings and avoid repeated tuning.
+2. Resolve a compatible externally labelled NIHSS cohort. UCLH's public participant TSV has no NIHSS column; different stroke subtype/healthy-control targets cannot substitute for severity.
+3. Once a compatible clinical target is established, audit raw EEG/reference/duration and define a separate common montage before external validation. Pinned UCLH source lacks O1/O2 and high-passes at 2 Hz, conflicting with the Figshare 1-4 Hz delta input. See the existing UCLH docs; no raw BDF/common-montage implementation is present locally.
 
-1. Complete and verify the interrupted primary family using the tested continuation adapter; T1-T5 already have verified results.
-2. Execute and report the already implemented descriptive sensitivities in separate outputs; preserve the frozen primary artifacts and all primary decisions.
-3. Resolve UCLH reference/duration/common-montage prerequisites before external validation.
+## Working rules
 
-UCLH source/DOI audit is now pinned to upstream commit `52ad25a8cb8ecae867cd8fb9984b4fbe703585c4`. The source has no O1/O2, and its EEG extractor high-passes at 2 Hz (not equivalent to the frozen 1-4 Hz delta input). The public participant TSV does not contain NIHSS. No UCLH raw files/common-montage implementation were found locally; external NIHSS validation remains blocked on target availability and raw preprocessing/montage compatibility. See the two existing UCLH docs for hashes and corrected source references.
+Keep IDs/metadata/NIHSS/severity/epoch counts out of X; fit preprocessing/tuning only inside training folds. Preserve legacy and frozen artifacts. Update progress, rewrite the technical ledger and append the timeline after changes. The frozen registry retains historical freeze-time status wording; live operational status is in the guide/progress/context.

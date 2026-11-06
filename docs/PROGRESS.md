@@ -50,7 +50,7 @@ All grouped analyses retain their primary subjects, keep known pairs together in
 
 All 19 sensitivity RMSE values exceed their matching dummy. Some fixed SVR/RF runs have better MAE or descriptive AUC: G8f SVR rho=.2085, AUC=.6190, MAE=2.0619 versus dummy 2.2077, but RMSE=2.8422 versus dummy 2.8006. G24f RF has AUC=.6368 and rho=.1493. Combined Ridge rho=-.1721, RMSE=2.9397 versus dummy 2.8006. These descriptive findings do not alter registered decisions.
 
-Saved [results figure](../results/v2/figures/primary_20261021_overview.png) compares the nine registered results and pair-grouped predictions.
+Saved [results figure](../results/v2/figures/primary_20261021_overview.png) compares the nine registered results and pair-grouped predictions. An eight-page [explained results PDF](../results/v2/figures/figshare_v2_results_explained.pdf) adds the cohort composition, test map, metric definitions, exact T1-T9 values, Ridge-versus-dummy RMSE chart, robustness interpretation and conclusion without rerunning or changing any analysis.
 
 ## Verification and preserved execution history
 

@@ -420,3 +420,11 @@ Saved and visually checked `results/v2/figures/primary_20261021_overview.png`, s
 Rewrote progress/context/technical ledger to the completed current state, preserving the invocation audit and full timeline, and updated the operational guide. Recorded actual runtime versions (including NumPy 2.2.5/pandas 2.2.3/matplotlib 3.10.1, which differ from requirements.txt) without changing the evaluation environment. Frozen scientific files, owner review, tags and feature content remain preserved. Next work is final scientific write-up and resolving compatible external clinical targets before raw-EEG/common-montage transfer; UCLH external NIHSS validation remains blocked on documented prerequisites.
 
 Final verification passed: snapshot self-check, actual freeze guard over all 42 bound inputs, and `git diff --check`. No further scientific-code changes occurred after the passing 47-test suite. The completed tables/figure and current handoff are ready to save in the final documentation commit; generated result files remain on disk in their preserved run directories.
+
+## State 33 - Explained Results PDF Created
+
+**Date:** 2026-10-31.
+
+Created `results/v2/figures/figshare_v2_results_explained.pdf`, an eight-page reader-facing explanation of the completed registered Figshare v2 evaluation. The report uses the frozen primary and descriptive-sensitivity CSVs and the existing overview PNG; it adds cohort and Ridge-versus-dummy RMSE graphics, exact T1-T9 values, definitions of all reported statistical/performance terms and a bounded interpretation of `no_effect_detected`.
+
+No EEG, labels, model settings, registry decisions or result artifacts were modified, and no model or statistical analysis was rerun. PDF size is 184,207 bytes; SHA-256 `4652b678130b9c5e6c51ff98ab5a5a147555c2b35154a093f015ec6512f53168`. The PDF records the negative result, distinguishes absence of detected evidence from proof of no effect, and directs future work toward an independent compatible cohort or an explicitly changed clinical target rather than repeated outcome-driven tuning.

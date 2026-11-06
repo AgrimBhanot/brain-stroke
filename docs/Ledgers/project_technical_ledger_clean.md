@@ -110,6 +110,7 @@ Independent checks verified all 19 rhos, primary/input/source hashes, OOF covera
 - Primary CSV: `results/v2/runs/primary_20261021_continued/registry_results.csv`; SHA-256 `82815fc03ff71ba8131236d903e03ab68af6aeefe1b6d804b87c820a412c08dd`.
 - Sensitivity CSV: `results/v2/sensitivities/robustness_20261021/sensitivity_results.csv`; SHA-256 `0ad8c1a2eba53a9e8e75c8c72e2a1699a6be4f4892549d03b324a419b270c901`.
 - Figure: `results/v2/figures/primary_20261021_overview.png`; SHA-256 `6a951dd4db87461b0062d8699aac0c10db6e2bede9700385659bd9bc5ee5e5bb`.
+- Explained report: `results/v2/figures/figshare_v2_results_explained.pdf`; eight pages, 184,207 bytes; SHA-256 `4652b678130b9c5e6c51ff98ab5a5a147555c2b35154a093f015ec6512f53168`. It is generated entirely from the frozen primary/sensitivity CSVs and existing overview PNG. It defines NIHSS, T1-T9, OOF/nested CV, Spearman rho, permutation and Holm p-values, bootstrap intervals, RMSE, MAE, R-squared, ROC-AUC and the dummy comparator, then connects each definition to the observed values. No analysis or model was rerun.
 - Per-test null/bootstrap arrays, OOF predictions/folds/targets, metrics, alpha selections, contracts and grouped audits remain saved. No jobs remain active and no model was exported.
 - Results are local and Git-ignored. Preserve these directories; tracked documentation records their paths/digests.
 
